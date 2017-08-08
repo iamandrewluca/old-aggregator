@@ -1,0 +1,90 @@
+
+
+/********************** General sidebar values **********************/
+
+section#main .main-container > .row{
+    position: relative;
+}
+section#main .main-container > .row .sidebar-right,
+section#main .main-container > .row .sidebar-left{
+    position: relative;
+    z-index: 9;
+}
+
+
+/********************** Content and sidebars **********************/
+
+.content-left,
+.content-right,
+.sidebar-left,
+.sidebar-right,
+.no-sidebars {
+    padding-top: 0;
+}
+
+
+/********************** Delimited sidebar **********************/
+
+.delimited .content-left,
+.delimited .sidebar-left,
+.delimited .view-switcher {
+    padding-right: 3.750rem;
+}
+.delimited .sidebar-right,
+.delimited .content-right,
+.delimited .monstro-cats {
+    padding-left: 3.750rem;
+}
+.align-right .delimited .view-switcher {
+    padding-right: 1.875rem;
+}
+.align-right .delimited .monstro-cats {
+    padding-left: 1.875rem;
+}
+.delimited .sidebar-right:before,
+.delimited .sidebar-left:before {
+    position: absolute;
+    bottom: -8000%;
+    top: 0;
+    left: 0;
+    right: 0;
+    content:"";
+}
+.delimited.dotted .sidebar-right:before {
+    border-left: 1px dotted;
+}
+.delimited.dotted .sidebar-left:before {
+    border-right: 1px dotted;
+}
+.delimited.solid .sidebar-right:before {
+    border-left: 1px solid;
+}
+.delimited.solid .sidebar-left:before {
+    border-right: 1px solid;
+}
+.delimited.with-opacity .sidebar-left:before,
+.delimited.with-opacity .sidebar-right:before {
+    opacity: 0.2;
+}
+
+
+/********************** Mobile queries **********************/
+
+@media only screen and (max-width: 768px){
+    .delimited .content-left,
+    .delimited .sidebar-left,
+    .delimited .view-switcher {
+        padding-right: 1.875rem;
+    }
+    .delimited .sidebar-right,
+    .delimited .content-right,
+    .delimited .monstro-cats {
+        padding-left: 1.875rem;
+    }
+    .delimited.dotted .sidebar-right:before
+    .delimited.dotted .sidebar-left:before,
+    .delimited.solid .sidebar-right:before,
+    .delimited.solid .sidebar-left:before {
+        border: none;
+    }
+}

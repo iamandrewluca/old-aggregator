@@ -1,0 +1,22 @@
+{
+  "name": "agregator",
+  "css_prefix_text": "agregator-",
+  "css_use_suffix": false,
+  "hinting": true,
+  "units_per_em": 1000,
+  "ascent": 850,
+  "glyphs": [
+    {
+      "uid": "e15f0d620a7897e2035c18c80142f6d9",
+      "css": "link-extern",
+      "code": 61582,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "3bd18d47a12b8709e9f4fe9ead4f7518",
+      "css": "refresh",
+      "code": 59392,
+      "src": "entypo"
+    }
+  ]
+}

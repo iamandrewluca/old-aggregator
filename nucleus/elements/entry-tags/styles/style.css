@@ -1,0 +1,63 @@
+
+
+/********************** Blog single entry tags and source **********************/
+
+ul.entry-tags {
+    margin: 0;
+    padding: 0;
+}
+ul.entry-tags li {
+    list-style-type: none;
+    margin: 0 20px 15px 20px;
+    display: inline-block;
+    text-transform: uppercase;
+    text-align: left;
+    font-size: 0.688rem;
+}
+ul.entry-tags li a {
+    position: relative;
+    display: inline-block;
+    background: #ffffff;
+    color: inherit;
+    line-height: 25px;
+}
+ul.entry-tags li a:after {
+    content: '';
+    position: absolute;
+    left: -20px;
+    right: -10px;
+    height: 100%;
+}
+.solid ul.entry-tags li a:after {
+    border: 1px solid;
+}
+.dotted ul.entry-tags li a:after {
+    border: 1px dotted;
+}
+.with-opacity ul.entry-tags li a:after {
+    opacity: 0.2;
+}
+ul.entry-tags li a:hover {
+    color: inherit;
+}
+ul.entry-tags li a:before{
+    content: "";
+    width: 2px;
+    height: 2px;
+    position: absolute;
+    top: 12px;
+    left: -10px;
+    background: #000000;
+}
+ul.entry-tags li:last-child {
+    margin: 0 0 15px 20px;
+}
+ul.entry-tags li.label {
+    display: block;
+    margin: 0 0 10px 0;
+    font-weight: 700;
+    font-size: 0.750rem;
+}
+ul.entry-tags li.label:before {
+    background: none;
+}

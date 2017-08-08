@@ -1,0 +1,252 @@
+
+
+/********************** Grid view **********************/
+
+.monstro-grid-view {
+    clear: both;
+}
+.monstro-grid-view article{
+    margin-bottom: 60px;
+    position: relative;
+}
+
+/* clear last column */
+
+.monstro-grid-view > .columns.large-6:nth-child(2n+3){
+    clear: left;
+}
+.monstro-grid-view > .columns.large-4:nth-child(3n+4){
+    clear: left;
+}
+.monstro-grid-view > .columns.large-3:nth-child(4n+5){
+    clear: left;
+}
+.monstro-grid-view [class*="column"]+[class*="column"]:last-child {
+    float: left;
+}
+
+/* Grid-view header */
+
+.monstro-grid-view article header.entry-header .featimg{
+    position: relative;
+    margin: 0 0 1.875em;
+    overflow: hidden;
+}
+.monstro-grid-view article header.entry-header .featimg a {
+    line-height: inherit;
+}
+.monstro-grid-view article header.entry-header .featimg img{
+    -webkit-transform: scale(1,1);
+    -moz-transform: scale(1,1);
+    transform: scale(1,1);
+    -webkit-transition: all 250ms ease;
+    -moz-transition: all 250ms ease;
+    -o-transition: all 250ms ease;
+    -ms-transition: all 250ms ease;
+    transition: all 250ms ease;
+}
+.monstro-grid-view article header.entry-header .featimg:hover img{
+    position: relative;
+    -webkit-transform: scale(1.05,1.07);
+    -moz-transform: scale(1.05,1.07);
+    transform: scale(1.05,1.07);
+    -webkit-transition: all 250ms ease;
+    -moz-transition: all 250ms ease;
+    -o-transition: all 250ms ease;
+    -ms-transition: all 250ms ease;
+    transition: all 250ms ease;
+}
+.monstro-grid-view article header.entry-header .entry-category{
+    z-index: 9;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    line-height: 1;
+    text-align: right;
+    padding: 4px 10px;
+    background: #ffffff;
+}
+.monstro-grid-view article header.entry-header .entry-category a{
+    color: inherit;
+    font-size: 0.688rem;
+    text-transform: uppercase;
+}
+
+/* Grid-view content */
+
+.monstro-grid-view article section.entry-content h2.entry-title {
+    font-size: 1.125rem;
+    margin: 0 0 5px;
+    line-height: 1.4;
+    text-transform: uppercase;
+}
+.monstro-grid-view article section.entry-content h2.entry-title a {
+    display: block;
+}
+.monstro-grid-view article section.entry-content .entry-date{
+    font-size: 0.625rem;
+    line-height: 1;
+    margin: 0 0 25px;
+    text-transform: uppercase;
+}
+.monstro-grid-view article section.entry-content .entry-date a{
+    color: inherit;
+}
+.monstro-grid-view article section.entry-content .entry-excerpt{
+    margin-bottom: 1.875rem;
+}
+.page .monstro-grid-view article section.entry-content .entry-excerpt p,
+.monstro-grid-view article section.entry-content .entry-excerpt p{
+    font-size: 0.750rem;
+    line-height: 1.8;
+    margin: 0;
+}
+
+/* Grid-view footer */
+
+.monstro-grid-view a.read-more {
+    text-transform: uppercase;
+    position: relative;
+    font-size: 0.688rem;
+    display: inline-block;
+    color: inherit;
+    padding: 0 30px;
+    line-height: 35px;
+    margin: 0;
+    width: auto;
+    border: 1px solid;
+}
+
+/* No gutter case */
+
+.monstro-grid-view.no-gutter{
+    margin: 0!important;
+}
+.monstro-grid-view.no-gutter > .columns{
+    padding: 2px;
+}
+.monstro-grid-view.no-gutter article section.entry-content .entry-excerpt{
+    padding-right: 1.875rem;
+}
+
+/* No featured image case */
+
+.monstro-grid-view article.no-feat-img .featimg a.image {
+    display: block;
+    border: 1px solid;
+    min-height: 230px;
+    color: #EFEFEF;
+    background: #ffffff;
+    text-align: center;
+}
+.monstro-grid-view article.no-feat-img .featimg a.image:before {
+    font-family: "monstrofront";
+    content: "\E80B";
+    position: absolute;
+    top: 45%;
+    margin-left: -20px;
+    font-size: 250%;
+}
+.monstro-grid-view article header .entry-category {
+    border-left: 1px solid #EFEFEF;
+    border-top: 1px solid #EFEFEF;
+}
+
+/********************** Mobile queries **********************/
+
+@media only screen and (max-width: 768px){
+    .monstro-grid-view article header .featimg .entry-category{
+        left: 0;
+        right: auto;
+    }
+}
+
+
+/**********************  Mouseover overlay **********************/
+
+article header .featimg .entry-feat-overlay{
+    background: rgba(255,255,255,0.7);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    -webkit-transition: .3s opacity ease-in;
+    -moz-transition: .3s opacity ease-in;
+    -o-transition: .3s opacity ease-in;
+    -ms-transition: .3s opacity ease-in;
+    transition: .3s opacity ease-in;
+}
+article header .featimg .entry-feat-overlay a{
+    color: inherit;
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+article header:hover .featimg .entry-feat-overlay{
+    opacity: 1;
+}
+
+
+/********************** Post formats **********************/
+
+.entry-feat-overlay a:before {
+    font-family: "monstrofront";
+    position: absolute;
+    top: 45%;
+    top: calc(50% - 10px);
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 200%;
+    margin: auto;
+    -webkit-transition: all 0.3s ease 0s;
+    -moz-transition: all 0.3s ease 0s;
+    -o-transition: all 0.3s ease 0s;
+    -ms-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+    -webkit-transform: rotate(25deg);
+    -moz-transform: rotate(25deg);
+    -o-transform: rotate(25deg);
+    -ms-transform: rotate(25deg);
+    transform: rotate(25deg);
+}
+.entry-feat-overlay a:hover:before {
+    -webkit-transform: scale(1.2) rotate(0deg);
+    -moz-transform: scale(1.2) rotate(0deg);
+    -o-transform: scale(1.2) rotate(0deg);
+    -ms-transform: scale(1.2) rotate(0deg);
+    transform: scale(1.2) rotate(0deg);
+}
+.format-standard .entry-feat-overlay a:before {
+    content: '\E824';
+}
+.format-image .entry-feat-overlay a:before {
+    content: '\E80B';
+}
+.format-gallery .entry-feat-overlay a:before {
+    content: '\e80f';
+}
+.format-aside .entry-feat-overlay a:before {
+    content: '\E80C';
+}
+.format-quote .entry-feat-overlay a:before {
+    content: '\275E';
+}
+.format-link .entry-feat-overlay a:before {
+    content: '\1F4CE';
+}
+.format-chat .entry-feat-overlay a:before {
+    content: '\E812';
+}
+.format-status .entry-feat-overlay a:before {
+    content: '\E817';
+}
+.format-video .entry-feat-overlay a:before {
+    content: '\25b6';
+}
+.format-audio .entry-feat-overlay a:before {
+    content: '\e80a';
+}

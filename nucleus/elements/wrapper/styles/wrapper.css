@@ -1,0 +1,143 @@
+
+
+/********************** Sites sections **********************/
+
+#monstro-wrapper {
+    height: auto !important;
+    min-height: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+header#header-container,
+section#main,
+footer#footer-container {
+    position: relative;
+    z-index: 9;
+}
+header#header-container{
+    top:0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+}
+section#main .main-container{
+    position: relative;
+    height: 100%;
+}
+footer#footer-container {
+    position: absolute;
+    background: #222222;
+    color: #ffffff;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 99;
+}
+
+
+/********************** Width options **********************/
+
+body.monstro-fullwidth-view .row {
+    max-width: 100%;
+}
+body.monstro-large-view .row {
+    max-width: 75.000rem;
+}
+body.monstro-narrow-view .row {
+    max-width: 63.750rem;
+}
+
+
+/********************** Boxed option **********************/
+
+.monstro-boxed {
+    margin: 0 auto;
+    border-left: 1px solid rgba(0,0,0,0.1);
+    border-right: 1px solid rgba(0,0,0,0.1);
+    background: #FFFFFF;
+    overflow: hidden;
+}
+body.monstro-large-view .monstro-boxed {
+    max-width: 78.750rem;
+}
+body.monstro-narrow-view .monstro-boxed {
+    max-width: 67.500rem;
+}
+#monstro-wrapper.monstro-align-left .monstro-boxed {
+    margin-left: 0;
+}
+#monstro-wrapper.monstro-align-right .monstro-boxed {
+    margin-right: 0;
+}
+
+
+/********************** Alignment options **********************/
+
+
+/***** Align left *****/
+
+#monstro-wrapper.monstro-align-left .row {
+    margin-left: 1.875rem;
+}
+.monstro-fullwidth-view #monstro-wrapper.monstro-align-left .row {
+    margin-left: 0;
+    margin-right: 0;
+    position: static;
+}
+.monstro-narrow-view #monstro-wrapper.monstro-align-left .row .row,
+.monstro-large-view #monstro-wrapper.monstro-align-left .row .row,
+.monstro-fullwidth-view #monstro-wrapper.monstro-align-left .row .row {
+    max-width: none;
+    margin-left: -1.875rem;
+    margin-right: -1.875rem;
+}
+
+
+/***** Align center *****/
+
+#monstro-wrapper.monstro-align-center {
+    margin: 0 auto;
+    text-align: left;
+}
+.monstro-fullwidth-view #monstro-wrapper.monstro-align-center .row {
+    margin-left: 0;
+    margin-right: 0;
+    position: static;
+}
+.monstro-narrow-view #monstro-wrapper.monstro-align-center .row .row,
+.monstro-large-view #monstro-wrapper.monstro-align-center .row .row,
+.monstro-fullwidth-view #monstro-wrapper.monstro-align-center .row .row {
+    max-width: none;
+    margin-left: -1.875rem;
+    margin-right: -1.875rem;
+}
+
+
+/***** Align right *****/
+
+#monstro-wrapper.monstro-align-right .row {
+    margin-right: 1.875rem;
+    text-align: left;
+}
+.monstro-fullwidth-view #monstro-wrapper.monstro-align-right .row {
+    margin-left: 0;
+    margin-right: 0;
+    position: static;
+}
+.monstro-narrow-view #monstro-wrapper.monstro-align-right .row .row,
+.monstro-large-view #monstro-wrapper.monstro-align-right .row .row,
+.monstro-fullwidth-view #monstro-wrapper.monstro-align-right .row .row {
+    max-width: none;
+    margin-left: -1.875rem;
+    margin-right: -1.875rem;
+}
+
+@media only screen and (max-width: 768px){
+    #monstro-wrapper.monstro-align-left .row,
+    #monstro-wrapper.monstro-align-right .row {
+        margin-left: 0;
+        margin-right: 0;
+    }
+}

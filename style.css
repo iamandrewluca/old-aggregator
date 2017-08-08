@@ -1,0 +1,395 @@
+
+
+/********************** General **********************/
+body {
+    font-family: 'Open Sans', serif;
+}
+
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+    color: #000000;
+}
+a {
+    color: #006621;
+}
+a:hover, a:focus {
+    color: #777777;
+}
+#wrapper {
+    position: relative;
+    overflow: hidden;
+}
+header#header-container,
+section#main,
+footer#footer-container {
+    position: relative;
+    z-index: 9;
+}
+header#header-container {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 30px 0;
+}
+section#main{
+    height: 100%;
+    font-size: 0.750rem;
+    background-color: #fbfbfb;
+    color: #000000;
+    padding: 30px 0;
+    border-top: 1px dotted rgba(0,0,0,.08);
+    border-bottom: 1px dotted rgba(0,0,0,.08);
+}
+footer#footer-container {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 30px 0;
+}
+
+
+/********************** Vertical align for header **********************/
+
+.vertical-align .row{
+    display: table;
+}
+.vertical-align .row .columns{
+    display: table-cell;
+    vertical-align: middle;
+    float: none;
+}
+
+.logo {
+    font-size: 1.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 0;
+    line-height: 1;
+}
+
+/********************** Language switcher **********************/
+
+ul.language-switcher {
+    float: right;
+    list-style-type: none;
+    margin: 0;
+    text-align: left;
+    position: relative;
+}
+ul.language-switcher li {
+    margin: 0;
+    padding: 0;
+    display: inline;
+    zoom: 1;
+    text-transform: uppercase;
+    font-size: 0.750rem;
+    font-weight: 700;
+    color: #006621;
+}
+ul.language-switcher li:before{
+    content: "/" ;
+    margin-right: 5px;
+    margin-left: 5px;
+    color: inherit;
+}
+ul.language-switcher li:first-child:before{
+    content:"";
+    margin: 0;
+}
+ul.language-switcher li a{
+    border-bottom: 1px dotted;
+    color: inherit;
+}
+ul.language-switcher li a:hover{
+    border: none;
+}
+ul.language-switcher li.active a{
+    color: #bfbfbf;
+    border: none;
+    cursor: default;
+}
+
+
+/********************** All resources **********************/
+
+.monstro-resources a {
+    display: block;
+    margin-bottom: 25px;
+    font-weight: 400;
+    font-size: 0.875rem;
+}
+.monstro-resources a.all-resources {
+    color: inherit;
+    font-size: 1rem;
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+.monstro-resources span.monstro-hint{
+    display: block;
+    color: #bfbfbf;
+    margin-bottom: 25px;
+}
+
+
+/********************** Labels **********************/
+
+.switch {
+    float: right;
+}
+.switch label {
+    width: 48px;
+    height: 24px;
+    box-shadow: inset 0 1px 0 rgba(0,0,0,0.1)
+}
+.switch input:checked+label {
+    background: #939da2;
+    box-shadow: inset 0 1px 0 rgba(0,0,0,0.4)
+}
+
+.switch input:checked+label:after {
+    left: 26px;
+}
+.switch label:after {
+    box-shadow: 0 1px 0 rgba(0,0,0,0.1);
+    width: 20px;
+    height: 20px;
+    top: 2px;
+}
+.switch input:checked+label:after {
+    box-shadow: 0 1px 0 rgba(0,0,0,0.4);
+}
+
+
+/********************** Section **********************/
+
+section#main .main-container > .row .sidebar-right,
+section#main .main-container > .row .sidebar-left,
+section#main .main-container > .row .content-left,
+section#main .main-container > .row .content-right{
+    position: relative;
+    z-index: 9;
+}
+
+.delimited .sidebar-right,
+.delimited .content-right {
+    padding-left: 3.750rem;
+}
+.delimited .content-left,
+.delimited .sidebar-left{
+    padding-right: 3.750rem;
+}
+
+.withbg .sidebar-right:before,
+.withbg .sidebar-left:before {
+    position: absolute;
+    bottom: -5000%;
+    top: 0;
+    right: -550%;
+    left: 0;
+    content: "";
+    z-index: -1;
+}
+.delimited .sidebar-right:before {
+    border-left: 1px dotted rgba(0,0,0,.08);
+}
+.delimited .sidebar-left:before {
+    right: 0;
+    left: -550%;
+    border-right: 1px dotted rgba(0,0,0,.08);
+}
+
+@media only screen and (max-width: 1024px) {
+    .delimited .content-left,
+    .delimited .sidebar-left{
+        padding-right: 1.875rem;
+    }
+    .delimited .sidebar-right,
+    .delimited .content-right {
+        padding-left: 1.875rem;
+    }
+    .delimited .sidebar-right {
+        margin-top: 1.875rem;
+        padding-top: 1.875rem;
+        border-top: 1px dotted rgba(0,0,0,.08)
+    }
+}
+@media only screen and (max-width: 768px) {
+    .content-left, .content-right, .sidebar-left, .sidebar-right {
+        padding-top: 30px;
+    }
+}
+@media only screen and (max-width: 767px) {
+    header#header-container .row .columns {
+        width: 50% ;
+    }
+}
+
+
+/********************** List view **********************/
+
+.main-container .page-title {
+    margin:0 0 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px dotted rgba(0,0,0,.08);
+}
+.main-container .page-title h1{
+    display: inline-block;
+    font-size: 1.250rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: normal;
+}
+.main-container .page-title button.monstro-refresh{
+    padding: 0;
+    margin:0;
+    background: none;
+    color: #006621;
+    float: right;
+    border-bottom: 1px dotted;
+    font-size: 0.750rem;
+    font-family: inherit;
+    line-height: 1.4rem;
+}
+.main-container .page-title button.monstro-refresh:hover{
+    border: none;
+}
+.main-container .page-title .source-URL{
+    float: right;
+    padding: 0;
+    margin:0;
+    font-size:0.750rem;
+    font-weight: 400;
+    line-height: 1.5rem;
+}
+.main-container .page-title .source-URL a{
+    padding: 0;
+    margin:0;
+    border-bottom: 1px dotted;
+}
+.main-container .page-title .source-URL a:hover{
+    border: none;
+}
+.main-container .page-title .agregator-link-extern{
+    margin:0 0 0 10px;
+    color: #006621;
+}
+.main-container .page-title .agregator-link-extern:before{
+    top: 1px;
+    position: relative;
+}
+
+.main-container .monstro-list-view article {
+    text-align: left;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+}
+.monstro-list-view article:after {
+    border-bottom: 1px dotted rgba(0,0,0,.08);
+}
+
+/* List-view header */
+
+.main-container .monstro-list-view article header {
+    text-align: left;
+}
+.main-container .monstro-list-view article header h2 {
+    font-weight: 400;
+    margin: 0;
+    font-size: 1.000rem;
+    display: block;
+}
+.main-container .monstro-list-view article header h2 a {
+    display: block;
+}
+.main-container .monstro-list-view article header h2 a:visited {
+    color: #777777;
+}
+
+
+/********************** Resource permalink **********************/
+
+a.resource-permalink {
+    margin-right: 10px;
+    border-bottom: 1px dotted;
+}
+a.resource-permalink:hover {
+    border-bottom: none;
+}
+/*
+a.resource-permalink:after {
+    content: "/";
+    margin-left: 10px;
+}
+*/
+
+/********************** Entry meta **********************/
+
+.entry-meta {
+    display: inline-block;
+    clear: both;
+}
+.meta-below .entry-meta,
+.entry-footer .entry-meta {
+    margin-bottom: 25px; /* instead of 30px because of line-height */
+}
+.entry-meta ul{
+    list-style-type: none;
+    margin: 0;
+    display: inline;
+    position: relative;
+}
+.entry-meta ul li {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: inline;
+    zoom: 1;
+    font-size: 0.750rem;
+}
+.entry-meta ul li:before{
+    content: "•\00a0" ;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+.entry-meta ul li:first-child:before{
+    content:"";
+    margin: 0;
+}
+.entry-meta ul li span a:before{
+    content: "/";
+    margin-right: 10px;
+}
+
+
+
+/********************** Pagination **********************/
+
+.monstro-pagination {
+    display: inline-block;
+    text-align: left;
+    padding-top: 1.875rem;
+    margin-top: 1.875rem;
+    width: 100%;
+    border-top: 1px dotted rgba(0, 0, 0, 0.08);
+}
+.monstro-pagination .page-numbers{
+    position: relative;
+    display: inline-block;
+    padding: 0 4px;
+    margin: 0 6px;
+    font-size: 0.750rem;
+    font-weight: bold;
+    color: inherit;
+}
+.monstro-pagination .page-numbers.current{
+    color: rgba(0,0,0,.3);
+}
+.monstro-pagination .page-numbers:not(.current):hover{
+    color: rgba(0,0,0,.5);
+}
+
+
+/********************** Copyright **********************/
+
+p.copyright {
+    text-align: center;
+    font-size: 0.750rem;
+    margin: 0;
+}

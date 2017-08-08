@@ -1,0 +1,154 @@
+.testimonials-header {
+    text-align: center;
+}
+.testimonials-header .monstro-page-name {
+    font-style:italic;
+    color:#888;
+    margin:auto;
+    font-size: 1.000rem;
+}
+
+.testimonials-header .monstro-subpage-name {
+    text-transform:uppercase;
+    font-size: 3.000rem;
+
+}
+.testimonials-header .monstro-subpage-name:after{
+    opacity: 0.3;
+    content: "";
+    display: block;
+    margin: 10px auto;
+    width: 20px;
+    border-bottom: 1px solid;
+}
+.testimonials-header p.testimonials-description {
+    max-width:450px;
+    margin:auto;
+    padding-top:10px;
+    font-size: 0.813rem;
+    color:#a1a1a1;
+}
+
+.testimonials:before {
+    content: "";
+    color:#cccccc;
+    display: block;
+    margin: 70px auto;
+    width: auto;
+    border-top: 1px solid;
+}
+.testimonials:after {
+    content: "";
+    color:#cccccc;
+    display: block;
+    margin: 20px auto;
+    width: auto;
+    border-top: 1px solid;
+}
+#testimonials-slider {
+    position: relative;
+    overflow: hidden;
+    max-width:750px;
+    margin:-50px auto 0 auto;
+}
+#testimonials-slider ul {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    height: auto;
+    list-style: none;
+}
+#testimonials-slider ul li {
+    position: relative;
+    display: block;
+    text-align: center;
+    line-height: 30px;
+}
+.author {
+    max-width: 400px;
+    margin:auto;
+}
+.slider-name:before {
+    content: "";
+    color:#000;
+    display: block;
+    margin: 10px auto;
+    width: 20px;
+    border-top: 1px solid;
+}
+.slider-name {
+    font-size: 1.500rem;
+    display: block;
+    margin-top: 5px;
+    text-align:center;
+    font-family:'Open Sans Condensed', sans-serif;
+    font-style: normal;
+    color:#000000;
+}
+
+.slider-location { font-size: 0.813rem;
+    margin-top:0px;
+    font-style: italic;
+    font-family: 'Old Standard TT', serif;
+    text-align:center;
+}
+
+
+.blockquote {
+    font-family: 'Old Standard TT', serif;
+    font-size: 1.200rem;
+    text-align:left;
+    font-style: italic;
+    max-width: 750px;
+    padding: 0.5em 40px;
+    line-height: 1.45;
+    position: absolute;
+    color: #757575;
+}
+.blockquote:before {
+    display: block;
+    content: "\201C";
+    font-size: 150px;
+    position: absolute;
+    left: -20px;
+    top: 50px;
+    color: #757575;
+    opacity:0.3;
+}
+
+.blockquote:after {
+    display: block;
+    content: "\201D";
+    font-size: 150px;
+    position: absolute;
+    right: 30px;
+    bottom: 50px;
+    color: #757575;
+    opacity:0.3;
+}
+a.control_next {
+    float:right;
+    margin-top:-50px;
+
+}
+a.control_prev {
+    float:left;
+    margin-top:-50px;
+}
+
+.testimonials-feedback {
+    font-size: 0.813rem;
+    background-color: #b3885e;
+    max-width: 160px;
+    max-height:35px;
+    color: #fff;
+    margin:auto;
+}
+
+.testimonials-feedback p {
+    text-align:center;
+    padding:5px;
+    text-transform: uppercase;
+    font-size:1.000rem;
+}
+

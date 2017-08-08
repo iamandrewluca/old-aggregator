@@ -1,0 +1,47 @@
+
+
+/********************** Author post box **********************/
+
+.post-author-box{
+    display: inline-block;
+    width: 100%;
+    margin: 0 0 30px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(0,0,0,.1);
+}
+
+.post-author-box > a {
+    float: left;
+    margin-right: 30px;
+}
+.entry-footer .post-author-box img { /* Added .entry-content to overpass .entry-content img */
+    max-width: 80px;
+    height: auto;
+}
+.post-author-box .author-title{
+    margin: 0 0 15px;
+    font-weight: bold;
+    font-size: 0.750rem;
+    text-transform: uppercase;
+}
+.post-author-box .author-title a{
+    color: inherit;
+}
+.post-author-box .author-box-info{
+    font-size: 0.750rem;
+    position: relative;
+    line-height: 1.8;
+}
+.post-author-box .author-box-info:before {
+    display: block;
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: rgba(0,0,0,.1);
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 110px;
+}
+.post-author-box .author-box-info span{
+    display: block;
+}

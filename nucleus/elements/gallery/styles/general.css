@@ -1,0 +1,6 @@
+.monstro-gallery-wrapper {
+  overflow: hidden;
+}
+.monstro-gallery-wrapper .monstro-gallery li {
+  float: left;
+}

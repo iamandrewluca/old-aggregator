@@ -1,0 +1,68 @@
+
+
+/********************** Share **********************/
+
+.entry-share {
+    line-height: 1;
+    padding: 0;
+    margin: 0 0 1.875rem;
+    width: 100%;
+    text-align: center;
+}
+.entry-share .socialicons > ul.monstro-social:before {
+    content: '';
+    position: absolute;
+    width: 80px;
+    left: -90px;
+    top: 15px;
+    z-index: 1;
+}
+.entry-share .socialicons > ul.monstro-social:after {
+    content: '';
+    position: absolute;
+    width: 80px;
+    right: -90px;
+    top: 15px;
+    z-index: 1;
+}
+
+.solid .entry-share .socialicons > ul.monstro-social:before,
+.solid .entry-share .socialicons > ul.monstro-social:after {
+    border-bottom: 1px solid;
+}
+.dotted .entry-share .socialicons > ul.monstro-social:before,
+.dotted .entry-share .socialicons > ul.monstro-social:after {
+    border-bottom: 1px dotted;
+}
+.with-opacity .entry-share .socialicons > ul.monstro-social:before,
+.with-opacity .entry-share .socialicons > ul.monstro-social:after{
+    opacity: 0.2;
+}
+.entry-share .socialicons > ul.monstro-social > li > a {
+    background: transparent;
+    color: inherit;
+    height: 30px;
+    width:30px;
+    line-height: 28px;
+    border-radius: 0%;
+    border: none;
+}
+.entry-share .socialicons > ul.monstro-social > li > a:hover {
+    color: #ffffff;
+}
+.entry-share .socialicons > ul.monstro-social > li a.twitter:hover{
+    background-color: #48c4d2;
+}
+.entry-share .socialicons > ul.monstro-social >li>a.gplus:hover{
+    background-color: #d94a39;
+}
+.entry-share .socialicons > ul.monstro-social > li > a.fb:hover,
+.entry-share .socialicons > ul.monstro-social > li > a.facebook:hover{
+    background-color: #3b5998;
+}
+.entry-share .socialicons > ul.monstro-social > li > a.pinterest:hover{
+    background-color: #cb2027;
+}
+.entry-share .socialicons > ul.monstro-social > li > a.email:hover{
+    background-color: #0bac03;
+}

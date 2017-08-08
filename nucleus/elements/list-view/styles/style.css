@@ -1,0 +1,208 @@
+
+
+/********************** List view **********************/
+
+.monstro-list-view article {
+    position: relative;
+    text-align: left;
+    margin-bottom: 60px;
+    padding-bottom: 60px;
+}
+/*TODO different backgrounds for list-view
+.monstro-list-view article:nth-child(odd) {
+    background: inherit;
+}
+.monstro-list-view article:nth-child(even) {
+    background: inherit;
+}
+*/
+.stretch-lines .monstro-list-view article:before {
+    position: absolute;
+    bottom: 0;
+    left: -100%;
+    width: 100%;
+    content: '';
+    height: 1px;
+}
+.monstro-list-view article:after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    content: '';
+    height: 1px;
+}
+.monstro-unboxed .stretch-lines .no-sidebars .monstro-list-view article:after {
+    width: 200%;
+}
+
+.solid .monstro-list-view article:after,
+.solid .monstro-list-view article:before{
+    border-bottom: 1px solid;
+}
+.dotted .monstro-list-view article:after,
+.dotted .monstro-list-view article:before{
+    border-bottom: 1px dotted;
+}
+.with-opacity .monstro-list-view article:after,
+.with-opacity .monstro-list-view article:before{
+    opacity: 0.2;
+}
+
+.monstro-boxed .monstro-list-view article:before {
+    left: 0;
+    border: none;
+}
+.monstro-list-view article:last-child {
+    margin-bottom: 0;
+    border-bottom: none;
+}
+.monstro-list-view article:last-child:before,
+.monstro-list-view article:last-child:after {
+    border-bottom: none;
+}
+
+/* List-view header */
+
+.monstro-list-view article header {
+    position: relative;
+    width: 100%;
+    text-align: center;
+}
+.monstro-list-view article header .featimg {
+    margin-bottom: 30px;
+    position: relative;
+    float: left;
+    width: 100%;
+    overflow: hidden;
+}
+.monstro-list-view article header .featimg a.image{
+    position: relative;
+    display: block;
+}
+
+/* Category name */
+
+.monstro-list-view article header .entry-category{
+    z-index: 9;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    line-height: 1;
+    text-align: right;
+    padding: 8px 12px;
+    background: #ffffff;
+}
+.monstro-list-view article header .entry-category a{
+    color: inherit;
+    font-size: 0.688rem;
+    text-transform: uppercase;
+}
+
+/* List-view section */
+
+.monstro-list-view article section .entry-excerpt{
+    margin-bottom: 25px; /* instead of 30px because of line-height */
+}
+.monstro-list-view article section .entry-excerpt p {
+    font-size: 0.750rem;
+    line-height: 1.8em;
+    margin: 0 0 30px;
+}
+.monstro-list-view article section .entry-excerpt p:last-child {
+    margin-bottom: 0;
+}
+
+/* List-view footer */
+
+.monstro-list-view article footer .socialicons {
+    float: none;
+    display: table;
+    margin: auto;
+}
+.monstro-list-view a.read-more {
+    text-transform: uppercase;
+    position: relative;
+    font-size: 0.688rem;
+    display: table;
+    color: inherit;
+    line-height: 35px;
+    margin: auto;
+}
+.monstro-list-view a.read-more:before {
+    content: '';
+    position: absolute;
+    left: -30px;
+    right: -30px;
+    height: 100%;
+}
+.monstro-list-view a.read-more:hover {
+    opacity: 0.6;
+}
+
+.solid .monstro-list-view a.read-more:before{
+    border: 1px solid;
+}
+.dotted .monstro-list-view a.read-more:before{
+    border: 1px dotted;
+}
+.with-opacity .monstro-list-view a.read-more:before{
+    opacity: 0.2;
+}
+
+/* Content right*/
+
+.content-right .monstro-list-view article header .featimg a.image{
+    float: right;
+}
+.content-right .monstro-list-view article:before{
+    right: -100%;
+    left: auto;
+}
+
+/* List-view sticky post */
+
+.monstro-list-view article.sticky header h2.entry-title a:before {
+    content: '\E809';
+    font-family: "monstrofront";
+    font-style: normal;
+    font-weight: normal;
+    speak: none;
+    display: inline-block;
+    text-decoration: inherit;
+    margin-right: 0.938rem;
+    text-align: left;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1em;
+    margin-left: 0;
+}
+
+/* No featured image case */
+
+.monstro-list-view article.no-feat-img .featimg a.image {
+    display: block;
+    border: 1px solid;
+    min-height: 250px;
+    color: #EFEFEF;
+    background: #ffffff;
+    text-align: center;
+}
+.monstro-list-view article.no-feat-img .featimg a.image:before {
+    font-family: "monstrofront";
+    content: "\E80B";
+    position: absolute;
+    top: 45%;
+    margin-left: -24px;
+    font-size: 300%;
+}
+.monstro-list-view article header .entry-category {
+    border-left: 1px solid #EFEFEF;
+    border-top: 1px solid #EFEFEF;
+}
+
+/********************** Media queries **********************/
+
+@media only screen and (max-width: 768px){
+
+}

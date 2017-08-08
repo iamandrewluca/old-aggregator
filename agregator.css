@@ -1,0 +1,42 @@
+@font-face {
+    font-family: 'agregator';
+    src: url('font/agregator.eot?92744060');
+    src: url('font/agregator.eot?92744060#iefix') format('embedded-opentype'),
+    url('font/agregator.woff2?92744060') format('woff2'),
+    url('font/agregator.woff?92744060') format('woff'),
+    url('font/agregator.ttf?92744060') format('truetype'),
+    url('font/agregator.svg?92744060#agregator') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'agregator';
+    src: url('../font/agregator.svg?34013543#agregator') format('svg');
+  }
+}
+*/
+ 
+ [class^="agregator-"]:before, [class*=" agregator-"]:before {
+    font-family: "agregator";
+    font-style: normal;
+    font-weight: normal;
+    speak: none;
+    display: inline-block;
+    text-decoration: inherit;
+    width: 1em;
+    margin-right: 0;
+    text-align: center;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1em;
+    margin-left: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.agregator-refresh:before { content: '\e800'; } /* '' */
+.agregator-link-extern:before { content: '\f08e'; } /* '' */

@@ -1,0 +1,75 @@
+
+
+/********************** Entry meta **********************/
+
+.entry-meta {
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 5px;
+}
+.meta-below .entry-meta,
+.entry-footer .entry-meta {
+    margin-bottom: 25px; /* instead of 30px because of line-height */
+}
+.entry-meta ul{
+    list-style-type: none;
+    margin: 0;
+    display: inline;
+    position: relative;
+}
+.entry-meta ul:before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    left: -30px;
+    top: 11px;
+    z-index: 1;
+}
+.entry-meta ul:after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    right: -30px;
+    top: 11px;
+    z-index: 1;
+}
+.solid .entry-meta ul:before,
+.solid .entry-meta ul:after {
+    border-bottom: 1px solid;
+}
+.dotted .entry-meta ul:before,
+.dotted .entry-meta ul:after {
+    border-bottom: 1px dotted;
+}
+.with-opacity .entry-meta ul:before,
+.with-opacity .entry-meta ul:after{
+    opacity: 0.2;
+}
+
+.entry-footer .entry-meta ul:before,
+.entry-footer .entry-meta ul:after {
+    content: none;
+    border: none;
+}
+.entry-meta ul li {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: inline;
+    zoom: 1;
+    text-transform: uppercase;
+    font-size: 0.625rem;
+}
+.entry-meta ul li:before{
+    content: "/" ;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+.entry-meta ul li:first-child:before{
+    content:"";
+    margin: 0;
+}
+.entry-meta ul li a{
+    color: inherit;
+}

@@ -1,0 +1,77 @@
+
+
+/********************** Video single **********************/
+
+.single-video .content-left,
+.single-video .content-right,
+.single-video .sidebar-left,
+.single-video .sidebar-right,
+.single-video .no-sidebars {
+    padding-top: 0;
+}
+.single-video article header.entry-header,
+.single-video article section.entry-content,
+.single-video article footer.entry-footer{
+    position: relative;
+    z-index: 2;
+}
+.single-video article header.entry-header,
+.single-video article section.entry-content{
+    color: #ffffff;
+}
+.single-video article header.entry-header:before,
+.single-video article section.entry-content:before{
+    content: "";
+    position: absolute;
+    display: block;
+    height: 100%;
+    left: 0;
+    right: 0;
+    background: #000000;
+    margin: 0 -100%;
+    z-index: -1;
+}
+.single-video article section.entry-content {
+    padding: 0 0 1.875rem;
+    margin: 0;
+}
+.single-video article div.entry-content:empty {
+    display: none;
+}
+.single-video .video-placeholder {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+.single-video .entry-meta,
+.single-video .post-title {
+    text-align: center;
+    color: inherit;
+}
+.single-video .entry-meta{
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+.single-video .meta-below .entry-meta{
+    margin-bottom: 0;
+    padding-bottom: 1.875rem;
+}
+.single-video .post-title {
+    font-size: 2rem;
+    margin: 0;
+    padding: 0 0 1.875rem;
+}
+.single-video .meta-below h2.post-title {
+    padding: 0;
+}
+.single-video .related-box .monstro-grid-view article section.entry-content {
+    color: inherit;
+}
+.single-video .related-box .monstro-grid-view article header.entry-header:before,
+.single-video .related-box .monstro-grid-view article section.entry-content:before {
+    background: none;
+    margin: 0;
+}
+.single-video .related-box .monstro-grid-view article .entry-meta {
+    text-align: left;
+}

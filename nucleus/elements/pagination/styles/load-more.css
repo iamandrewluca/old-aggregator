@@ -1,0 +1,25 @@
+
+
+/********************** Load-more pagination **********************/
+
+.monstro-load-more {
+    display: inline-block;
+    text-align: center;
+    margin-bottom: 60px;
+    width: 100%;
+    text-transform: uppercase;
+    position: relative;
+    font-size: 0.688rem;
+    color: inherit;
+    padding: 0 20px;
+    line-height: 40px;
+    background: #eeeeee;
+    transition: all 200ms ease 0s;
+}
+.monstro-load-more a {
+    display: block;
+}
+
+.monstro-load-more:hover {
+    opacity: 0.6;
+}

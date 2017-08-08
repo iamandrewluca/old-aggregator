@@ -1,0 +1,122 @@
+
+
+/********************** Footer **********************/
+
+footer#footer-container {
+    padding: 30px 0;
+}
+footer#footer-container p:last-child {
+    margin: 0;
+}
+nav.footer-menu {
+    position: relative;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+}
+.columns nav.footer-menu:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    content: "";
+    height: 2px;
+    box-shadow: 0 -1px 0 rgba(0,0,0,.2);
+    border-top: 1px solid;
+    border-color: rgba(255,255,255,.05)
+}
+.columns nav.footer-menu:after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    content: "";
+    height: 2px;
+    box-shadow: 0 -1px 0 rgba(0,0,0,.2);
+    border-top: 1px solid;
+    border-color: rgba(255,255,255,.05)
+}
+.columns:first-child nav.footer-menu {
+    margin-top: 0;
+    padding-top: 0;
+}
+.columns:last-child nav.footer-menu {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+.columns:first-child nav.footer-menu:before,
+.columns:last-child nav.footer-menu:after {
+    height: auto;
+    box-shadow:none;
+    border: none;
+}
+nav.footer-menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    white-space: nowrap;
+    font-size: 0.750rem;
+}
+nav.footer-menu ul > li {
+    position: relative;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    margin-right: 15px;
+    text-align: left;
+    vertical-align: top;
+}
+nav.footer-menu ul > li:last-child{
+    margin-right: 0;
+}
+nav.footer-menu ul > li a {
+    color: inherit;
+    display: block;
+}
+nav.footer-menu ul > li ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 10px 0 0;
+    text-align: left;
+}
+nav.footer-menu ul > li.menu-item-has-children ul:before{
+    background: none;
+    margin-top: 0;
+    margin-bottom:0;
+    height: auto;
+}
+nav.footer-menu ul > li ul li{
+    color: #9da0a4;
+    margin-right: 0;
+    text-transform: none;
+    margin-bottom: 10px;
+    display: block;
+    white-space: normal;
+}
+nav.footer-menu ul > li ul li a{
+    font-size: 0.688rem;
+}
+#header-container nav.footer-menu ul > li ul li a{
+    font-weight: 400;
+}
+nav.footer-menu ul > li ul ul{
+    margin: 10px 0 0 10px;
+    padding: 0;
+}
+
+footer#footer-container p.copyright{
+    margin: 0;
+    position: relative;
+    font-size: 0.750rem;
+}
+footer#footer-container p.copyright a{
+    color: inherit;
+}
+footer#footer-container #footerWidgets {
+    font-size: 0.750rem;
+}
+footer#footer-container [class*="column"] + [class*="column"]:last-child {
+    float: left;
+}

@@ -1,0 +1,232 @@
+
+
+/********************** Gallery single **********************/
+
+.single-gallery article header.entry-header {
+    position: relative;
+    text-align: center;
+    z-index: 2;
+    margin-bottom: -40px;
+}
+.single-gallery article header.entry-header .entry-meta {
+    color: #8f8f8f;
+    font-size: 1rem;
+}
+
+.single-gallery article header.entry-header .entry-meta,
+.single-gallery article header.entry-header .post-title {
+    text-align: center;
+}
+.single-gallery article header.entry-header .post-title {
+    font-weight: normal;
+    font-size: 2rem;
+    margin: 0;
+    text-transform: uppercase;
+}
+.single-gallery article header.entry-header div.entry-meta:last-child,
+.single-gallery article header.entry-header h2.post-title:last-child {
+    display: inline-block;
+    padding: 0 45px 15px;
+    width: auto;
+    max-width: 50.000rem;
+    background: #ffffff;
+    /*box-shadow: 0 35px 30px 0 rgba(0,0,0,0.1)*/
+}
+
+.single-gallery article section div.entry-content {
+    position: relative;
+}
+.single-gallery article section div.entry-content.stretched {
+    margin-left: -3.750rem;
+    margin-right: -3.750rem;
+}
+.narrow-view.single-gallery article section div.entry-content {
+    margin: 0 -31.25em 30px;
+}
+.large-view.single-gallery article section div.entry-content {
+    margin: 0 -40em 30px;
+}
+.single-gallery article section div.entry-content ul.monstro-gallery {
+    position: relative;
+    margin: 0;
+    list-style-type: none;
+    text-align: center;
+    z-index: 1;
+}
+.single-gallery article section div.entry-content ul li.monstro-gallery-item {
+    float: left;
+    display: inline;
+}
+.single-gallery article section div.entry-content ul li.monstro-gallery-item .gallery-zoom {
+    display: inline;
+}
+
+.single-gallery article section .gallery-controls {
+    position: absolute;
+    top: 45%;
+    z-index: 9;
+    width: 100%;
+    height: 40px;
+}
+.single-gallery article section .gallery-controls a.gallery-prev,
+.single-gallery article section .gallery-controls a.gallery-next {
+    position: absolute;
+    text-indent: -999em;
+    cursor: pointer;
+    height: 40px;
+    width: 40px;
+    line-height: 40px;
+    background: #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0,0,0,.1);
+}
+.single-gallery article section .gallery-controls a.gallery-prev {
+    left: 1.875rem;
+}
+.single-gallery article section .gallery-controls a.gallery-next {
+    right: 1.875rem;
+}
+.single-gallery article section .gallery-controls a.gallery-prev:before,
+.single-gallery article section .gallery-controls a.gallery-next:after {
+    position: absolute;
+    left: 0;
+    right: 0;
+    font-family: "monstrofront";
+    font-style: normal;
+    font-weight: normal;
+    speak: none;
+    display: inline-block;
+    text-decoration: inherit;
+    text-align: center;
+    font-variant: normal;
+    text-transform: none;
+    text-indent: 0;
+    font-size: 160%;
+}
+.single-gallery article section .gallery-controls .gallery-prev:before {
+    transition: left 0.2s linear;
+    content: '\E804';
+    margin-left: -4px;
+}
+.single-gallery article section .gallery-controls .gallery-next:after{
+    transition: right 0.2s linear;
+    content: '\E805';
+    margin-right: -4px;
+}
+.single-gallery article section .gallery-controls a:hover {
+    color: #dbdbdb;
+}
+.single-gallery article section .gallery-controls a:hover.gallery-prev:before {
+    left: -3px;
+}
+.single-gallery article section .gallery-controls a:hover.gallery-next:after {
+    right: -3px;
+}
+
+.single-gallery article footer.entry-footer {
+    overflow: hidden;
+    margin: 0 auto 30px;
+    max-width: 50.000rem;
+}
+.single-gallery article footer.entry-footer .monstro-border {
+    border-top: 1px solid #e9e9e9;
+    padding: 30px 0 0 ;
+}
+.single-gallery article footer.entry-footer .monstro-stats ul {
+    padding: 0;
+}
+.single-gallery article footer.entry-footer .monstro-stats ul li {
+    border: none;
+}
+.single-gallery article footer.entry-footer p {
+    font-size: 0.813rem;
+    line-height: 1.8;
+}
+.single article footer.entry-footer .socialicons > ul.monstro-social > li {
+    margin: 0 4px 0 0;
+}
+.single article footer.entry-footer .socialicons > ul.monstro-social > li > a > i:before {
+    font-size: 90%;
+}
+
+
+/********************** Gallery loader **********************/
+
+.single-gallery article div.entry-content:after {
+    content:"\E822";
+    font-family: "monstrofront";
+    font-style: normal;
+    font-weight: normal;
+    speak: none;
+    display: inline-block;
+    text-decoration: inherit;
+    font-size: 400%;
+    position: absolute;
+    left: 50%;
+    top: 45%;
+    margin-left: -32px;
+    color: #d0d0d0;
+    -webkit-animation: rotate 2s infinite linear;
+    -o-animation: rotate 2s infinite linear;
+    animation: rotate 2s infinite linear;
+}
+
+
+/********************** Gallery protected **********************/
+
+.single-gallery article.post-password-required div.entry-content:after {
+    content:"";
+    font-size: inherit;
+    position: relative;
+    margin: 0;
+}
+.single-gallery article.post-password-required div.entry-content {
+    height: auto!important;
+}
+.single-gallery article.post-password-required form{
+    text-align: center;
+    margin: 0 auto;
+}
+.single-gallery article.post-password-required form:before{
+    content: '\1F512';
+    font-family: "monstrofront";
+    font-style: normal;
+    font-weight: normal;
+    speak: none;
+    display: inline-block;
+    text-decoration: inherit;
+    width: 1em;
+    margin-right: .2em;
+    text-align: center;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1em;
+    margin-left: .2em;
+    font-size: 8.750rem;
+    color: #d0d0d0;
+}
+.single-gallery article.post-password-required form p{
+    font-size: 0.875rem;
+    font-weight: bold;
+}
+.single-gallery article.post-password-required form label{
+    font-weight: normal;
+    color: inherit;
+}
+.single-gallery article.post-password-required form input[type="submit"]{
+    margin: 0;
+    font-size: 0.875rem;
+}
+
+/* Tags and related for gallery */
+
+.single-gallery ul.entry-tags:after {
+    margin-right: 1.875em;
+}
+.single-gallery .related-box .monstro-grid-view article section.entry-content {
+    margin: 0;
+    background: none;
+}
+.single-gallery .related-box .monstro-grid-view article .entry-meta {
+    text-align: left;
+}

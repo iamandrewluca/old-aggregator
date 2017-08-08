@@ -1,0 +1,195 @@
+
+
+/********************** Tabbed comments **********************/
+
+.monstro-comments {
+    margin: 0 0 30px;
+    padding: 0;
+    position: relative;
+}
+.monstro-comments ul.comments-tabs {
+    margin:0;
+    padding:0 0 5px 0;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+}
+.monstro-comments ul.comments-tabs li {
+    list-style:none;
+    display:inline;
+    padding:0 15px 7px 15px;
+}
+.monstro-comments ul.comments-tabs li a {
+    font-weight: bold;
+    text-decoration:none;
+    text-transform: uppercase;
+    font-size: 0.750rem;
+    color: #999999;
+}
+.monstro-comments ul.comments-tabs li:first-child{
+    padding:0 15px 7px 0;
+}
+.monstro-comments ul.comments-tabs li.active {
+    border-bottom: 1px solid rgba(0,0,0,.2);
+}
+.monstro-comments ul.comments-tabs li.active a {
+    color: #000000;
+}
+
+/* Comments part */
+
+.monstro-comments .comments-wrapper {
+    position: relative;
+}
+.monstro-comments .comments-wrapper .comments-content {
+    margin-top: 30px;
+}
+.monstro-comments .comments-wrapper .comments-content ol.monstro-comment-list,
+.monstro-comments .comments-wrapper .comments-content ul.monstro-comment-list {
+    margin:0;
+    padding:0;
+    font-size: 0.750rem;
+}
+
+.monstro-comments .monstro-comment-list{
+    list-style-type: none;
+    margin: 0;
+}
+.monstro-comments .monstro-comment-list li.comment .monstro-comment-thumb{
+    float:left;
+    margin: 0 15px 15px 0;
+    line-height: 0;
+    max-width: 50px;
+}
+.monstro-comments .monstro-comment-list li.comment .monstro-comment-thumb img{
+    height: 100%;
+}
+.monstro-comments .monstro-comment-list li.comment .monstro-comment-quote{
+    /*float:left;*/
+}
+.monstro-comments .monstro-comment-list li.comment .monstro-comment-textinfo {
+    display: block;
+    text-transform: uppercase;
+    line-height: 1;
+}
+.monstro-comments .monstro-comment-list li.comment .monstro-comment-quote ul,
+.monstro-comments .monstro-comment-list li.comment .monstro-comment-quote ol,
+.monstro-comments .monstro-comment-list li.comment .monstro-comment-quote dl {
+    font-size: 0.750rem;
+    line-height: 2em;
+    margin-bottom: 1.875em;
+}
+.monstro-comments .monstro-comment-list li.comment .monstro-comment-quote ul li ul,
+.monstro-comments .monstro-comment-list li.comment .monstro-comment-quote ul li ol,
+.monstro-comments .monstro-comment-list li.comment .monstro-comment-quote ol li ol,
+.monstro-comments .monstro-comment-list li.comment .monstro-comment-quote ol li ul {
+    margin-bottom: 0;
+}
+.monstro-comments .monstro-comment-list li.comment .monstro-comment-textinfo .user {
+    font-weight: bold;
+    padding-top: 12px;
+    font-size: 0.625rem;
+    display: block;
+    color: inherit;
+}
+.monstro-comments .monstro-comment-list li.comment .monstro-comment-textinfo .time,
+.monstro-comments .monstro-comment-list li.comment .monstro-comment-textinfo .reply,
+.monstro-comments .monstro-comment-list li.comment .monstro-comment-textinfo .edit {
+    color: #999999;
+    font-size: 0.625rem;
+    line-height: 0;
+    font-weight: normal;
+}
+.monstro-comments .monstro-comment-list li.comment .monstro-comment-textinfo .edit {
+    margin-left: 15px;
+}
+.monstro-comments .monstro-comment-list li.comment .reply {
+    display: inline-block;
+    margin-top: -5px;
+    zoom: 1;
+    float: right;
+}
+
+.monstro-comments .monstro-comment-list .comment-body{
+    margin: 0;
+}
+.monstro-comments .monstro-comment-list .pingback p,
+.monstro-comments .monstro-comment-list .comment-body p{
+    clear: both;
+    font-size: 0.750rem;
+    line-height: 1.8em;
+    margin-bottom: 0;
+}
+.monstro-comments h3#comments-title,
+.monstro-comments h3#reply-title {
+    margin-bottom:5px;
+    font-size: 0.750rem;
+    text-transform: uppercase;
+}
+.monstro-comments .comment-notes,
+.monstro-comments .logged-in-as {
+    font-size: 0.750rem;
+    line-height: 1.8em;
+    margin-bottom: 30px;
+    color: #999999;
+}
+
+.monstro-comments #comments .children{
+    margin-left: 55px;
+}
+.monstro-comments .monstro-comment-list li.pingback,
+.monstro-comments .monstro-comment-list li.comment {
+    display: inline-block;
+    clear: both;
+    margin: 0 0 25px;
+    padding-bottom: 25px;
+    width: 100%;
+    list-style-type: none;
+}
+.monstro-comments .comments-wrapper .comments-content li.comment,
+.monstro-comments .comments-wrapper .comments-content li.pingback {
+    list-style:none;
+    border-bottom:1px solid rgba(0,0,0,.1);
+}
+.monstro-comments .comments-wrapper .comments-content li.comment:last-child,
+.monstro-comments .comments-wrapper .comments-content li.pingback:last-child {
+    border-bottom:none;
+}
+.monstro-comments .comments-wrapper .comments-content li.comment a,
+.monstro-comments .comments-wrapper .comments-content li.pingback a {
+    text-decoration:none;
+    color: inherit;
+}
+.monstro-comments .comments-wrapper .comments-content li.comment a small,
+.monstro-comments .comments-wrapper .comments-content li.pingback a small {
+    text-transform:uppercase;
+    position:relative;
+    left:4px;
+    top:0;
+}
+
+.monstro-comments .monstro-comment-list li.byuser .monstro-comment-textinfo .user {
+    color: #FF0000;
+}
+.monstro-comments .monstro-comment-list li.byuser .monstro-comment-textinfo .user {
+    color: #FF0000;
+}
+
+
+.monstro-comments #respond{
+    clear: both;
+}
+.monstro-comments #respond .monstro-comment-thumb{
+    display: none;
+}
+
+.monstro-comments #respond .comment-form {
+    margin-left: -1.875em;
+    margin-right: -1.875em;
+}
+.monstro-comments #respond .comment-form p.form-submit,
+.monstro-comments #respond .comment-form p.comment-subscription-form{
+    position: relative;
+    padding-left: 1.875em;
+    padding-right: 1.875em;
+    float: left;
+    margin-bottom: 0;
+}

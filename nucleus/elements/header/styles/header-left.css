@@ -1,0 +1,314 @@
+
+
+/********************** Left side header **********************/
+
+.header-left.monstro-narrow-view #monstro-wrapper {
+    max-width: 81.250em;
+}
+.header-left.monstro-fullwidth-view section#main .main-container > .row {
+    max-width: none;
+}
+.header-left #monstro-wrapper.monstro-align-left .row,
+.header-left #monstro-wrapper.monstro-align-right .row {
+    margin: 0;
+}
+.header-left header#header-container {
+    position: absolute;
+    bottom: 0;
+    border: none;
+    float: left;
+    width: 18.750rem;
+    z-index: 10;
+    padding: 3.750rem 1.875rem 0 1.875rem;
+}
+
+.header-left.header-sticky header#header-container,
+.header-left.header-sticky footer#footer-container {
+    position: fixed;
+}
+
+.header-left header#header-container .columns {
+    float: left;
+    display: block;
+    width: 100%;
+    margin-bottom: 60px;
+}
+
+.header-left .logo {
+    text-align: center;
+}
+
+.header-left section#main {
+    width: calc(100% - 22.5rem); /* 20.625 (margin left) + 1.875 (padding right) */
+    margin-left: 20.625em;
+    height: 100%;
+    float: left;
+}
+
+.header-left section#main.type-fullw-gallery {
+    margin-left: 18.75rem; /*  20.625rem - 1.875 rem */
+    width: calc(100% - 18.75rem);
+}
+.header-left section#main.type-fullw-gallery .columns {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.header-left.single-video section#main,
+.header-left.single-gallery section#main {
+    padding-top: 0px;
+}
+
+.header-left section#main .main-container > .row .sidebar-right {
+    padding-right: 3.750em;
+}
+
+/* Search */
+.header-left header#header-container .standard.searchform {
+    margin-bottom: 30px;
+}
+
+/* Menus */
+.header-left header#header-container nav.main-menu {
+    padding: 0;
+}
+.header-left header#header-container nav.main-menu ul > li {
+    width: 100%;
+    display: block;
+    margin-right: 0;
+    margin-bottom: 1.875em;
+    max-width: none;
+}
+.header-left header#header-container nav.main-menu ul > li ul li {
+    margin-bottom: 10px;
+}
+
+
+/********************** Header left with dropdown **********************/
+
+.header-left header#header-container .drop-down nav.main-menu ul > li {
+    text-align: center;
+    margin-bottom: 0;
+    position: static;
+}
+.header-left header#header-container .drop-down nav.main-menu ul li:hover > ul:before{
+    border: none;
+    position: relative;
+    width: auto;
+    height: auto;
+    top: auto;
+    left: auto;
+}
+.header-left header#header-container .drop-down nav.main-menu ul > li a:after {
+    left: 0;
+    opacity: 0.3;
+    color: inherit;
+    content: "";
+    display: block;
+    margin: 10px auto;
+    width: 20px;
+    text-align: center;
+    border-bottom: 1px solid;
+}
+
+.header-left header#header-container .drop-down nav.main-menu ul > li a {
+    padding: 10px 0;
+    border: none;
+}
+.header-left header#header-container .drop-down nav.main-menu ul > li:last-child a {
+    border: none;
+}
+.header-left header#header-container .drop-down nav.main-menu ul > li ul {
+    position: absolute;
+    left: 100%;
+    top: 0;
+    bottom: 0;
+    margin: 0;
+    width: 15.625rem;
+    max-width: 15.625rem;
+    color: #000000;
+    background: none;
+    padding: 0 0 0 90px;
+    z-index: 999;
+}
+.header-left header#header-container .drop-down nav.main-menu ul > li.menu-item-has-children {
+    padding-right: 0;
+}
+.header-left header#header-container .drop-down nav.main-menu ul > li.menu-item-has-children ul:before {
+    position: fixed;
+    background: #ffffff;
+    background: rgba(255,255,255,.9);
+    height: auto;
+    width: 13.750rem;
+    top: 0;
+    bottom: 0;
+    left: 18.750rem;
+    margin: 0;
+}
+.header-left header#header-container .drop-down nav.main-menu ul > li ul li.menu-item-has-children ul:before {
+    left: 32.500rem;
+}
+.header-left header#header-container .drop-down nav.main-menu ul > li ul ul li.menu-item-has-children ul:before {
+    left: 46.250rem;
+}
+.header-left header#header-container .drop-down nav.main-menu ul > li ul ul ul li.menu-item-has-children ul:before {
+    left: 60rem;
+}
+.header-left header#header-container .drop-down nav.main-menu ul > li ul ul ul ul li.menu-item-has-children ul:before {
+    left: 73.75rem;
+}
+.header-left header#header-container .drop-down nav.main-menu ul > li ul ul ul ul ul li.menu-item-has-children ul:before {
+    left: 87.5rem;
+}
+.header-left header#header-container .drop-down nav.main-menu ul > li ul li {
+    margin-bottom: 0;
+    padding: 0;
+    text-transform: uppercase;
+    margin-left:0;
+    color: inherit;
+    left: 0;
+    white-space: normal;
+}
+.header-left header#header-container .drop-down nav.main-menu ul > li ul li a {
+    /*font-size: 0.625rem;*/
+}
+
+
+/* Social icons */
+
+.header-left footer#footer-container .socialicons{
+    width: 100%;
+}
+.header-left footer#footer-container .socialicons > ul.monstro-social{
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Footer */
+.header-left footer#footer-container {
+    width: 18.750rem;
+    padding: 30px 30px;
+}
+.header-left footer#footer-container .row {
+    max-width: 100%;
+}
+
+/* List view */
+.header-left .monstro-list-view article:before {
+    background: none;
+}
+
+/* Position fixed case */
+.header-left header#header-container.position-fixed {
+    position: fixed;
+}
+
+/* Floating sidebar */
+.header-left section#main .main-container > .row {
+    margin: 0;
+}
+.header-left section#main .main-container.floating-sidebar .monstro-list-view article .featimg a.image {
+    width: 88%;
+}
+.header-left section#main .main-container.floating-sidebar .monstro-vote {
+    right: 0;
+}
+
+
+/********************** Header-left single gallery **********************/
+
+.header-left.monstro-large-view.single-gallery article .entry-content {
+    margin: 0 0 30px;
+}
+
+
+/********************** Different view-ports Styles **********************/
+
+@media only screen and (max-width: 1024px) {
+    .header-left.header-sticky header#header-container,
+    .header-left.header-sticky footer#footer-container {
+        position: relative;
+    }
+    .header-left header#header-container {
+        float: none;
+        width: auto;
+        margin-left: 0;
+        position: relative;
+        padding: 15px 0;
+    }
+    .header-left header#header-container .columns {
+        margin-bottom: 0;
+    }
+    .header-left header#header-container .small-1.columns,
+    .header-left header#header-container .small-5.columns,
+    .header-left header#header-container .small-8.columns,
+    .header-left header#header-container .small-11.columns{
+        margin-bottom: 0;
+        padding-bottom: 0;
+        text-align: left;
+        float: none;
+        display: table-cell!important;
+        vertical-align: middle;
+    }
+    .header-left header#header-container .small-1.columns{
+        width: 8.33333%;
+    }
+    .header-left header#header-container .small-3.columns{
+        width: 25%;
+    }
+    .header-left header#header-container .small-5.columns{
+        width: 41.66667%;
+    }
+    .header-left header#header-container .small-8.columns{
+        width: 66.66667%;
+    }
+    .header-left header#header-container .small-11.columns{
+        width: 91.66667%;
+    }
+    .header-left header#header-container .standard.searchform {
+        margin-bottom: 0;
+    }
+    .header-left section#main,
+    .header-left section#main.type-fullw-gallery {
+        width: 100%;
+        margin-left: 0;
+    }
+    .header-left section#main .main-container.floating-sidebar > .row .sidebar-right,
+    .header-left section#main .main-container.floating-sidebar > .row .sidebar-left {
+        max-width: none;
+    }
+    .header-left footer#footer-container {
+        margin-left: 0;
+        width: 100%;
+        padding: 30px 0;
+    }
+    .header-left header#header-container.position-fixed {
+        position: inherit;
+        text-align: center;
+    }
+    .header-left section#main .main-container > .row .sidebar-right {
+        padding-right: 1.875em;
+    }
+}
+
+/* <768px width */
+@media only screen and (max-width : 768px) {
+    .header-left header#header-container .row [class*="column"] + [class*="column"]:last-child{
+        width: 100%;
+        float: right;
+    }
+}
+
+@media only screen and (max-width: 767px){
+    .header-left header#header-container .small-3.columns{
+        width: 100%;
+        float: left;
+    }
+}
+
+/* Phones */
+@media only screen and (max-width: 480px){
+    .header-left header#header-container .columns{
+        margin-bottom: 10px;
+    }
+}

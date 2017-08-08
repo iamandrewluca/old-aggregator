@@ -1,0 +1,135 @@
+
+
+/********************** Full-width row for titles **********************/
+
+.full-width-row {
+    width: 100%;
+}
+.full-width-row > .row {
+    margin: 0;
+}
+.full-width-row .row,
+.monstro-large-view .full-width-row .row,
+.monstro-narrow-view .full-width-row .row {
+    max-width: 100%;
+}
+.full-width-row > .row > .columns,
+.full-width-row > .row > .columns > .row > .columns {
+    padding: 0;
+}
+
+/***** Align left *****/
+#monstro-wrapper.monstro-align-left .full-width-row .row {
+    margin-left: 0;
+}
+
+/***** Align right *****/
+#monstro-wrapper.monstro-align-right .full-width-row .row {
+    margin-right: 0;
+    float: right;
+}
+
+/***** Boxed version *****/
+.monstro-align-left .monstro-boxed .full-width-row > .row > .columns,
+.monstro-align-left .monstro-boxed .full-width-row > .row > .columns > .row > .columns {
+    padding: 0;
+}
+
+/***** Unboxed version *****/
+.monstro-large-view .monstro-align-left .monstro-unboxed .full-width-row .row,
+.monstro-large-view .monstro-align-right .monstro-unboxed .full-width-row .row {
+    max-width: 75.000rem;
+}
+.monstro-align-left .monstro-unboxed .full-width-row > .row > .columns,
+.monstro-align-left .monstro-unboxed .full-width-row > .row > .columns > .row > .columns {
+    padding-left: 3.75rem;
+    padding-right: 0;
+}
+.monstro-align-right .monstro-unboxed .full-width-row > .row > .columns,
+.monstro-align-right .monstro-unboxed .full-width-row > .row > .columns > .row > .columns {
+    padding-left: 0;
+    padding-right: 3.75rem;
+}
+
+/***** Mobile settings *****/
+@media only screen and (max-width: 768px){
+    .monstro-align-left .monstro-unboxed .full-width-row > .row > .columns,
+    .monstro-align-left .monstro-unboxed .full-width-row > .row > .columns > .row > .columns {
+        padding-left: 0;
+    }
+    .monstro-align-right .monstro-unboxed .full-width-row > .row > .columns,
+    .monstro-align-right .monstro-unboxed .full-width-row > .row > .columns > .row > .columns {
+        padding-right: 0;
+    }
+}
+
+
+/********************** Delimiters **********************/
+
+.delimiter-type {
+    display: block;
+    clear: both;
+    margin-bottom: 0;
+    width: 100%;
+}
+.delimiter-type.none {
+    border-bottom: none!important;
+}
+.dotted .delimiter-type {
+    border-bottom: 1px dotted;
+}
+.solid .delimiter-type {
+    border-bottom: 1px solid;
+}
+.with-opacity .delimiter-type {
+    opacity: 0.2;
+}
+.stretch-lines .delimiter-type {
+    width: auto;
+    margin-left: -100%;
+    margin-right: -100%;
+}
+.monstro-boxed .stretch-lines .delimiter-type {
+    width: 100%;
+    margin: 0;
+}
+
+
+/********************** Titles **********************/
+
+h2.cat-title,
+h2.post-title,
+h2.entry-title {
+    margin: 30px 0;
+    line-height: 1;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+h2.cat-title,
+h2.post-title {
+    font-size: 2.250rem;
+    margin: 30px 0 10px;
+}
+h2.entry-title {
+    font-size: 1.875rem;
+}
+.no-meta h2.entry-title,
+.meta-above h2.entry-title {
+    margin: 0 0 30px 0;
+}
+.meta-below h2.entry-title,
+.meta-below h2.post-title{
+    margin: 0;
+}
+.archive h2.cat-title {
+    font-size: 2.250rem;
+    margin: 0;
+}
+
+
+/********************** Gullwidth galleries **********************/
+
+section#main.type-fullw-gallery.padding-top-30,
+section#main.type-fullw-gallery.padding-top-60 {
+    padding-top: 0!important;
+}

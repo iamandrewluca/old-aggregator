@@ -1,0 +1,117 @@
+
+
+/********************** Voting **********************/
+
+.monstro-vote {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: auto;
+    width: auto;
+}
+.monstro-vote-sticky {
+    position: relative;
+    z-index: 2;
+}
+.monstro-float-vote {
+    margin-bottom: 0;
+}
+.monstro-float-vote ul {
+    max-width: 50px;
+    display: inline-block;
+    list-style-type: none;
+    margin: 0;
+}
+.monstro-float-vote li.count {
+    font-size: 1.000rem;
+    text-align: center;
+    margin: 15px 0;
+}
+.monstro-float-vote a {
+    display: block;
+    text-align: center;
+    position: relative;
+}
+.monstro-float-vote span.icon {
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    min-width: 40px;
+    max-width: 40px;
+    position: relative;
+}
+.monstro-float-vote a span.icon:before,
+.monstro-post-action a span.icon:before {
+    font-family: "monstrofront";
+    font-size: 100%;
+    width: 1em;
+    line-height: 1em;
+    display: inline-block;
+    font-style: normal;
+    font-weight: normal;
+    speak: none;
+    text-decoration: inherit;
+    text-align: center;
+    font-variant: normal;
+    text-transform: none;
+}
+.monstro-float-vote .arrow a.good span.icon:before {
+    content: '\E811';
+}
+.monstro-float-vote .arrow a.meh span.icon:before {
+    content: '\E80E';
+}
+.monstro-float-vote .equation a.good span.icon:before {
+    content: '\E800';
+}
+.monstro-float-vote .equation a.meh span.icon:before {
+    content: '\E808';
+}
+.monstro-float-vote .heart a.good span.icon:before {
+    content: '\E801';
+}
+.monstro-float-vote .heart a.meh span.icon:before {
+    content: '\E802';
+}
+.monstro-float-vote .smiley a.good span.icon:before {
+    content: '\E813';
+}
+.monstro-float-vote .smiley a.meh span.icon:before {
+    content: '\E814';
+}
+.monstro-float-vote .thumbs a.good span.icon:before {
+    content: '\E815';
+}
+.monstro-float-vote .thumbs a.meh span.icon:before {
+    content: '\E816';
+}
+.monstro-post-action a.comment span.icon:before {
+    content: '\E80E';
+}
+
+
+/* Case when feat image is missing */
+
+.monstro-vote:first-child {
+    left: 0;
+    right: auto;
+}
+.monstro-vote:first-child ul {
+    max-width: none;
+}
+.monstro-vote:first-child .monstro-float-vote li {
+    display: inline;
+}
+.monstro-vote:first-child .monstro-float-vote li.count {
+    margin: 0;
+}
+.monstro-vote:first-child .monstro-float-vote a {
+    display: inline;
+}
+.monstro-vote:first-child .monstro-float-vote span.icon {
+    display: inline-block;
+    width: 44px
+}
+.monstro-vote:first-child article .featimg{
+    text-align: center;
+}

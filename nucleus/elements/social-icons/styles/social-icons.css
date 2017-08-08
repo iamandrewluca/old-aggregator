@@ -1,0 +1,88 @@
+/********************** Social icons **********************/
+
+.socialicons {
+    float: left;
+    position: relative;
+    z-index: 999;
+}
+.socialicons > ul.monstro-social{
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    position: relative;
+}
+.socialicons > ul.monstro-social > li {
+    display: inline-block;
+    margin: 0 10px 0 0;
+}
+.socialicons > ul.monstro-social > li:last-child {
+    margin: 0;
+}
+.socialicons > ul.monstro-social > li > a {
+    display: block;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    margin-bottom: 0;
+    text-align: center;
+    padding: 0;
+    background-color: #292929;
+    border-radius: 50%;
+    color: #FFFFFF;
+}
+.socialicons>ul.monstro-social>li>a.rss:hover{
+    background-color: #f69400;
+}
+.socialicons>ul.monstro-social>li a.twitter:hover{
+    background-color: #48c4d2;
+}
+.socialicons>ul.monstro-social>li>a.gplus:hover{
+    background-color: #d94a39;
+}
+.socialicons>ul.monstro-social>li>a.dribbble:hover{
+    background-color: #ef5b92;
+}
+.socialicons>ul.monstro-social>li>a.yahoo:hover{
+    background-color: #7b0099;
+}
+.socialicons>ul.monstro-social>li>a.linkedin:hover{
+    background-color: #71C5EF;
+}
+.socialicons>ul.monstro-social>li>a.skype:hover{
+    background-color: #18b7f1;
+}
+.socialicons>ul.monstro-social>li>a.fb:hover{
+    background-color: #3b5998;
+}
+.socialicons>ul.monstro-social>li>a.yt:hover{
+    background-color: #C4302B;
+}
+.socialicons>ul.monstro-social>li>a.vimeo:hover{
+    background-color: #44bbff;
+}
+.socialicons>ul.monstro-social>li>a.delicious:hover{
+    background-color: #3274d1;
+}
+.socialicons>ul.monstro-social>li>a.tumblr:hover{
+    background-color: #3a5976;
+}
+.socialicons>ul.monstro-social>li>a.pinterest:hover{
+    background-color: #cb2027;
+}
+.socialicons>ul.monstro-social>li>a.flickr:hover{
+    background-color: #FF0084;
+}
+.socialicons>ul.monstro-social>li>a.email:hover{
+    background-color: #0bac03;
+}
+.socialicons>ul.monstro-social>li>a.instagram:hover{
+    background-color: #634d40;
+}
+.socialicons>ul.monstro-social>li>a>i{
+}
+.socialicons>ul.monstro-social>li>a>i:before{
+    line-height: inherit;
+    font-size:65%;
+    width: auto;
+    margin: 0;
+}

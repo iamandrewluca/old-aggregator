@@ -1,0 +1,17 @@
+
+
+/********************** Logo **********************/
+
+.logo {
+    position: relative;
+    z-index: 999;
+}
+.logo a,
+.logo a:hover {
+    color: inherit;
+}
+.logo h1 {
+    font-size: 2rem;
+    line-height: 1.4rem;
+    margin-bottom: 0;
+}

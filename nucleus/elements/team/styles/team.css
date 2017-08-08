@@ -1,0 +1,121 @@
+.team-header {
+    text-align: center;
+}
+.team-header .monstro-page-name {
+    font-style:italic;
+    color:#888;
+    margin:auto;
+    font-size: 1.000rem;
+}
+
+.team-header .monstro-subpage-name {
+    text-transform:uppercase;
+    font-size: 3.000rem;
+    color:#000000;
+
+}
+.team-header .monstro-subpage-name:after{
+    opacity: 0.3;
+    content: "";
+    display: block;
+    margin: 10px auto;
+    width: 20px;
+    border-bottom: 1px solid;
+}
+.team-header {
+    max-width:450px;
+    margin:auto;
+    padding-top:13px;
+    font-size: 0.813rem;
+    color:#a1a1a1;
+}
+
+.team-description {
+    color: #757575;
+    font-size: 0.813rem;
+    text-align: center;
+    max-width: 450px;
+    margin: 0 auto;
+}
+
+/**** Team Photos ****/
+#monstro-team {
+    padding-top: 50px;
+    text-align:center;
+}
+#monstro-team li {
+    list-style: none;
+}
+#monstro-team li .monstro-team-items {
+    display: inline-block;
+    position: relative;
+    margin: 0 auto;
+    max-width:195px;x
+    margin-bottom: 30px;
+}
+#monstro-team li .monstro-team-items a {
+    display: inline-block;
+    background-color: #b89674;
+    border-radius: 50%;
+}
+
+#monstro-team img {
+    border-radius:50%;
+    width:195px;
+    height:195px;
+    opacity:1;
+    display:block;
+}
+#monstro-team span.team-read-more {
+    position:absolute;
+    top: calc(50% - 40px);
+    font-size:1.000rem;
+    opacity:0;
+    display:block;
+    text-transform: uppercase;
+    width: 100%;
+}
+#monstro-team .team-read-more {
+    color:#fff;
+}
+#monstro-team .team-read-more:after {
+    display: block;
+    top: 25px;
+    left: 0;
+    right: 0;
+    position:absolute;
+    width: 10px;
+    content: "";
+    height: 10px;
+    border-right: 1px solid;
+    color:#FFFFFF;
+    border-bottom: 1px solid;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    margin: 0 auto;
+}
+
+#monstro-team .team-name{
+    padding-top:15px;
+    font-size: 1.500rem;
+    display: block;
+
+}
+#monstro-team .monstro-team-title {
+    font-family: 'Old Standard TT', serif;
+    font-size: 0.875rem;
+    color: #ababab;
+    font-style: italic;
+}
+#monstro-team a:hover img {
+    opacity:0;
+    transition: 1s ease;
+}
+#monstro-team a:hover span {
+    opacity:1;
+    transition: 1s ease;
+
+}
+

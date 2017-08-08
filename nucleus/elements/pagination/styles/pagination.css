@@ -1,0 +1,53 @@
+
+
+/********************** Pagination **********************/
+
+.monstro-pagination {
+    display: inline-block;
+    text-align: center;
+    margin-bottom: 60px;
+    width: 100%;
+}
+.monstro-pagination .page-numbers{
+    position: relative;
+    display: inline-block;
+    padding: 0 4px;
+    margin: 0 6px;
+    font-size: 0.750rem;
+    font-weight: bold;
+    color: inherit;
+}
+.monstro-pagination .page-numbers.next,
+.monstro-pagination .page-numbers.prev{
+    text-indent: -999em;
+    width: 15px;
+}
+.monstro-pagination .page-numbers.next:before,
+.monstro-pagination .page-numbers.prev:before{
+    position: absolute;
+    font-family: "monstrofront";
+    font-style: normal;
+    font-weight: normal;
+    speak: none;
+    display: inline-block;
+    text-decoration: inherit;
+    text-align: center;
+    font-variant: normal;
+    text-transform: none;
+    text-indent: 0;
+    font-size: 110%;
+}
+.monstro-pagination .page-numbers.next:before{
+    content: '\e819';
+    right: 0;
+}
+.monstro-pagination .page-numbers.prev:before{
+    content: '\e818';
+    left: 0;
+}
+.monstro-pagination .page-numbers.current{
+    color: rgba(0,0,0,.3);
+}
+.monstro-pagination .page-numbers:not(.current):hover{
+    color: rgba(0,0,0,.5);
+}

@@ -1,0 +1,32 @@
+
+
+/********************** Breadcrumbs **********************/
+
+.breadcrumbs{
+    background: none;
+    border: 0 none;
+}
+.single .breadcrumbs,
+.archive .breadcrumbs{
+    margin-top: 25px;
+}
+.breadcrumbs ul{
+    list-style-type: none;
+    margin: 0;
+}
+.breadcrumbs ul li{
+    display: inline-block;
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    color: #888888;
+}
+.breadcrumbs ul li:not(:first-child):before{
+    content: '/';
+    font-style: normal;
+    font-weight: normal;
+    speak: none;
+    font-size: 0.625rem;
+    display: inline-block;
+    margin: 0 5px;
+    color: inherit;
+}

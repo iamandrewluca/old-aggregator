@@ -1,0 +1,9 @@
+.customization-content .columns {
+  margin-bottom: 0!important;
+}
+.customization-content .columns.small-6 {
+  width: 50%!important;
+}
+.customization-content .columns .button-group {
+  margin-bottom: 1rem;
+}

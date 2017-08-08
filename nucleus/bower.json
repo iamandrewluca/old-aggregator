@@ -1,0 +1,21 @@
+{
+  "name": "nucleus",
+  "version": "0.0.0",
+  "authors": [
+    "kzdmssoft <diogene.din.pizdiuseni@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "lesshat": "*",
+    "foundation": "*",
+    "imagesloaded": "*"
+  }
+}
