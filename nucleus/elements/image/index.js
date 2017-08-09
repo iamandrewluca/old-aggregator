@@ -1,6 +1,6 @@
 /** @jsx React.DOM */
 var React = require('react');
-var Fluxxor = require('fluxxor');
+// var Fluxxor = require('fluxxor');
 var Image = {
     render: function(){
         return this.transferPropsTo(React.DOM.img(null));

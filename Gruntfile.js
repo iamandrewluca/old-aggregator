@@ -48,7 +48,11 @@ module.exports = function(grunt) {
                 progress: false,
                 stats: true,
                 failOnError: false,
-                plugins: [new webpack.optimize.UglifyJsPlugin],
+                plugins: [
+                    new webpack.optimize.UglifyJsPlugin({
+                        compress: { warnings: false }
+                    })
+                ],
                 resolve: {
                     modulesDirectories: ['node_modules', 'elements', 'mixins', 'utils', 'nucleus', 'nucleus/elements'],
                     alias: {

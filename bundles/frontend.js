@@ -5,7 +5,6 @@ var actions = require('../nucleus/actions').actions;
 var Config = require('../mRNA/config');
 var Resource = require('../mRNA/resource');
 var Aggregator = require('aggregator').Component;
-var __ = require('translate');
 var aggregatorActions = jQuery.extend(true, actions, {
     updateLang: function(newLang){
         this.dispatch('update-lang', newLang);
@@ -34,7 +33,7 @@ window.addEventListener('popstate', function(){
 });
 
 var TitleCtrl = require('../nucleus/elements/title/controller');
-var titleCtrl = TitleCtrl(flux.store('Resource'));
+TitleCtrl(flux.store('Resource'));
 flux.actions.bootstrap();
 React.renderComponent(Aggregator({flux: flux}), document.getElementById('react-parent'));
 jQuery(document).foundation();

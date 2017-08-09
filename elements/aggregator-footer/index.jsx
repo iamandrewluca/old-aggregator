@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 var React = require('react');
 var Fluxxor = require('fluxxor');
-var __ = require('translate');
+// var __ = require('translate');
 var AggregatorFooter = {
     mixins: [Fluxxor.FluxMixin(React)],
     render: function(){

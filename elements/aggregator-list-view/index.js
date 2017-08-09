@@ -2,7 +2,7 @@
 var React = require('react');
 var Parent = require('../../nucleus/elements/list-view').Class;
 var Link = require('link').Component;
-var Switch = require('switch').Component;
+// var Switch = require('switch').Component;
 var __ = require('translate');
 var Pagination = require('pagination').Component;
 var AggregatorListView = jQuery.extend(true, Parent, {

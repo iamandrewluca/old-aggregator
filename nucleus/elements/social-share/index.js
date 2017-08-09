@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 var React = require('react');
-var Link = require('../link').Component;
-var __ = require('../../translate');
+// var Link = require('../link').Component;
+// var __ = require('../../translate');
 var SocialShare = {
     openSharer: function(event){
         event.preventDefault();

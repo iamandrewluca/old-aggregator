@@ -1,4 +1,4 @@
-var Debouncer = require('debouncer');
+// var Debouncer = require('debouncer');
 var URIjs = require('URIjs');
 var constants = {
     BOOTSTRAP: 'boostrap',

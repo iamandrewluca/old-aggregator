@@ -1,15 +1,15 @@
 var Fluxxor = require('fluxxor');
 var constants = require('../nucleus/actions').constants;
 var parseSiren = require('../nucleus/utils/siren');
-var traverseObj = require('../nucleus/utils/object-traverser').traverse;
+// var traverseObj = require('../nucleus/utils/object-traverser').traverse;
 var resource = null;
 var resources = null;
 var lang = null;
-var __ = require('../nucleus/translate');
+// var __ = require('../nucleus/translate');
 var Courier = require('../nucleus/utils/courier');
 var URIjs = require('URIjs');
 var obj2array = require('../nucleus/utils/obj2array');
-var cached = {};
+// var cached = {};
 
 var ResourceStore = {
     initialize: function(){
