@@ -16,15 +16,14 @@ if(isset($_GET['monstro-api']) && ('json' == $_GET['monstro-api'])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?php
-        if ($LANG == 'ro') {
-            echo "<title>Agregator de știri</title>";
-        }
-        elseif ($LANG == 'ru') {
-            echo "<title>Агрегатор новостей</title>";
-        }
-    ?>
-    <title>Agregator de știri</title>
+
+    <?php if ($LANG == 'ro') {
+        echo "<title>Agregator de știri</title>";
+    }
+    elseif ($LANG == 'ru') {
+        echo "<title>Агрегатор новостей</title>";
+    } ?>
+    
 	<link rel="stylesheet" href="vendor/foundation/css/foundation.min.css"/>
 	<link rel="stylesheet" href="style.css"/>
 	<link rel="stylesheet" href="agregator.css"/>
@@ -59,5 +58,6 @@ if(isset($_GET['monstro-api']) && ('json' == $_GET['monstro-api'])){
 			}
 		</script>
 		<script src="concat/frontend.js"></script>
+		<script src="//localhost:35729/livereload.js"></script>
 	</body>
 </html>

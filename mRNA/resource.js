@@ -17,6 +17,7 @@ var ResourceStore = {
         this.bindActions(constants.NAVIGATE, this.onNavigate);
         this.bindActions('update-lang', this.onChangeLang);
         this.bindActions('change-selection', this.changeSelection);
+        this.bindActions('toggle-all-sources', this.toggleAllSources);
     },
 
     getSelectionDelta: function(slug, isSelected){
@@ -53,6 +54,23 @@ var ResourceStore = {
         }.bind(this));
     },
 
+    toggleAllSources: function(isSelected) {
+
+        if (isSelected) {
+            $.removeCookie(lang, { path: '/' });
+        } else {
+            $.cookie(lang, '');
+        }
+        
+        var resource = this.updateResource();
+        var that = this;
+        this.updateResources().then(function(){
+            resource.then(function(){
+                that.emit("change");
+            })
+        });
+    },
+
     onChangeLang: function(newLang){
         $.cookie('lang', newLang);
         lang = $.cookie('lang');
@@ -67,12 +85,14 @@ var ResourceStore = {
 
     updateResource: function() {
         return jQuery.get(AggregatorData.config.homeUrl + '?monstro-api=json', null, function(newResource){
+            console.log('updateResource', newResource)
             resource = parseSiren(newResource);
         }.bind(this), 'json');
     },
 
     updateResources: function(){
         return jQuery.get(AggregatorData.config.homeUrl + '?monstro-api=json&resources', null, function(newResources){
+            console.log('updateResources', newResources)
             resources = obj2array(newResources);
         }.bind(this), 'json');
     },

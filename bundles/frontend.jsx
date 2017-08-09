@@ -20,6 +20,9 @@ var aggregatorActions = jQuery.extend(true, actions, {
             slug: slug,
             isSelected: isSelected
         })
+    },
+    toggleAllSources: function(isSelected) {
+        this.dispatch('toggle-all-sources', isSelected);
     }
 });
 var flux = new Fluxxor.Flux({

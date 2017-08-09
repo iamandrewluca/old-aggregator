@@ -8,7 +8,6 @@ var AggregatorFooter = require('aggregator-footer').Component;
 var Aggregator = {
     mixins:[Fluxxor.FluxMixin(React), Fluxxor.StoreWatchMixin("Resource")],
     getStateFromFlux: function(){
-        // var flux = this.getFlux();
         var resource = this.getFlux().store("Resource");
         return {
             resource: resource.getResource(),

@@ -44,7 +44,6 @@ module.exports = function(grunt) {
                     filename: "frontend.js"
                 },
                 watch: true,
-                devtool: 'source-map',
                 progress: false,
                 stats: true,
                 failOnError: false,
