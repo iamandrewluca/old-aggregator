@@ -24,7 +24,10 @@ var Aggregator = {
                     <div className="main-container delimited shadow withbg">
                         <div className="row">
                             <div className="large-9 columns content-left">
-                                <AggregatorListView resource={this.state.resource}/>
+                                <AggregatorListView
+                                    resource={this.state.resource}
+                                    resources={this.state.resources}
+                                />
                             </div>
                             <div className="large-3 columns sidebar-right">
                                 <ResourceSelection resources={this.state.resources}/>

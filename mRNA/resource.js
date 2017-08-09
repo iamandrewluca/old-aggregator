@@ -85,14 +85,12 @@ var ResourceStore = {
 
     updateResource: function() {
         return jQuery.get(AggregatorData.config.homeUrl + '?monstro-api=json', null, function(newResource){
-            console.log('updateResource', newResource)
             resource = parseSiren(newResource);
         }.bind(this), 'json');
     },
 
     updateResources: function(){
         return jQuery.get(AggregatorData.config.homeUrl + '?monstro-api=json&resources', null, function(newResources){
-            console.log('updateResources', newResources)
             resources = obj2array(newResources);
         }.bind(this), 'json');
     },

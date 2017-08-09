@@ -24,7 +24,10 @@ var Aggregator = {
                     React.DOM.div({className: "main-container delimited shadow withbg"}, 
                         React.DOM.div({className: "row"}, 
                             React.DOM.div({className: "large-9 columns content-left"}, 
-                                AggregatorListView({resource: this.state.resource})
+                                AggregatorListView({
+                                    resource: this.state.resource, 
+                                    resources: this.state.resources}
+                                )
                             ), 
                             React.DOM.div({className: "large-3 columns sidebar-right"}, 
                                 ResourceSelection({resources: this.state.resources})

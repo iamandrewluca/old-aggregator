@@ -96,15 +96,25 @@ var AggregatorListView = jQuery.extend(true, Parent, {
     },
 
     render: function(){
+
+        var noSources = this.props.resources.every(function(resource) {
+            return resource.selected === false
+        });
+
         return (
             <div>
                 {this.getTitle()}
                 <div className="monstro-list-view">
-                    {this.getPosts()}
+                    {noSources ? (
+                        <div className="row">
+                            <div className="columns large-12">
+                                <h4 className="monstro-no-posts-msg">{__('Lipsa știrilor e cea mai bună știre - ai deconectat toate sursele.')}</h4>
+                            </div>
+                        </div>
+                    ) : this.getPosts()}
                 </div>
                 <Pagination currentPage={this.props.resource.prop('currentPage')} totalPages={this.props.resource.prop('totalPages')}/>
             </div>
-
         )
     }
 });

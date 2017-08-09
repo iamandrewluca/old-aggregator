@@ -96,15 +96,25 @@ var AggregatorListView = jQuery.extend(true, Parent, {
     },
 
     render: function(){
+
+        var noSources = this.props.resources.every(function(resource) {
+            return resource.selected === false
+        });
+
         return (
             React.DOM.div(null, 
                 this.getTitle(), 
                 React.DOM.div({className: "monstro-list-view"}, 
-                    this.getPosts()
+                    noSources ? (
+                        React.DOM.div({className: "row"}, 
+                            React.DOM.div({className: "columns large-12"}, 
+                                React.DOM.h4({className: "monstro-no-posts-msg"}, __('Lipsa știrilor e cea mai bună știre - ai deconectat toate sursele.'))
+                            )
+                        )
+                    ) : this.getPosts()
                 ), 
                 Pagination({currentPage: this.props.resource.prop('currentPage'), totalPages: this.props.resource.prop('totalPages')})
             )
-
         )
     }
 });
