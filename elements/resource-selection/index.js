@@ -13,7 +13,7 @@ var ResourceSelection = {
                 actions.changeSelection(resource.slug, isSelected);
             };
             return (
-                React.DOM.div({className: "row monstro-resources"}, 
+                React.DOM.div({key: resource.slug, className: "row monstro-resources"}, 
                     React.DOM.div({className: "large-8 small-9 columns"}, 
                         Link({href: "?resource=" + resource.slug}, 
                             resource.name

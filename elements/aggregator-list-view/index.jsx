@@ -57,7 +57,7 @@ var AggregatorListView = jQuery.extend(true, Parent, {
                 var date = new Date(post.prop("date"));
                 var formatedDate = date.getDate() + " " + AggregatorData.months[AggregatorData.lang][date.getMonth()] + " " + date.getFullYear() + ", " + ('0' + date.getHours()).slice(-2) + ":" + ('0' + date.getMinutes()).slice(-2);
                 return (
-                    <article className={"type-post " + this.getArticleClasses(post)}>
+                    <article key={post.prop('permalink')} className={"type-post " + this.getArticleClasses(post)}>
                         <header className="entry-header">
                             <h2 className="entry-title">
                                 <a target="_blank" rel="nofollow" href={post.prop("permalink")} dangerouslySetInnerHTML={{__html: post.prop("title")}}/>

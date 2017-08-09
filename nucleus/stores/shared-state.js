@@ -1,4 +1,4 @@
-var Fluxxor = require('Fluxxor');
+var Fluxxor = require('fluxxor');
 var constants = require('../actions').constants;
 
 var SharedStateStore = {

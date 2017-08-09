@@ -13,7 +13,7 @@ var ResourceSelection = {
                 actions.changeSelection(resource.slug, isSelected);
             };
             return (
-                <div className="row monstro-resources">
+                <div key={resource.slug} className="row monstro-resources">
                     <div className="large-8 small-9 columns">
                         <Link href={"?resource=" + resource.slug}>
                             {resource.name}

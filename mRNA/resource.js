@@ -1,4 +1,4 @@
-var Fluxxor = require('Fluxxor');
+var Fluxxor = require('fluxxor');
 var constants = require('../nucleus/actions').constants;
 var parseSiren = require('../nucleus/utils/siren');
 var traverseObj = require('../nucleus/utils/object-traverser').traverse;

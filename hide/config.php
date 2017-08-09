@@ -1,5 +1,6 @@
 <?php
-define('HOME_URL', 'http://localhost/agregator/'); //TRAILING SLASH!
+// define('HOME_URL', 'http://localhost/agregator/'); //TRAILING SLASH!
+define('HOME_URL', 'http://localhost:8001/'); //TRAILING SLASH!
 //define('HOME_URL', 'https://agregator.md/');
 //BEGIN mysql config
 define("MYSQL_HOST", "localhost");

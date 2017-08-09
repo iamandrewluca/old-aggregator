@@ -15,14 +15,14 @@ var AggregatorPagination = {
         var pages = pageNumbers.map(function(number){
             if(this.props.currentPage == number){
                 return (
-                    <span className="page-numbers current">{number}</span>
+                    <span key={number} className="page-numbers current">{number}</span>
                 )
             } else {
                 var uri = new URIjs(location);
                 uri.removeSearch('page')
                     .addSearch('page', number);
                 return (
-                    <Link className="page-numbers" href={uri.toString()}>{number}</Link>
+                    <Link key={number} className="page-numbers" href={uri.toString()}>{number}</Link>
                 )
             }
         }.bind(this));

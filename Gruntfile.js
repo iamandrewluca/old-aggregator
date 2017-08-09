@@ -44,10 +44,11 @@ module.exports = function(grunt) {
                     filename: "frontend.js"
                 },
                 watch: true,
+                devtool: 'source-map',
                 progress: false,
                 stats: true,
                 failOnError: false,
-                //plugins: [new webpack.optimize.UglifyJsPlugin],
+                plugins: [new webpack.optimize.UglifyJsPlugin],
                 resolve: {
                     modulesDirectories: ['node_modules', 'elements', 'mixins', 'utils', 'nucleus', 'nucleus/elements'],
                     alias: {
