@@ -6,9 +6,8 @@ require_once $DIRNAME . '/nucleus/utils/siren/SirenEntity.php';
 require_once $DIRNAME . '/Model.php';
 global $LANG_RESOURCES, $LANG;
 $model = new AggregatorModel();
-if(isset($_GET['monstro-api']) && ('json' == $_GET['monstro-api'])){
-	echo json_encode(isset($_GET['resources']) ? $LANG_RESOURCES : $model->getData());
-	exit;
+if(isset($_GET['monstro-api']) && ('json' == $_GET['monstro-api'])) {
+	exit(json_encode(isset($_GET['resources']) ? $LANG_RESOURCES : $model->getData()));
 }
 ?>
 <!doctype html>
@@ -58,6 +57,5 @@ if(isset($_GET['monstro-api']) && ('json' == $_GET['monstro-api'])){
 			}
 		</script>
 		<script src="concat/frontend.js"></script>
-		<script src="//localhost:35729/livereload.js"></script>
 	</body>
 </html>

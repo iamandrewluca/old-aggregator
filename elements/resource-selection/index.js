@@ -30,29 +30,75 @@ var ResourceSelection = {
             )
         });
 
+        var filters = [
+            "Plahotniuc",
+            "Candu",
+            "Maia Sandu",
+            "Dodon",
+            "internauții",
+            "Șocant",
+            "Majuscule"
+        ]
+
+        var filterChanged = function(isSelected) {
+            console.log(isSelected)
+        }
+
+        var stopFilters = filters.map(function(stopWord) {
+            return (
+                React.DOM.div({key: stopWord, className: "row monstro-resources"}, 
+                    React.DOM.div({className: "large-8 small-9 columns"}, 
+                        React.DOM.a(null, stopWord)
+                    ), 
+                    React.DOM.div({className: "large-4 small-3 columns"}, 
+                        Switch({checked: false, className: "round", onChange: filterChanged})
+                    )
+                )
+            )
+        })
+
         var toggleAllSources = function(isSelected) {
             actions.toggleAllSources(isSelected);
         }
 
         return (
             React.DOM.form(null, 
+
                 React.DOM.div({className: "row monstro-resources"}, 
+
                     React.DOM.div({className: "large-12 columns"}, 
-                        Link({href: "?", className: "all-resources"}, __('Filtru abonamente')), 
+                        Link({href: "?", className: "all-resources"}, __('Filtru abonamente'))
+                    ), 
 
-                        React.DOM.div({className: "row monstro-resources"}, 
-                            React.DOM.div({className: "large-8 small-9 columns"}, 
-                                React.DOM.a(null, toggled ? __('Dezactivează Toate') : __('Activează Toate'))
-                            ), 
-                            React.DOM.div({className: "large-4 small-3 columns"}, 
-                                Switch({checked: toggled, className: "round", onChange: toggleAllSources})
-                            )
-                        ), 
-
-                        React.DOM.span({className: "monstro-hint"}, __('Selectați din lista de mai jos resursele dorite'))
+                    React.DOM.div({className: "large-12 columns"}, 
+                        React.DOM.span({className: "monstro-hint"}, __('Meniu „Pentru alergici” - serviți știri fără:'))
                     )
+
                 ), 
+
+                stopFilters, 
+
+                React.DOM.div({className: "row monstro-resources"}, 
+
+                    React.DOM.div({className: "large-12 columns"}, 
+                        React.DOM.input({type: "text", placeholder: "Alege cuvântul tău"})
+                    ), 
+
+                    React.DOM.div({className: "small-12 columns"}, 
+                        React.DOM.span({className: "monstro-hint"}, __('Selectați din lista de mai jos resursele dorite'))
+                    ), 
+
+                    React.DOM.div({className: "large-8 small-9 columns"}, 
+                        React.DOM.a(null, toggled ? __('Dezactivează Toate') : __('Activează Toate'))
+                    ), 
+                    React.DOM.div({className: "large-4 small-3 columns"}, 
+                        Switch({checked: toggled, className: "round", onChange: toggleAllSources})
+                    )
+
+                ), 
+
                 resources
+
             )
         )
     }

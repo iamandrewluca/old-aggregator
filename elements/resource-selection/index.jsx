@@ -30,29 +30,75 @@ var ResourceSelection = {
             )
         });
 
+        var filters = [
+            "Plahotniuc",
+            "Candu",
+            "Maia Sandu",
+            "Dodon",
+            "internauții",
+            "Șocant",
+            "Majuscule"
+        ]
+
+        var filterChanged = function(isSelected) {
+            console.log(isSelected)
+        }
+
+        var stopFilters = filters.map(function(stopWord) {
+            return (
+                <div key={stopWord} className="row monstro-resources">
+                    <div className="large-8 small-9 columns">
+                        <a>{stopWord}</a>
+                    </div>
+                    <div className="large-4 small-3 columns">
+                        <Switch checked={false} className="round" onChange={filterChanged}/>
+                    </div>
+                </div>
+            )
+        })
+
         var toggleAllSources = function(isSelected) {
             actions.toggleAllSources(isSelected);
         }
 
         return (
             <form>
+
                 <div className="row monstro-resources">
+
                     <div className="large-12 columns">
-                        <Link href="?" className="all-resources">{__('Filtru abonamente')}</Link>
+                        <Link href="?" className="all-resources">{__('Filtru abonamente')}</Link>                        
+                    </div>
 
-                        <div className="row monstro-resources">
-                            <div className="large-8 small-9 columns">
-                                <a>{toggled ? __('Dezactivează Toate') : __('Activează Toate')}</a>
-                            </div>
-                            <div className="large-4 small-3 columns">
-                                <Switch checked={toggled} className="round" onChange={toggleAllSources}/>
-                            </div>
-                        </div>
+                    <div className="large-12 columns">
+                        <span className="monstro-hint">{__('Meniu „Pentru alergici” - serviți știri fără:')}</span>
+                    </div>
 
+                </div>
+
+                {stopFilters}
+
+                <div className="row monstro-resources">
+
+                    <div className="large-12 columns">
+                        <input type="text" placeholder="Alege cuvântul tău" />
+                    </div>
+
+                    <div className="small-12 columns">
                         <span className="monstro-hint">{__('Selectați din lista de mai jos resursele dorite')}</span>
                     </div>
+
+                    <div className="large-8 small-9 columns">
+                        <a>{toggled ? __('Dezactivează Toate') : __('Activează Toate')}</a>
+                    </div>
+                    <div className="large-4 small-3 columns">
+                        <Switch checked={toggled} className="round" onChange={toggleAllSources}/>
+                    </div>
+
                 </div>
+
                 {resources}
+
             </form>
         )
     }
