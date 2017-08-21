@@ -1,23 +1,25 @@
 <?php
-class MonstroSirenEntity{
+class MonstroSirenEntity {
+	
     private $class = array();
     private $links = array();
     private $entities = array();
     private $entitiesLinks = array();
     private $props = array();
-    public function __construct($class, $selfLink){
+
+    public function __construct($class, $selfLink) {
         $this->class = $class;
         $this->addLink(array('self'), $selfLink);
     }
 
-    public function addLink($rel, $href){
+    public function addLink($rel, $href) {
         $this->links[] = array(
             'rel' => $rel,
             'href' => $href
         );
     }
 
-    public function getLink($rel){
+    public function getLink($rel) {
 	    $wrappedRel = is_array($rel) ? $rel : array($rel);
 	    foreach($wrappedRel as $rel){
 		    foreach($this->links as $link){
@@ -29,11 +31,11 @@ class MonstroSirenEntity{
 	    return null;
     }
 
-    public function setProps($props){
+    public function setProps($props) {
         $this->props = $props;
     }
 
-    public function getData(){
+    public function getData() {
 	    $data = array(
 		    'class' => $this->class
 	    );
@@ -53,7 +55,7 @@ class MonstroSirenEntity{
         return $data;
     }
 
-	public function addEntity($a, $data = null, $link = null){
+	public function addEntity($a, $data = null, $link = null) {
 		if($a instanceof MonstroSirenEntity){
 			$newEntity = $a;
 		} else {
@@ -72,13 +74,13 @@ class MonstroSirenEntity{
 		return false;
 	}
 
-	public function addEntities($entities){
+	public function addEntities($entities) {
 		foreach($entities as $entity){
 			$this->addEntity($entity);
 		}
 	}
 
-	public function is (){
+	public function is () {
 		$arguments = func_get_args();
 		if(count($arguments) > 1){
 			$accumulator = false;
@@ -97,7 +99,7 @@ class MonstroSirenEntity{
 		return true;
 	}
 
-	public function getEntitiesByClass ($class){
+	public function getEntitiesByClass ($class) {
 		$result = array();
 		foreach($this->entities as $entity){
 			if($entity->is($class)){
@@ -107,7 +109,7 @@ class MonstroSirenEntity{
 		return $result;
 	}
 
-	public function getEntityByClass ($class){
+	public function getEntityByClass ($class) {
 		foreach($this->entities as $entity){
 			if($entity->is($class)){
 				return $entity;
@@ -116,8 +118,8 @@ class MonstroSirenEntity{
 		return null;
 	}
 
-	public function hasEntity($class){
-		foreach($this->entities as $entity){
+	public function hasEntity($class) {
+		foreach($this->entities as $entity) {
 			if($entity->is($class)){
 				return true;
 			}
@@ -125,15 +127,15 @@ class MonstroSirenEntity{
 		return false;
 	}
 
-	public function getAllEntities(){
+	public function getAllEntities() {
 		return $this->entities;
 	}
 
-	public function getClasses(){
+	public function getClasses() {
 		return $this->class;
 	}
 
-	public function prop($slug){
+	public function prop($slug) {
 		if(isset($this->props[$slug])){
 			return $this->props[$slug];
 		} else {
