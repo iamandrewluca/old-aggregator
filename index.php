@@ -10,7 +10,7 @@ if(isset($_GET['monstro-api']) && ('json' == $_GET['monstro-api'])) {
 	exit(json_encode(isset($_GET['resources']) ? $LANG_RESOURCES : $model->getData()));
 }
 ?>
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -22,7 +22,7 @@ if(isset($_GET['monstro-api']) && ('json' == $_GET['monstro-api'])) {
     elseif ($LANG == 'ru') {
         echo "<title>Агрегатор новостей</title>";
     } ?>
-    
+
 	<link rel="stylesheet" href="vendor/foundation/css/foundation.min.css"/>
 	<link rel="stylesheet" href="style.css"/>
 	<link rel="stylesheet" href="agregator.css"/>

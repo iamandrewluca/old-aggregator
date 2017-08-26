@@ -1,7 +1,15 @@
 <?php
-// define('HOME_URL', 'http://localhost/agregator/'); //TRAILING SLASH!
-define('HOME_URL', 'http://localhost:8001/'); //TRAILING SLASH!
-//define('HOME_URL', 'https://agregator.md/');
+
+define('PROD', false);
+
+if (PROD) {
+  define('HOME_URL', 'https://agregator.md/'); //TRAILING SLASH!
+} else {
+  // define('HOME_URL', 'http://localhost/agregator/');
+  define('HOME_URL', 'http://localhost:8001/');
+  header("Access-Control-Allow-Origin: *");
+}
+
 //BEGIN mysql config
 define("MYSQL_HOST", "localhost");
 define("MYSQL_DB", "agregator");
