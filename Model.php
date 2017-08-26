@@ -36,25 +36,25 @@ class AggregatorModel extends MonstroSirenEntity {
 
 		$totalPagesSQL = 'SELECT COUNT(*) FROM post WHERE source_id IN (:label_ids) AND lang_id = :lang_id';
 		$totalPagesQuery = R::getCell($totalPagesSQL, [
-			'lang_id' => $langId,
-			'label_ids' => $labelIds
+			':lang_id' => $langId,
+			':label_ids' => $labelIds
 		]);
 		$totalPages = ceil($totalPagesQuery / $POSTS_PER_PAGE);
 
 		$this->setProps(array(
-			'postsPerPage' => $POSTS_PER_PAGE,
-			'totalPages' => $totalPages,
-			'currentPage' => $currentPage
+			':postsPerPage' => $POSTS_PER_PAGE,
+			':totalPages' => $totalPages,
+			':currentPage' => $currentPage
 		));
 
 		$mysqlOffset = ($currentPage - 1) * $POSTS_PER_PAGE;
 
 		$postsSQL = 'SELECT * FROM post WHERE source_id IN (:label_ids) AND lang_id = :lang_id ORDER BY date DESC LIMIT :offset, :count';
 		$postsQuery = R::getAll($postsSQL, [
-			'label_ids' => $labelIds,
-			'lang_id' => $langId,
-			'offset' => $mysqlOffset,
-			'count' => $POSTS_PER_PAGE
+			':label_ids' => $labelIds,
+			':lang_id' => $langId,
+			':offset' => $mysqlOffset,
+			':count' => $POSTS_PER_PAGE
 		]);
 		$posts = R::convertToBeans('post', $postsQuery);
 
