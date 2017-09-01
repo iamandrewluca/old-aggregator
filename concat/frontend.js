@@ -27113,6 +27113,7 @@
 	// var traverseObj = require('../nucleus/utils/object-traverser').traverse;
 	var resource = null;
 	var resources = null;
+	var filters = null;
 	var lang = null;
 	// var __ = require('../nucleus/translate');
 	var Courier = __webpack_require__(253);
@@ -27185,29 +27186,39 @@
 	    $.cookie('lang', newLang);
 	    lang = $.cookie('lang');
 	    var resource = this.updateResource();
+	    var filters = this.updateFilters();
 	    var that = this;
 	    this.updateResources().then(function() {
-	      resource.then(function() {
-	        that.emit("change");
-	      })
+	      filters.then(function () {
+	        resource.then(function() {
+	          that.emit("change");
+	        });
+	      });
 	    });
 	  },
 
 	  updateResource: function() {
-	    return jQuery.get(AggregatorData.config.homeUrl + '?monstro-api=json', null, function(newResource) {
+	    return jQuery.get(AggregatorData.config.homeUrl + '?monstro-api=json&data=resource', null, function(newResource) {
 	      resource = parseSiren(newResource);
 	    }.bind(this), 'json');
 	  },
 
 	  updateResources: function() {
-	    return jQuery.get(AggregatorData.config.homeUrl + '?monstro-api=json&resources', null, function(newResources) {
+	    return jQuery.get(AggregatorData.config.homeUrl + '?monstro-api=json&data=resources', null, function(newResources) {
 	      resources = obj2array(newResources);
+	    }.bind(this), 'json');
+	  },
+
+	  updateFilters: function () {
+	    return jQuery.get(AggregatorData.config.homeUrl + '?monstro-api=json&data=filters', null, function(newFilters) {
+	      filters = obj2array(newFilters);
 	    }.bind(this), 'json');
 	  },
 
 	  onBootstrap: function() {
 	    resource = parseSiren(AggregatorData.resource);
 	    resources = obj2array(AggregatorData.resources);
+	    filters = AggregatorData.filters;
 	    lang = AggregatorData.lang;
 	    this.emit("change");
 	  },
@@ -27238,7 +27249,11 @@
 
 	  getResource: function() {
 	    return resource;
-	  }
+	  },
+
+	  getFilters: function () {
+	    return filters;
+	  },
 	};
 
 	module.exports = {
@@ -27388,45 +27403,47 @@
 	var AggregatorHeader = __webpack_require__(266).Component;
 	var AggregatorFooter = __webpack_require__(267).Component;
 	var Aggregator = {
-	    mixins:[Fluxxor.FluxMixin(React), Fluxxor.StoreWatchMixin("Resource")],
-	    getStateFromFlux: function(){
-	        var resource = this.getFlux().store("Resource");
-	        return {
-	            resource: resource.getResource(),
-	            resources: resource.getResources(),
-	            lang: resource.getLang()
-	        }
-	    },
-
-	    render: function(){
-	        return (
-	            React.DOM.div({id: "wrapper"}, 
-	                AggregatorHeader({lang: this.state.lang}), 
-	                React.DOM.section({id: "main"}, 
-	                    React.DOM.div({className: "main-container delimited shadow withbg"}, 
-	                        React.DOM.div({className: "row"}, 
-	                            React.DOM.div({className: "large-9 columns content-left"}, 
-	                                AggregatorListView({
-	                                    resource: this.state.resource, 
-	                                    resources: this.state.resources}
-	                                )
-	                            ), 
-	                            React.DOM.div({className: "large-3 columns sidebar-right"}, 
-	                                ResourceSelection({resources: this.state.resources})
-	                            )
-	                        )
-	                    )
-	                ), 
-	                AggregatorFooter(null)
-	            )
-	        )
+	  mixins:[Fluxxor.FluxMixin(React), Fluxxor.StoreWatchMixin("Resource")],
+	  getStateFromFlux: function(){
+	    var resource = this.getFlux().store("Resource");
+	    return {
+	      resource: resource.getResource(),
+	      resources: resource.getResources(),
+	      filters: resource.getFilters(),
+	      lang: resource.getLang()
 	    }
+	  },
+
+	  render: function(){
+	    return (
+	      React.DOM.div({id: "wrapper"}, 
+	        AggregatorHeader({lang: this.state.lang}), 
+	        React.DOM.section({id: "main"}, 
+	          React.DOM.div({className: "main-container delimited shadow withbg"}, 
+	            React.DOM.div({className: "row"}, 
+	              React.DOM.div({className: "large-9 columns content-left"}, 
+	                AggregatorListView({
+	                  resource: this.state.resource, 
+	                  resources: this.state.resources}
+	                )
+	              ), 
+	              React.DOM.div({className: "large-3 columns sidebar-right"}, 
+	                ResourceSelection({resources: this.state.resources, filters: this.state.filters})
+	              )
+	            )
+	          )
+	        ), 
+	        AggregatorFooter(null)
+	      )
+	    )
+	  }
 	};
 
 	module.exports = {
-	    Class: Aggregator,
-	    Component: React.createClass(Aggregator)
+	  Class: Aggregator,
+	  Component: React.createClass(Aggregator)
 	}
+
 
 /***/ }),
 /* 256 */
@@ -27464,32 +27481,22 @@
 	      )
 	    });
 
-	    var filters = [
-	      "Plahotniuc",
-	      "Candu",
-	      "Maia Sandu",
-	      "Dodon",
-	      "internauții",
-	      "Șocant",
-	      "Majuscule"
-	    ];
-
 	    var filterChanged = function(isSelected) {
 	      console.log(isSelected)
 	    };
 
-	    var stopFilters = filters.map(function(stopWord) {
+	    var stopFilters = this.props.filters.map(function(filter) {
 	      return (
-	        React.DOM.div({key: stopWord, className: "row monstro-resources"}, 
+	        React.DOM.div({key: filter.id, className: "row monstro-resources"}, 
 	          React.DOM.div({className: "large-8 small-9 columns"}, 
-	            React.DOM.a(null, stopWord)
+	            React.DOM.a(null, filter.title)
 	          ), 
 	          React.DOM.div({className: "large-4 small-3 columns"}, 
 	            Switch({checked: false, className: "round", onChange: filterChanged})
 	          )
 	        )
 	      )
-	    })
+	    });
 
 	    var toggleAllSources = function(isSelected) {
 	      actions.toggleAllSources(isSelected);

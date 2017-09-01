@@ -30,32 +30,22 @@ var ResourceSelection = {
       )
     });
 
-    var filters = [
-      "Plahotniuc",
-      "Candu",
-      "Maia Sandu",
-      "Dodon",
-      "internauții",
-      "Șocant",
-      "Majuscule"
-    ];
-
     var filterChanged = function(isSelected) {
       console.log(isSelected)
     };
 
-    var stopFilters = filters.map(function(stopWord) {
+    var stopFilters = this.props.filters.map(function(filter) {
       return (
-        React.DOM.div({key: stopWord, className: "row monstro-resources"}, 
+        React.DOM.div({key: filter.id, className: "row monstro-resources"}, 
           React.DOM.div({className: "large-8 small-9 columns"}, 
-            React.DOM.a(null, stopWord)
+            React.DOM.a(null, filter.title)
           ), 
           React.DOM.div({className: "large-4 small-3 columns"}, 
             Switch({checked: false, className: "round", onChange: filterChanged})
           )
         )
       )
-    })
+    });
 
     var toggleAllSources = function(isSelected) {
       actions.toggleAllSources(isSelected);

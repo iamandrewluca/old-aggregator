@@ -4,6 +4,7 @@ var parseSiren = require('../nucleus/utils/siren');
 // var traverseObj = require('../nucleus/utils/object-traverser').traverse;
 var resource = null;
 var resources = null;
+var filters = null;
 var lang = null;
 // var __ = require('../nucleus/translate');
 var Courier = require('../nucleus/utils/courier');
@@ -76,29 +77,39 @@ var ResourceStore = {
     $.cookie('lang', newLang);
     lang = $.cookie('lang');
     var resource = this.updateResource();
+    var filters = this.updateFilters();
     var that = this;
     this.updateResources().then(function() {
-      resource.then(function() {
-        that.emit("change");
-      })
+      filters.then(function () {
+        resource.then(function() {
+          that.emit("change");
+        });
+      });
     });
   },
 
   updateResource: function() {
-    return jQuery.get(AggregatorData.config.homeUrl + '?monstro-api=json', null, function(newResource) {
+    return jQuery.get(AggregatorData.config.homeUrl + '?monstro-api=json&data=resource', null, function(newResource) {
       resource = parseSiren(newResource);
     }.bind(this), 'json');
   },
 
   updateResources: function() {
-    return jQuery.get(AggregatorData.config.homeUrl + '?monstro-api=json&resources', null, function(newResources) {
+    return jQuery.get(AggregatorData.config.homeUrl + '?monstro-api=json&data=resources', null, function(newResources) {
       resources = obj2array(newResources);
+    }.bind(this), 'json');
+  },
+
+  updateFilters: function () {
+    return jQuery.get(AggregatorData.config.homeUrl + '?monstro-api=json&data=filters', null, function(newFilters) {
+      filters = obj2array(newFilters);
     }.bind(this), 'json');
   },
 
   onBootstrap: function() {
     resource = parseSiren(AggregatorData.resource);
     resources = obj2array(AggregatorData.resources);
+    filters = AggregatorData.filters;
     lang = AggregatorData.lang;
     this.emit("change");
   },
@@ -129,7 +140,11 @@ var ResourceStore = {
 
   getResource: function() {
     return resource;
-  }
+  },
+
+  getFilters: function () {
+    return filters;
+  },
 };
 
 module.exports = {

@@ -6,8 +6,22 @@ require_once $DIRNAME . '/nucleus/utils/siren/SirenEntity.php';
 require_once $DIRNAME . '/Model.php';
 global $LANG_RESOURCES, $LANG;
 $model = new AggregatorModel();
-if(isset($_GET['monstro-api']) && ('json' == $_GET['monstro-api'])) {
-    exit(json_encode(isset($_GET['resources']) ? $LANG_RESOURCES : $model->getData()));
+if(isset($_GET['monstro-api']) && 'json' === $_GET['monstro-api'] && isset($_GET['data'])) {
+    switch ($_GET['data']) {
+        case 'resource':
+            $data = $model->getData();
+            break;
+        case 'resources':
+            $data = $LANG_RESOURCES;
+            break;
+        case 'filters':
+            $data = $model->getFilters();
+            break;
+        default:
+            $data = null;
+    }
+
+    exit(json_encode($data));
 }
 ?>
 <!DOCTYPE html>
@@ -40,6 +54,7 @@ if(isset($_GET['monstro-api']) && ('json' == $_GET['monstro-api'])) {
     AggregatorData = {
         resources: <?php echo json_encode($LANG_RESOURCES);?>,
         resource: <?php echo json_encode($model->getData());?>,
+        filters: <?php echo json_encode($model->getFilters());?>,
         lang: '<?php echo $LANG;?>',
         config: {
             homeUrl: '<?php echo HOME_URL;?>'

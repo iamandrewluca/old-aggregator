@@ -6,7 +6,9 @@ import SourceForm from './SourceForm.js';
 class Sources extends Component {
 
   componentDidMount() {
-    this.props.fetchSources()
+    if (!this.props.sources) {
+      this.props.fetchSources()
+    }
   }
 
   render() {

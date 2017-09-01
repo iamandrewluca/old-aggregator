@@ -3,7 +3,9 @@ import React, { Component } from 'react';
 class Filters extends Component {
 
   componentDidMount() {
-    this.props.fetchFilters()
+    if (!this.props.filters) {
+      this.props.fetchFilters()
+    }
   }
 
   render() {

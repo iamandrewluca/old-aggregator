@@ -82,4 +82,11 @@ class AggregatorModel extends MonstroSirenEntity {
             ), $resourceLink);
         }
     }
+
+    function getFilters()
+    {
+        global $LANG;
+        $langId = EID("lang:$LANG");
+        return R::exportAll(R::findAll('filter', ' lang_id = ? ', [$langId] ));
+    }
 }
