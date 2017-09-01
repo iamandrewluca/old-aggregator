@@ -24,6 +24,6 @@ if (isset($_GET['action'])) {
       echo json_encode($sourceService->delete($_POST));
       break;
     default:
-      echo json_encode($sourceService->list());
+      echo json_encode($sourceService->all());
   }
 }

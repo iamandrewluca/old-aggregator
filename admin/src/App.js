@@ -9,7 +9,7 @@ import ContentTypes from './ContentTypes.js';
 import SourceForm from './SourceForm.js';
 
 
-let fetchUrl = 'https://agregator.md/admin/admin.php'
+let fetchUrl = 'https://agregator.md/admin/admin.php';
 
 if (process.env.NODE_ENV === 'development') {
   fetchUrl = 'http://localhost:8001/admin/admin.php'
@@ -26,7 +26,7 @@ class App extends Component {
       rss: '',
       lang_id: ''
     },
-  }
+  };
 
   componentDidMount() {
     this.fetchSources(fetchUrl)
@@ -34,93 +34,93 @@ class App extends Component {
 
   catchError = (res) => {
     console.log(res);
-  }
+  };
 
   fetchSources = async (fetchUrl) => {
-    const sourcesPromise = await fetch(fetchUrl + '?action').catch(this.catchError)
+    const sourcesPromise = await fetch(fetchUrl + '?action').catch(this.catchError);
     if (sourcesPromise) {
-      const sources = await sourcesPromise.json()
+      const sources = await sourcesPromise.json();
       this.setState({sources})
     }
-  }
+  };
 
   updateNewSource = (e) => {
-    const newSource = Object.assign({}, this.state.newSource)
-    newSource[e.target.id] = e.target.value
+    const newSource = Object.assign({}, this.state.newSource);
+    newSource[e.target.id] = e.target.value;
     this.setState({newSource})
-  }
+  };
 
   submitNewSource = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    const data = new FormData(e.target)
+    const data = new FormData(e.target);
 
     const sourcePromise = await fetch(fetchUrl + '?action=add', {
       method: 'POST',
       body: data,
-    }).catch(this.catchError)
+    }).catch(this.catchError);
 
     if (sourcePromise) {
-      const source = await sourcePromise.json()
+      const source = await sourcePromise.json();
 
       const sources = [
         source,
         ...this.state.sources.slice()
-      ]
+      ];
 
       this.setState({sources})
     }
-  }
+  };
 
   updateListItem = (id, e) => {
 
-    const sourceIndex = this.state.sources.findIndex(source => source.id === id)
+    const sourceIndex = this.state.sources.findIndex(source => source.id === id);
 
-    if (sourceIndex === -1) return
+    if (sourceIndex === -1) return;
 
-    const source = Object.assign({}, this.state.sources[sourceIndex])
-    source[e.target.name] = e.target.value
+    const source = Object.assign({}, this.state.sources[sourceIndex]);
+    source[e.target.name] = e.target.value;
 
     const sources = [
       ...this.state.sources.slice(0, sourceIndex),
       source,
       ...this.state.sources.slice(sourceIndex + 1)
-    ]
+    ];
 
     this.setState({sources})
-  }
+  };
 
   submitListItem = (id, e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    const data = new FormData(e.target)
-    data.append('id', id)
+    const data = new FormData(e.target);
+    data.append('id', id);
 
     fetch(fetchUrl + '?action=update', {
       method: 'POST',
       body: data,
     })
-  }
+  };
 
   deleteListItem = (id, e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    const data = new FormData()
-    data.append('id', id)
+    const data = new FormData();
+    data.append('id', id);
 
     fetch(fetchUrl + '?action=delete', {
       method: 'POST',
       body: data,
     }).then(res => {
-      const sourceIndex = this.state.sources.findIndex(source => source.id === id)
+      const sourceIndex = this.state.sources.findIndex(source => source.id === id);
       const sources = [
         ...this.state.sources.slice(0, sourceIndex),
         ...this.state.sources.slice(sourceIndex + 1)
-      ]
+      ];
 
       this.setState({sources})
     }).catch(res => console.log(res))
-  }
+  };
 
   render() {
     return (

@@ -4,58 +4,57 @@ if (!defined('PROD')) die('Access denied');
 
 class SourceService
 {
-  public function list()
-  {
-    return R::exportAll(R::findAll('source'));
-  }
+    public function all()
+    {
+        return R::exportAll(R::findAll('source'));
+    }
 
-  public function create($post)
-  {
-    $source = R::dispense('source');
-    $source->name = $post['name'];
-    $source->slug = $post['slug'];
-    $source->resource_url = $post['resource_url'];
-    $source->rss = $post['rss'];
+    public function create($post)
+    {
+        $source = R::dispense([
+            '_type' => 'source',
+            'name' => $post['name'],
+            'slug' => $post['slug'],
+            'resource_url' => $post['resource_url'],
+            'rss' => $post['rss'],
+            'lang' => R::load('lang', $post['lang_id']),
+        ]);
 
-    $lang = R::load('lang', $post['lang_id']);
+        R::store($source);
 
-    $source->lang = $lang;
+        return $source->export();
+    }
 
-    R::store($source);
+    public function read($value='')
+    {
+        # code...
+    }
 
-    return $source->export();
-  }
+    public function update($post)
+    {
+        $source = R::load('source', $post['id']);
+        $source->name = $post['name'];
+        $source->slug = $post['slug'];
+        $source->resource_url = $post['resource_url'];
+        $source->rss = $post['rss'];
 
-  public function read($value='')
-  {
-    # code...
-  }
+        $lang = R::load('lang', $post['lang_id']);
+        $source->lang = $lang;
 
-  public function update($post)
-  {
-    $source = R::load('source', $post['id']);
-    $source->name = $post['name'];
-    $source->slug = $post['slug'];
-    $source->resource_url = $post['resource_url'];
-    $source->rss = $post['rss'];
+        R::store($source);
 
-    $lang = R::load('lang', $post['lang_id']);
-    $source->lang = $lang;
+        return R::export($source);
+    }
 
-    R::store($source);
-
-    return R::export($source);
-  }
-
-  public function delete($post)
-  {
-    $source = R::load('source', $post['id']);
-    R::trash($source);
-    $response = [];
-    $response['id'] = $source->id;
-    $response['deleted'] = 'Source deleted';
-    return $response;
-  }
+    public function delete($post)
+    {
+        $source = R::load('source', $post['id']);
+        R::trash($source);
+        $response = [];
+        $response['id'] = $source->id;
+        $response['deleted'] = 'Source deleted';
+        return $response;
+    }
 
 
 }

@@ -23,8 +23,10 @@ const List = ({ items, updateItem, submitItem, deleteItem }) => (
                     EDIT
                   </button>
                   {item.name}
-                  <a href="#delete" onClick={e => deleteItem(item.id, e)} className="ml-auto btn btn-link text-danger">&times;</a>
-                  {/* <span className="ml-auto badge badge-warning">{item.ownPost.length}</span> */}
+                  <div className="ml-auto">
+                    <span className="badge badge-warning">{item.ownPost ? item.ownPost.length : 0}</span>
+                    <a href="#delete" onClick={e => deleteItem(item.id, e)} className="btn btn-link text-danger">&times;</a>
+                  </div>
                 </div>
 
                 <div className="collapse" id={`source-${item.id}`}>
@@ -43,6 +45,6 @@ const List = ({ items, updateItem, submitItem, deleteItem }) => (
     }
 
   </ul>
-)
+);
 
 export default List

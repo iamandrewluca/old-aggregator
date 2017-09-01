@@ -41,7 +41,7 @@ var ResourceStore = {
 
   changeSelection: function(payload) {
 
-    var source = resource.find(function(source) {
+    var source = resources.find(function(source) {
       return source.id === payload.id;
     });
 
