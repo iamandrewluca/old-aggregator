@@ -1,0 +1,21 @@
+.App {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.App .navbar {
+  flex-shrink: 0;
+}
+
+.App .footer {
+  margin-top: auto;
+  flex-shrink: 0;
+  background-color: #ebebeb;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+

@@ -5,13 +5,15 @@ require_once $DIRNAME . '/resources/RSSResource.php';
 require_once $DIRNAME . '/nucleus/utils/siren/SirenEntity.php';
 require_once $DIRNAME . '/vendor/autoload.php';
 require_once $DIRNAME . '/vendor/ForceCharsetPlugin.php';
-global $RESOURCES;
+
+$RESOURCES = R::findAll('source');
+
 $forceCharsetPlugin = new ForceCharsetPlugin();
 $forceCharsetPlugin->setForcedCharset('utf-8');
 $client = new Goutte\Client();
 $client->getClient()->addSubscriber($forceCharsetPlugin);
 foreach($RESOURCES as $resource){
-	echo 'Fetching resources from ' . $resource['slug'] . PHP_EOL;
+	echo 'Fetching resources from ' . $resource['name'] . '<br />';
 	if(isset($resource['handler'])){
 		$handler = $resource['handler'];
 		require_once $DIRNAME . '/resources/' . $handler . '.php';
@@ -23,15 +25,15 @@ foreach($RESOURCES as $resource){
 	$fetchedEntities = $fetcher->getAllEntities();
 	foreach($fetchedEntities as $entity){
 		if(R::findOne('post', 'permalink LIKE ?', [$entity->prop('permalink')])){
-			echo "\tSkipping " . $entity->prop('permalink') . PHP_EOL;
+			echo "\tSkipping " . $entity->prop('permalink') . '<br />';
 			continue;
 		}
 		$post = R::dispense('post');
 		$post->title = $entity->prop('title');
 		$post->permalink = $entity->prop('permalink');
-		$post->source = R::enum("source:${resource['slug']}");
+		$post->source = $resource;
 		$post->date = strtotime($entity->prop('date'));
-		$post->lang = R::enum("lang:${resource['lang']}");
+		$post->lang = $resource->lang;
 		R::store($post);
 	}
 }

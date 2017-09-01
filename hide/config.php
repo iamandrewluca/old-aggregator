@@ -1,13 +1,31 @@
 <?php
-// define('HOME_URL', 'http://localhost/agregator/'); //TRAILING SLASH!
-define('HOME_URL', 'http://localhost:8001/'); //TRAILING SLASH!
-//define('HOME_URL', 'https://agregator.md/');
+
+define('PROD', false);
+
+if (PROD) {
+    define('HOME_URL', 'https://agregator.md/'); //TRAILING SLASH!
+} else {
+    // define('HOME_URL', 'http://localhost/agregator/');
+    define('HOME_URL', 'http://localhost:8001/');
+    header("Access-Control-Allow-Origin: *");
+}
+
 //BEGIN mysql config
 define("MYSQL_HOST", "localhost");
 define("MYSQL_DB", "agregator");
 define("MYSQL_USER", "agregator_user");
 define("MYSQL_PWD", "Efs6V6bWf2Qytjfr584Q");
 //END mysql config
+
+global $DIRNAME;
+$DIRNAME = dirname(__FILE__) . '/..';
+
+require_once $DIRNAME . '/vendor/redbean/rb.php';
+R::setup('mysql:host=' . MYSQL_HOST . ';dbname=' . MYSQL_DB, MYSQL_USER, MYSQL_PWD);
+
+if (PROD) {
+    R::freeze(TRUE);
+}
 
 //BEGIN resources config
 global $RESOURCES;
@@ -89,20 +107,20 @@ $RESOURCES = array(
         'resourceURL' => 'http://www.moldova.org/',
         'rss' => 'http://www.moldova.org/feed/'
     ),
-	array(
-		'slug' => 'protv',
-		'name' => _('ProTV'),
-		'lang' => 'ro',
+    array(
+        'slug' => 'protv',
+        'name' => _('ProTV'),
+        'lang' => 'ro',
         'resourceURL' => 'http://protv.md/',
-		'rss' => 'http://feeds.feedburner.com/ProTv-ToateStirile'
-	),
-	array(
-		'slug' => 'publika',
-		'name' => _('Publika'),
-		'lang' => 'ro',
+        'rss' => 'http://feeds.feedburner.com/ProTv-ToateStirile'
+    ),
+    array(
+        'slug' => 'publika',
+        'name' => _('Publika'),
+        'lang' => 'ro',
         'resourceURL' => 'http://publika.md',
-		'rss' => 'http://rss.publika.md/stiri.xml'
-	),
+        'rss' => 'http://rss.publika.md/stiri.xml'
+    ),
     array(
         'slug' => 'radiochisinau',
         'name' => _('Radio Chișinău'),
@@ -124,15 +142,13 @@ $RESOURCES = array(
         'resourceURL' => 'http://tribuna.md/',
         'rss' => 'http://tribuna.md/feed/'
     ),
-	array(
-		'slug' => 'unimedia',
-		'name' => _('Unimedia'),
-		'lang' => 'ro',
+    array(
+        'slug' => 'unimedia',
+        'name' => _('Unimedia'),
+        'lang' => 'ro',
         'resourceURL' => 'http://unimedia.info/',
-		'rss' => 'http://unimedia.info/rss/news.xml'
-	),
-
-
+        'rss' => 'http://unimedia.info/rss/news.xml'
+    ),
     array(
         'slug' => 'evzmd',
         'name' => _('Событие дня'),
@@ -147,7 +163,7 @@ $RESOURCES = array(
         'resourceURL' => 'https://deschide.md/ru/',
         'rss' => 'https://deschide.md/ru/feed/'
     ),
-        array(
+    array(
         'slug' => 'diez',
         'name' => _('#diez на русском'),
         'lang' => 'ru',
@@ -168,20 +184,20 @@ $RESOURCES = array(
         'resourceURL' => 'http://golos.md',
         'rss' => 'http://golos.md/feed/'
     ),
-	array(
-		'slug' => 'moldovaorg',
-		'name' => _('Moldova.org'),
-		'lang' => 'ru',
+    array(
+        'slug' => 'moldovaorg',
+        'name' => _('Moldova.org'),
+        'lang' => 'ru',
         'resourceURL' => 'http://www.moldova.org/ru/',
-		'rss' => 'http://www.moldova.org/ru/feed/'
-	),
-	array(
-		'slug' => 'pointmd',
-		'name' => _('Point.md'),
-		'lang' => 'ru',
+        'rss' => 'http://www.moldova.org/ru/feed/'
+    ),
+    array(
+        'slug' => 'pointmd',
+        'name' => _('Point.md'),
+        'lang' => 'ru',
         'resourceURL' => 'http://point.md/ru/',
-		'rss' => 'http://point.md/ru/rss/novosti/'
-	),
+        'rss' => 'http://point.md/ru/rss/novosti/'
+    ),
     array(
         'slug' => 'tribuna',
         'name' => _('Tribuna'),
@@ -189,46 +205,43 @@ $RESOURCES = array(
         'resourceURL' => 'http://tribuna.md/ru/',
         'rss' => 'http://tribuna.md/ru/feed/'
     ),
-	array(
-		'slug' => 'vestimd',
-		'name' => _('Вести'),
-		'lang' => 'ru',
+    array(
+        'slug' => 'vestimd',
+        'name' => _('Вести'),
+        'lang' => 'ru',
         'resourceURL' => 'http://vesti.md/',
-		'rss' => 'http://vesti.md/rss/news.xml'
-	)
+        'rss' => 'http://vesti.md/rss/news.xml'
+    )
 );
 //END resources config
 
-//BEGIN filters config
-global $STOP_FILTERS;
-$STOP_FILTERS = [
-	'ro' => ['SOCANT', 'ȘOCANT', 'DODON', 'Putin'],
-	'ru' => ['Украина', "Крым"]
-];
-//END filters config
-
-//stop editing, have fun
-
-// Resources filter
-global $DIRNAME;
-$DIRNAME = dirname(__FILE__) . '/..';
 global $LANG;
 $LANG = isset($_COOKIE['lang']) ? $_COOKIE['lang'] : 'ro';
+
 global $LANG_RESOURCES;
-$LANG_RESOURCES = array_filter($RESOURCES, function($resource){
-	global $LANG;
-	return $resource['lang'] == $LANG;
-});
+//$LANG_RESOURCES = array_filter($RESOURCES, function($resource){
+//    global $LANG;
+//    return $resource['lang'] == $LANG;
+//});
+
+$LANG_RESOURCES_BEANS = R::find('source', " lang_id = ? ", [ EID("lang:$LANG")] );
+$LANG_RESOURCES = R::exportAll($LANG_RESOURCES_BEANS);
+
 global $SELECTED_RESOURCES;
-$SELECTED_RESOURCES = isset( $_COOKIE[$LANG]) ?
-	explode(',', $_COOKIE[$LANG]) :
-	array_map(function($resource){
-		return $resource['slug'];
-	}, $LANG_RESOURCES);
 
-array_walk($LANG_RESOURCES, function(&$resource) use($SELECTED_RESOURCES){
-	$resource['selected'] = in_array($resource['slug'], $SELECTED_RESOURCES);
+if (isset( $_COOKIE[$LANG])) {
+    $SELECTED_RESOURCES = explode(',', $_COOKIE[$LANG]);
+} else {
+    $SELECTED_RESOURCES = array_map(function($resource){
+        return $resource['id'];
+    }, $LANG_RESOURCES);
+}
+
+array_walk($LANG_RESOURCES, function(&$resource) use($SELECTED_RESOURCES) {
+    $resource['selected'] = in_array($resource['id'], $SELECTED_RESOURCES);
 });
 
-require_once $DIRNAME . '/vendor/redbean/rb.php';
-R::setup('mysql:host=' . MYSQL_HOST . ';dbname=' . MYSQL_DB, MYSQL_USER, MYSQL_PWD);
+function dd($data) {
+    var_dump($data);
+    die();
+}
