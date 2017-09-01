@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('PROD')) die('Access denied');
+!defined('PROD') && die('Access denied');
 
 class SourceService
 {

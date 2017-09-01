@@ -1,19 +1,25 @@
 import React, { Component } from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+} from 'react-router-dom';
 
 import './App.css';
 
 import Header from './Header.js';
-import List from './List.js';
 import Footer from './Footer.js';
-import ContentTypes from './ContentTypes.js';
-import SourceForm from './SourceForm.js';
-
+import Menu from './Menu.js';
+import Sources from './Sources.js';
+import Filters from './Filters.js';
 
 let fetchUrl = 'https://agregator.md/admin/admin.php';
+let basename = '/admin/';
 
 if (process.env.NODE_ENV === 'development') {
   fetchUrl = 'http://localhost:8001/admin/admin.php'
 }
+
+const route = (controller, action) => `${fetchUrl}?controller=${controller}&action=${action}`;
 
 class App extends Component {
 
@@ -26,18 +32,20 @@ class App extends Component {
       rss: '',
       lang_id: ''
     },
-  };
 
-  componentDidMount() {
-    this.fetchSources(fetchUrl)
-  }
+    filters: null,
+    newFilter: {
+      title: '',
+      lang_id: '',
+    }
+  };
 
   catchError = (res) => {
     console.log(res);
   };
 
-  fetchSources = async (fetchUrl) => {
-    const sourcesPromise = await fetch(fetchUrl + '?action').catch(this.catchError);
+  fetchSources = async () => {
+    const sourcesPromise = await fetch(route('source', 'all')).catch(this.catchError);
     if (sourcesPromise) {
       const sources = await sourcesPromise.json();
       this.setState({sources})
@@ -55,7 +63,7 @@ class App extends Component {
 
     const data = new FormData(e.target);
 
-    const sourcePromise = await fetch(fetchUrl + '?action=add', {
+    const sourcePromise = await fetch(route('source', 'create'), {
       method: 'POST',
       body: data,
     }).catch(this.catchError);
@@ -96,7 +104,7 @@ class App extends Component {
     const data = new FormData(e.target);
     data.append('id', id);
 
-    fetch(fetchUrl + '?action=update', {
+    fetch(route('source', 'update'), {
       method: 'POST',
       body: data,
     })
@@ -108,7 +116,7 @@ class App extends Component {
     const data = new FormData();
     data.append('id', id);
 
-    fetch(fetchUrl + '?action=delete', {
+    fetch(route('source', 'delete'), {
       method: 'POST',
       body: data,
     }).then(res => {
@@ -122,61 +130,114 @@ class App extends Component {
     }).catch(res => console.log(res))
   };
 
+  updateNewFilter = (e) => {
+    const newFilter = Object.assign({}, this.state.newFilter);
+    newFilter[e.target.id] = e.target.value;
+    this.setState({newFilter});
+  };
+
+  submitNewFilter = async (e) => {
+    e.preventDefault();
+
+    const data = new FormData(e.target);
+
+    const filterPromise = await fetch(route('filter', 'create'), {
+      method: 'POST',
+      body: data,
+    }).catch(this.catchError);
+
+    if (filterPromise) {
+      const filter = await filterPromise.json();
+
+      const filters = [
+        filter,
+        ...this.state.filters.slice()
+      ];
+
+      this.setState({filters})
+    }
+  };
+
+  deleteFilter = async (id, e) => {
+    e.preventDefault();
+
+    const data = new FormData();
+    data.append('id', id);
+
+    fetch(route('filter', 'delete'), {
+      method: 'POST',
+      body: data,
+    }).then(res => {
+      const filterIndex = this.state.filters.findIndex(filter => filter.id === id);
+      const filters = [
+        ...this.state.filters.slice(0, filterIndex),
+        ...this.state.filters.slice(filterIndex + 1)
+      ];
+
+      this.setState({filters})
+    }).catch(res => console.log(res))
+  };
+
+  fetchFilters = async () => {
+    const filtersPromise = await fetch(route('filter', 'all')).catch(this.catchError);
+    if (filtersPromise) {
+      const filters = await filtersPromise.json();
+      this.setState({filters})
+    }
+  };
+
   render() {
     return (
-      <div className="App">
-        <Header />
+      <Router basename={basename}>
+        <div className="App">
+          <Header />
 
-        <div className="container">
-          <ContentTypes />
+          <div className="container">
 
-          <div className="row">
-            <div className="col-lg-8 my-3">
+            <div className="row">
+              <div className="col-lg-8 my-3">
 
-              <ul className="list-group mb-3">
-                <li
-                  className="list-group-item">
+                <Menu />
 
-                  <div className="d-flex align-items-center justify-content-between">
-                    CREATE NEW SOURCE
-                    <button className="btn btn-sm btn-primary"
-                      type="button"
-                      data-toggle="collapse"
-                      data-target="#addSource"
-                      aria-expanded="false"
-                      aria-controls="addSource">
-                      ADD
-                    </button>
-                  </div>
+                <Route exact path="/" render={() => (
+                  <Sources
+                    newSource={this.state.newSource}
+                    updateNewSource={this.updateNewSource}
+                    submitNewSource={this.submitNewSource}
+                    sources={this.state.sources}
+                    updateListItem={this.updateListItem}
+                    submitListItem={this.submitListItem}
+                    deleteListItem={this.deleteListItem}
+                    fetchSources={this.fetchSources}
+                  />
+                )} />
 
-                  <div className="collapse" id="addSource">
-                    <div className="pt-2">
-                      <SourceForm
-                        item={this.state.newSource}
-                        updateItem={this.updateNewSource}
-                        submit={this.submitNewSource}
-                      />
-                    </div>
-                  </div>
-                </li>
-              </ul>
+                <Route path="/filters" render={() => (
+                  <Filters
+                    newFilter={this.state.newFilter}
+                    updateNewFilter={this.updateNewFilter}
+                    submitNewFilter={this.submitNewFilter}
+                    filters={this.state.filters}
+                    deleteFilter={this.deleteFilter}
+                    fetchFilters={this.fetchFilters}
+                  />
+                )} />
 
-              <List
-                items={this.state.sources}
-                updateItem={this.updateListItem}
-                submitItem={this.submitListItem}
-                deleteItem={this.deleteListItem}
-              />
-            </div>
+                <Route path="/top" component={() => <div>Top 10</div>}/>
+                <Route path="/topics" component={() => <div>Topics of the day</div>}/>
+                <Route path="/users" component={() => <div>Users</div>}/>
 
-            <div className="col-lg-4 mb-3 my-lg-3">
-              Some Sidebar content
+              </div>
+
+              <div className="col-lg-4 mb-3 my-lg-3">
+                <h3>Agregator settings</h3>
+              </div>
             </div>
           </div>
-        </div>
 
-        <Footer />
-      </div>
+          <Footer />
+        </div>
+      </Router>
     );
   }
 }

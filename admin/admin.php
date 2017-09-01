@@ -7,23 +7,36 @@ if (PROD) {
   require_auth();
 }
 
-if (isset($_GET['action'])) {
+if (isset($_GET['controller']) && isset($_GET['action'])) {
 
-  require_once './framework/SourceService.php';
+    $controller = $_GET['controller'];
 
-  $sourceService = new SourceService();
+    switch ($controller) {
+        case 'source':
+            require_once './framework/SourceService.php';
+            $service = new SourceService();
+            break;
+        case 'filter':
+            require_once './framework/FilterService.php';
+            $service = new FilterService();
+            break;
+        default:
+            echo 'Controller not defined.';
+            return;
+    }
 
-  switch ($_GET['action']) {
-    case 'add':
-      echo json_encode($sourceService->create($_POST));
-      break;
-    case 'update':
-      echo json_encode($sourceService->update($_POST));
-      break;
-    case 'delete':
-      echo json_encode($sourceService->delete($_POST));
-      break;
-    default:
-      echo json_encode($sourceService->all());
-  }
+    $action = $_GET['action'];
+    $hasMethod = method_exists($service, $action);
+
+    if ($hasMethod) {
+        echo json_encode($service->$action($_POST));
+        return;
+    } else {
+        echo 'Action not defined.';
+        return;
+    }
+
+} else {
+    echo 'Route not defined.';
+    return;
 }
