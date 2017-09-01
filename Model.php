@@ -1,4 +1,7 @@
 <?php
+
+if (!defined('PROD')) die('Access denied');
+
 require_once 'hide/config.php';
 require_once $DIRNAME . '/nucleus/utils/siren/SirenEntity.php';
 class AggregatorModel extends MonstroSirenEntity {
@@ -76,7 +79,7 @@ class AggregatorModel extends MonstroSirenEntity {
 			$newPost -> addEntity(['term', 'category'], array(
 				'name' => $source["name"],
 				'permalink' => $resourceLink,
-                'resourceURL' => $source["resourceURL"]
+        'resourceURL' => $source["resourceURL"]
 			), $resourceLink);
 		}
 	}

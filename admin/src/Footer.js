@@ -4,7 +4,7 @@ const Footer = () => (
   <footer className="footer">
     <div>Agregator &copy; 2017</div>
     <div>
-      Elaborat de&nbsp;
+      Developed by&nbsp;
       <a
         href="https://twitter.com/iamandrewluca"
         target="_blank"

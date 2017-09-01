@@ -27,7 +27,7 @@ if(isset($_GET['monstro-api']) && ('json' == $_GET['monstro-api'])) {
 	<link rel="stylesheet" href="style.css"/>
 	<link rel="stylesheet" href="agregator.css"/>
 	<link rel="stylesheet" href="nucleus/elements/list-view/styles/style.css"/>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=cyrillic-ext" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=cyrillic-ext" rel="stylesheet" />
 	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 	<script src="vendor/foundation/js/foundation.min.js"></script>
 	<script src="vendor/jquery.cookie.js"></script>
