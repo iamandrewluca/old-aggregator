@@ -27095,10 +27095,10 @@
 /* 250 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var Fluxxor = __webpack_require__(146);
-	var constants = __webpack_require__(243).constants;
+	const Fluxxor = __webpack_require__(146);
+	const constants = __webpack_require__(243).constants;
 
-	var ConfigStore = {
+	const ConfigStore = {
 	    initialize: function(){
 	        //__webpack_public_path__ = MonstroThemeData.config.assetsUrl + '/concat/';
 	        this.bindActions(constants.BOOTSTRAP, this.onBootstrap);
@@ -27117,6 +27117,7 @@
 	    Store: Fluxxor.createStore(ConfigStore)
 	};
 
+
 /***/ }),
 /* 251 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -27130,6 +27131,7 @@
 	let resources = null;
 	let filters = null;
 	let lang = null;
+	let filter = '';
 	// const __ = require('../nucleus/translate');
 	const Courier = __webpack_require__(253);
 	const URIjs = __webpack_require__(244);
@@ -27215,6 +27217,7 @@
 	    let that = this;
 
 	    currentFilter.selected = payload.isSelected;
+	    filter = currentFilter.title;
 	    this.updateResource(payload.isSelected ? currentFilter.title : undefined).then(function () {
 	      that.emit("change");
 	    });
@@ -27232,7 +27235,7 @@
 	  changePersonalFilter: function (payload) {
 
 	    if (payload.value.length > 0 && payload.value.length < 3) return;
-
+	    filter = payload.value;
 	    this.requestPersonalFilter(payload)
 
 	  },
@@ -27283,6 +27286,10 @@
 	    const uri = new URIjs(url);
 	    if(!uri.hasSearch('monstro-api')) {
 	      uri.addSearch('monstro-api', 'json');
+	      uri.addSearch('data', 'resource');
+	      if (filter.length) {
+	        uri.addSearch('filter', filter);
+	      }
 	    }
 	    Courier.fetchJson(uri.toString()).then(function(data) {
 	      resource = parseSiren(data);
@@ -27452,16 +27459,16 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */
-	var React = __webpack_require__(1);
-	var Fluxxor = __webpack_require__(146);
-	var ResourceSelection = __webpack_require__(256).Component;
-	var AggregatorListView = __webpack_require__(260).Component;
-	var AggregatorHeader = __webpack_require__(266).Component;
-	var AggregatorFooter = __webpack_require__(267).Component;
-	var Aggregator = {
+	const React = __webpack_require__(1);
+	const Fluxxor = __webpack_require__(146);
+	const ResourceSelection = __webpack_require__(256).Component;
+	const AggregatorListView = __webpack_require__(260).Component;
+	const AggregatorHeader = __webpack_require__(266).Component;
+	const AggregatorFooter = __webpack_require__(267).Component;
+	const Aggregator = {
 	  mixins:[Fluxxor.FluxMixin(React), Fluxxor.StoreWatchMixin("Resource")],
 	  getStateFromFlux: function(){
-	    var resource = this.getFlux().store("Resource");
+	    const resource = this.getFlux().store("Resource");
 	    return {
 	      resource: resource.getResource(),
 	      resources: resource.getResources(),
@@ -27688,13 +27695,13 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */
-	var React = __webpack_require__(1);
-	var Parent = __webpack_require__(261).Class;
-	var Link = __webpack_require__(258).Component;
-	// var Switch = require('switch').Component;
-	var __ = __webpack_require__(257);
-	var Pagination = __webpack_require__(263).Component;
-	var AggregatorListView = jQuery.extend(true, Parent, {
+	const React = __webpack_require__(1);
+	const Parent = __webpack_require__(261).Class;
+	const Link = __webpack_require__(258).Component;
+	// const Switch = require('switch').Component;
+	const __ = __webpack_require__(257);
+	const Pagination = __webpack_require__(263).Component;
+	const AggregatorListView = jQuery.extend(true, Parent, {
 	    getDefaultProps: function(){
 	        return {
 	            settings: {"no-image": true}
@@ -27702,7 +27709,7 @@
 	    },
 
 	    getTitle: function () {
-	        var posts = this.props.resource.getEntitiesByClass('post');
+	        const posts = this.props.resource.getEntitiesByClass('post');
 	        function refreshPage(){
 	            window.parent.location = window.parent.location.href;
 	        }
@@ -27724,7 +27731,7 @@
 	            }
 	        }
 	        else {
-	            var category = posts[0].getEntityByClass('category');
+	            const category = posts[0].getEntityByClass('category');
 	            if (posts[0] === undefined) return;
 	            return (
 	                React.DOM.div({className: "page-title"}, 
@@ -27739,12 +27746,12 @@
 	    },
 
 	    getPosts: function(){
-	        var posts = this.props.resource.getEntitiesByClass('post');
+	        const posts = this.props.resource.getEntitiesByClass('post');
 	        if(posts.length){
 	            return posts.map(function(post){
-	                var category = post.getEntityByClass('category');
-	                var date = new Date(post.prop("date"));
-	                var formatedDate = date.getDate() + " " + AggregatorData.months[AggregatorData.lang][date.getMonth()] + " " + date.getFullYear() + ", " + ('0' + date.getHours()).slice(-2) + ":" + ('0' + date.getMinutes()).slice(-2);
+	                const category = post.getEntityByClass('category');
+	                const date = new Date(post.prop("date"));
+	                const formatedDate = date.getDate() + " " + AggregatorData.months[AggregatorData.lang][date.getMonth()] + " " + date.getFullYear() + ", " + ('0' + date.getHours()).slice(-2) + ":" + ('0' + date.getMinutes()).slice(-2);
 	                return (
 	                    React.DOM.article({key: post.prop('permalink'), className: "type-post " + this.getArticleClasses(post)}, 
 	                        React.DOM.header({className: "entry-header"}, 
@@ -27786,7 +27793,7 @@
 
 	    render: function(){
 
-	        var noSources = this.props.resources.every(function(resource) {
+	        const noSources = this.props.resources.every(function(resource) {
 	            return resource.selected === false
 	        });
 
@@ -27811,6 +27818,7 @@
 	    Class: AggregatorListView,
 	    Component: React.createClass(AggregatorListView)
 	};
+
 
 /***/ }),
 /* 261 */
@@ -27965,26 +27973,26 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */
-	var React = __webpack_require__(1);
-	var Link = __webpack_require__(258).Component;
-	var URIjs = __webpack_require__(244);
-	var showPages = 19;
-	var AggregatorPagination = {
+	const React = __webpack_require__(1);
+	const Link = __webpack_require__(258).Component;
+	const URIjs = __webpack_require__(244);
+	const showPages = 19;
+	const AggregatorPagination = {
 	    render: function(){
-	        var half = (showPages - 1) / 2;
-	        var start = (this.props.currentPage <= half) ? 1 : this.props.currentPage - half;
-	        var end = (this.props.currentPage >= (this.props.totalPages - half)) ?
+	        const half = (showPages - 1) / 2;
+	        const start = (this.props.currentPage <= half) ? 1 : this.props.currentPage - half;
+	        const end = (this.props.currentPage >= (this.props.totalPages - half)) ?
 	            this.props.totalPages :
 	            this.props.currentPage + half;
-	        var pageNumbers = [];
-	        for(var counter = start; counter <= end; counter++) pageNumbers.push(counter);
-	        var pages = pageNumbers.map(function(number){
-	            if(this.props.currentPage == number){
+	        const pageNumbers = [];
+	        for(let counter = start; counter <= end; counter++) pageNumbers.push(counter);
+	        const pages = pageNumbers.map(function(number){
+	            if(this.props.currentPage === number){
 	                return (
 	                    React.DOM.span({key: number, className: "page-numbers current"}, number)
 	                )
 	            } else {
-	                var uri = new URIjs(location);
+	                const uri = new URIjs(location);
 	                uri.removeSearch('page')
 	                    .addSearch('page', number);
 	                return (
@@ -28003,6 +28011,7 @@
 	    Class: AggregatorPagination,
 	    Component: React.createClass(AggregatorPagination)
 	};
+
 
 /***/ }),
 /* 264 */

@@ -1,11 +1,11 @@
 /** @jsx React.DOM */
-var React = require('react');
-var Parent = require('../../nucleus/elements/list-view').Class;
-var Link = require('link').Component;
-// var Switch = require('switch').Component;
-var __ = require('translate');
-var Pagination = require('pagination').Component;
-var AggregatorListView = jQuery.extend(true, Parent, {
+const React = require('react');
+const Parent = require('../../nucleus/elements/list-view').Class;
+const Link = require('link').Component;
+// const Switch = require('switch').Component;
+const __ = require('translate');
+const Pagination = require('pagination').Component;
+const AggregatorListView = jQuery.extend(true, Parent, {
     getDefaultProps: function(){
         return {
             settings: {"no-image": true}
@@ -13,7 +13,7 @@ var AggregatorListView = jQuery.extend(true, Parent, {
     },
 
     getTitle: function () {
-        var posts = this.props.resource.getEntitiesByClass('post');
+        const posts = this.props.resource.getEntitiesByClass('post');
         function refreshPage(){
             window.parent.location = window.parent.location.href;
         }
@@ -35,7 +35,7 @@ var AggregatorListView = jQuery.extend(true, Parent, {
             }
         }
         else {
-            var category = posts[0].getEntityByClass('category');
+            const category = posts[0].getEntityByClass('category');
             if (posts[0] === undefined) return;
             return (
                 React.DOM.div({className: "page-title"}, 
@@ -50,12 +50,12 @@ var AggregatorListView = jQuery.extend(true, Parent, {
     },
 
     getPosts: function(){
-        var posts = this.props.resource.getEntitiesByClass('post');
+        const posts = this.props.resource.getEntitiesByClass('post');
         if(posts.length){
             return posts.map(function(post){
-                var category = post.getEntityByClass('category');
-                var date = new Date(post.prop("date"));
-                var formatedDate = date.getDate() + " " + AggregatorData.months[AggregatorData.lang][date.getMonth()] + " " + date.getFullYear() + ", " + ('0' + date.getHours()).slice(-2) + ":" + ('0' + date.getMinutes()).slice(-2);
+                const category = post.getEntityByClass('category');
+                const date = new Date(post.prop("date"));
+                const formatedDate = date.getDate() + " " + AggregatorData.months[AggregatorData.lang][date.getMonth()] + " " + date.getFullYear() + ", " + ('0' + date.getHours()).slice(-2) + ":" + ('0' + date.getMinutes()).slice(-2);
                 return (
                     React.DOM.article({key: post.prop('permalink'), className: "type-post " + this.getArticleClasses(post)}, 
                         React.DOM.header({className: "entry-header"}, 
@@ -97,7 +97,7 @@ var AggregatorListView = jQuery.extend(true, Parent, {
 
     render: function(){
 
-        var noSources = this.props.resources.every(function(resource) {
+        const noSources = this.props.resources.every(function(resource) {
             return resource.selected === false
         });
 

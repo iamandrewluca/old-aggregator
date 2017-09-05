@@ -1,14 +1,14 @@
 /** @jsx React.DOM */
-var React = require('react');
-var Fluxxor = require('fluxxor');
-var ResourceSelection = require('resource-selection').Component;
-var AggregatorListView = require('aggregator-list-view').Component;
-var AggregatorHeader = require('aggregator-header').Component;
-var AggregatorFooter = require('aggregator-footer').Component;
-var Aggregator = {
+const React = require('react');
+const Fluxxor = require('fluxxor');
+const ResourceSelection = require('resource-selection').Component;
+const AggregatorListView = require('aggregator-list-view').Component;
+const AggregatorHeader = require('aggregator-header').Component;
+const AggregatorFooter = require('aggregator-footer').Component;
+const Aggregator = {
   mixins:[Fluxxor.FluxMixin(React), Fluxxor.StoreWatchMixin("Resource")],
   getStateFromFlux: function(){
-    var resource = this.getFlux().store("Resource");
+    const resource = this.getFlux().store("Resource");
     return {
       resource: resource.getResource(),
       resources: resource.getResources(),

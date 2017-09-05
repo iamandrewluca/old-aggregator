@@ -1,22 +1,22 @@
 module.exports = function(grunt) {
-  var frontendStyles = [
+  const frontendStyles = [
     'elements/**/*.css',
     'nucleus/elements/**/*.css',
     'nucleus/mixins/**/*.css',
     'vendors/**/*.css'
   ];
-  var frontendScripts = [
+  const frontendScripts = [
     'elements/**/*.js',
     'nucleus/elements/**/*.js'
   ];
-  var jsx = [
+  const jsx = [
     'bundles/**/*.jsx',
     'elements/**/*.jsx',
     'nucleus/elements/**/*.jsx',
     'nucleus/mixins/**/*.jsx'
   ];
-  var path = require('path');
-  var webpack = require('webpack');
+  const path = require('path');
+  const webpack = require('webpack');
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),

@@ -7,6 +7,7 @@ let resource = null;
 let resources = null;
 let filters = null;
 let lang = null;
+let filter = '';
 // const __ = require('../nucleus/translate');
 const Courier = require('../nucleus/utils/courier');
 const URIjs = require('URIjs');
@@ -92,6 +93,7 @@ const ResourceStore = {
     let that = this;
 
     currentFilter.selected = payload.isSelected;
+    filter = currentFilter.title;
     this.updateResource(payload.isSelected ? currentFilter.title : undefined).then(function () {
       that.emit("change");
     });
@@ -109,7 +111,7 @@ const ResourceStore = {
   changePersonalFilter: function (payload) {
 
     if (payload.value.length > 0 && payload.value.length < 3) return;
-
+    filter = payload.value;
     this.requestPersonalFilter(payload)
 
   },
@@ -160,6 +162,10 @@ const ResourceStore = {
     const uri = new URIjs(url);
     if(!uri.hasSearch('monstro-api')) {
       uri.addSearch('monstro-api', 'json');
+      uri.addSearch('data', 'resource');
+      if (filter.length) {
+        uri.addSearch('filter', filter);
+      }
     }
     Courier.fetchJson(uri.toString()).then(function(data) {
       resource = parseSiren(data);

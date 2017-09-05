@@ -1,7 +1,7 @@
-var Fluxxor = require('fluxxor');
-var constants = require('../nucleus/actions').constants;
+const Fluxxor = require('fluxxor');
+const constants = require('../nucleus/actions').constants;
 
-var ConfigStore = {
+const ConfigStore = {
     initialize: function(){
         //__webpack_public_path__ = MonstroThemeData.config.assetsUrl + '/concat/';
         this.bindActions(constants.BOOTSTRAP, this.onBootstrap);

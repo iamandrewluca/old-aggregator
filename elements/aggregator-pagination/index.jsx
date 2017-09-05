@@ -1,24 +1,24 @@
 /** @jsx React.DOM */
-var React = require('react');
-var Link = require('link').Component;
-var URIjs = require('URIjs');
-var showPages = 19;
-var AggregatorPagination = {
+const React = require('react');
+const Link = require('link').Component;
+const URIjs = require('URIjs');
+const showPages = 19;
+const AggregatorPagination = {
     render: function(){
-        var half = (showPages - 1) / 2;
-        var start = (this.props.currentPage <= half) ? 1 : this.props.currentPage - half;
-        var end = (this.props.currentPage >= (this.props.totalPages - half)) ?
+        const half = (showPages - 1) / 2;
+        const start = (this.props.currentPage <= half) ? 1 : this.props.currentPage - half;
+        const end = (this.props.currentPage >= (this.props.totalPages - half)) ?
             this.props.totalPages :
             this.props.currentPage + half;
-        var pageNumbers = [];
-        for(var counter = start; counter <= end; counter++) pageNumbers.push(counter);
-        var pages = pageNumbers.map(function(number){
-            if(this.props.currentPage == number){
+        const pageNumbers = [];
+        for(let counter = start; counter <= end; counter++) pageNumbers.push(counter);
+        const pages = pageNumbers.map(function(number){
+            if(this.props.currentPage === number){
                 return (
                     <span key={number} className="page-numbers current">{number}</span>
                 )
             } else {
-                var uri = new URIjs(location);
+                const uri = new URIjs(location);
                 uri.removeSearch('page')
                     .addSearch('page', number);
                 return (
