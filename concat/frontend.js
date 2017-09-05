@@ -45,14 +45,14 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */
-	var React = __webpack_require__(1);
-	var Fluxxor = __webpack_require__(146);
-	var actions = __webpack_require__(243).actions;
-	var Config = __webpack_require__(250);
-	var Resource = __webpack_require__(251);
-	var Aggregator = __webpack_require__(255).Component;
+	const React = __webpack_require__(1);
+	const Fluxxor = __webpack_require__(146);
+	const actions = __webpack_require__(243).actions;
+	const Config = __webpack_require__(250);
+	const Resource = __webpack_require__(251);
+	const Aggregator = __webpack_require__(255).Component;
 
-	var aggregatorActions = jQuery.extend(true, actions, {
+	const aggregatorActions = jQuery.extend(true, actions, {
 	  updateLang: function(newLang){
 	    this.dispatch('update-lang', newLang);
 	  },
@@ -70,9 +70,23 @@
 	  },
 	  toggleAllSources: function(isSelected) {
 	    this.dispatch('toggle-all-sources', isSelected);
+	  },
+
+	  changeFilter: function (id, isSelected) {
+	    this.dispatch('change-filter', {
+	      id: id,
+	      isSelected: isSelected
+	    });
+	  },
+
+	  changePersonalFilter: function (value) {
+	    this.dispatch('change-personal-filter', {
+	      value: value
+	    });
 	  }
 	});
-	var flux = new Fluxxor.Flux({
+
+	const flux = new Fluxxor.Flux({
 	  Config: new Config.Store(),
 	  Resource: new Resource.Store()
 	}, aggregatorActions);
@@ -82,7 +96,7 @@
 	  flux.actions.navigate(location.pathname, true);
 	});
 
-	var TitleCtrl = __webpack_require__(268);
+	const TitleCtrl = __webpack_require__(268);
 	TitleCtrl(flux.store('Resource'));
 	flux.actions.bootstrap();
 	React.renderComponent(Aggregator({flux: flux}), document.getElementById('react-parent'));
@@ -23891,9 +23905,8 @@
 /* 243 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	// var Debouncer = require('debouncer');
-	var URIjs = __webpack_require__(244);
-	var constants = {
+	const URIjs = __webpack_require__(244);
+	const constants = {
 	    BOOTSTRAP: 'boostrap',
 	    NAVIGATE: 'navigate',
 	    CUSTOMIZE: 'customize',
@@ -23901,22 +23914,22 @@
 	    UPDATE_SEARCH_QUERY: 'update-search-query'
 	};
 
-	var debounce = __webpack_require__(249);
-	var doQuery = debounce(500, function(searchQuery){
-	    var config = this.flux.store("Config").getConfig();
-	    var uri = new URIjs(config.homeUrl);
+	const debounce = __webpack_require__(249);
+	const doQuery = debounce(500, function(searchQuery){
+	    const config = this.flux.store("Config").getConfig();
+	    const uri = new URIjs(config.homeUrl);
 	    uri.removeSearch('s');//in case we're already on search results page
 	    uri.addSearch('s', searchQuery);
 	    this.flux.actions.navigate(uri.toString());
 	});
 
-	var actions = {
+	const actions = {
 	    bootstrap: function(){
 	        this.dispatch(constants.BOOTSTRAP);
 	    },
 
 	    navigate: function(url, dontPush){
-	        var push = !dontPush;
+	        const push = !dontPush;
 	        this.dispatch(constants.NAVIGATE, url);
 	        if(push){
 	            history.pushState(null, null, url);
@@ -23928,12 +23941,12 @@
 	    },
 
 	    updateSettings: function(level, deltaOrCb){
-	        var payload = {
+	        const payload = {
 	            level: level
 	        };
-	        if('function' == typeof deltaOrCb){
+	        if('function' === typeof deltaOrCb){
 	            payload['cb'] = deltaOrCb
-	        } else if('object' == typeof deltaOrCb){
+	        } else if('object' === typeof deltaOrCb){
 	            payload['delta'] = deltaOrCb
 	        }
 	        this.dispatch(constants.UPDATE_SETTINGS, payload);
@@ -23949,6 +23962,7 @@
 	    constants: constants,
 	    actions: actions
 	};
+
 
 /***/ }),
 /* 244 */
@@ -27107,41 +27121,46 @@
 /* 251 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var Fluxxor = __webpack_require__(146);
-	var constants = __webpack_require__(243).constants;
-	var parseSiren = __webpack_require__(252);
-	// var traverseObj = require('../nucleus/utils/object-traverser').traverse;
-	var resource = null;
-	var resources = null;
-	var filters = null;
-	var lang = null;
-	// var __ = require('../nucleus/translate');
-	var Courier = __webpack_require__(253);
-	var URIjs = __webpack_require__(244);
-	var obj2array = __webpack_require__(254);
-	// var cached = {};
+	const Fluxxor = __webpack_require__(146);
+	const constants = __webpack_require__(243).constants;
+	const parseSiren = __webpack_require__(252);
+	const debounce = __webpack_require__(249);
+	// const traverseObj = require('../nucleus/utils/object-traverser').traverse;
+	let resource = null;
+	let resources = null;
+	let filters = null;
+	let lang = null;
+	// const __ = require('../nucleus/translate');
+	const Courier = __webpack_require__(253);
+	const URIjs = __webpack_require__(244);
+	const obj2array = __webpack_require__(254);
+	// const cached = {};
 
-	var ResourceStore = {
+	const ResourceStore = {
+
 	  initialize: function() {
 	    this.bindActions(constants.BOOTSTRAP, this.onBootstrap);
 	    this.bindActions(constants.NAVIGATE, this.onNavigate);
 	    this.bindActions('update-lang', this.onChangeLang);
 	    this.bindActions('change-selection', this.changeSelection);
 	    this.bindActions('toggle-all-sources', this.toggleAllSources);
+	    this.bindActions('change-filter', this.changeFilter);
+	    this.bindActions('change-personal-filter', this.changePersonalFilter);
 	  },
 
 	  getSelectionDelta: function(id, isSelected) {
-	    var selectedResources;
-	    if(selectedResources = $.cookie(lang)) {
+	    let selectedResources = $.cookie(lang);
+	    if(selectedResources) {
 	      selectedResources = selectedResources.split(',');
 	    } else {
 	      selectedResources = isSelected ? [] : resources.map(function(resource) {return resource.id});
 	    }
 	    if(isSelected) {
-	      if(selectedResources.indexOf(id) == -1) {
+	      if(selectedResources.indexOf(id) === -1) {
 	        selectedResources.push(id);
 	      }
 	    } else {
+	      let index;
 	      if((index = selectedResources.indexOf(id)) > -1) {
 	        selectedResources.splice(index, 1);
 	      }
@@ -27151,14 +27170,14 @@
 
 	  changeSelection: function(payload) {
 
-	    var source = resources.find(function(source) {
+	    const source = resources.find(function(source) {
 	      return source.id === payload.id;
 	    });
 
 	    source.selected = payload.isSelected;
 	    this.emit("change");
 
-	    var delta = this.getSelectionDelta(payload.id, payload.isSelected);
+	    const delta = this.getSelectionDelta(payload.id, source.selected);
 	    $.cookie(lang, delta);
 	    this.updateResource().then(function() {
 	      this.emit("change");
@@ -27173,8 +27192,8 @@
 	      $.cookie(lang, '');
 	    }
 
-	    var resource = this.updateResource();
-	    var that = this;
+	    const resource = this.updateResource();
+	    const that = this;
 	    this.updateResources().then(function() {
 	      resource.then(function() {
 	        that.emit("change");
@@ -27182,12 +27201,48 @@
 	    });
 	  },
 
+	  changeFilter: function (payload) {
+
+	    let currentFilter = null;
+
+	    filters.forEach(function (filter) {
+	      filter.selected = false;
+	      if (payload.id === filter.id) {
+	        currentFilter = filter;
+	      }
+	    });
+
+	    let that = this;
+
+	    currentFilter.selected = payload.isSelected;
+	    this.updateResource(payload.isSelected ? currentFilter.title : undefined).then(function () {
+	      that.emit("change");
+	    });
+
+	    this.emit("change");
+	  },
+
+	  requestPersonalFilter: debounce(500, function (payload) {
+	    let that = this;
+	    this.updateResource(payload.value).then(function () {
+	      that.emit("change");
+	    });
+	  }),
+
+	  changePersonalFilter: function (payload) {
+
+	    if (payload.value.length > 0 && payload.value.length < 3) return;
+
+	    this.requestPersonalFilter(payload)
+
+	  },
+
 	  onChangeLang: function(newLang) {
 	    $.cookie('lang', newLang);
 	    lang = $.cookie('lang');
-	    var resource = this.updateResource();
-	    var filters = this.updateFilters();
-	    var that = this;
+	    const resource = this.updateResource();
+	    const filters = this.updateFilters();
+	    const that = this;
 	    this.updateResources().then(function() {
 	      filters.then(function () {
 	        resource.then(function() {
@@ -27197,8 +27252,9 @@
 	    });
 	  },
 
-	  updateResource: function() {
-	    return jQuery.get(AggregatorData.config.homeUrl + '?monstro-api=json&data=resource', null, function(newResource) {
+	  updateResource: function(filter) {
+	    const path = '?monstro-api=json&data=resource' + (filter ? '&filter=' + encodeURIComponent(filter) : '');
+	    return jQuery.get(AggregatorData.config.homeUrl + path, null, function(newResource) {
 	      resource = parseSiren(newResource);
 	    }.bind(this), 'json');
 	  },
@@ -27224,7 +27280,7 @@
 	  },
 
 	  onNavigate: function(url) {
-	    var uri = new URIjs(url);
+	    const uri = new URIjs(url);
 	    if(!uri.hasSearch('monstro-api')) {
 	      uri.addSearch('monstro-api', 'json');
 	    }
@@ -27428,7 +27484,10 @@
 	                )
 	              ), 
 	              React.DOM.div({className: "large-3 columns sidebar-right"}, 
-	                ResourceSelection({resources: this.state.resources, filters: this.state.filters})
+	                ResourceSelection({
+	                  resources: this.state.resources, 
+	                  filters: this.state.filters}
+	                )
 	              )
 	            )
 	          )
@@ -27450,20 +27509,18 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 	/** @jsx React.DOM */
-	var React = __webpack_require__(1);
-	var Fluxxor = __webpack_require__(146);
-	var __ = __webpack_require__(257);
-	var Link = __webpack_require__(258).Component;
-	var Switch = __webpack_require__(259).Component;
-	var ResourceSelection = {
+	const React = __webpack_require__(1);
+	const Fluxxor = __webpack_require__(146);
+	const __ = __webpack_require__(257);
+	const Link = __webpack_require__(258).Component;
+	const Switch = __webpack_require__(259).Component;
+	const ResourceSelection = {
 	  mixins: [Fluxxor.FluxMixin(React)],
 	  render: function(){
-	    var actions = this.getFlux().actions;
-	    var toggled = false;
-	    var resources = this.props.resources.map(function(resource){
-	      var onChange = function(isSelected){
-	        actions.changeSelection(resource.id, isSelected);
-	      };
+	    const actions = this.getFlux().actions;
+	    let toggled = false;
+
+	    const resources = this.props.resources.map(function(resource){
 
 	      toggled = toggled || resource.selected;
 
@@ -27475,32 +27532,26 @@
 	            )
 	          ), 
 	          React.DOM.div({className: "large-4 small-3 columns"}, 
-	            Switch({checked: resource.selected, className: "round", onChange: onChange})
+	            Switch({checked: resource.selected, className: "round", 
+	                    onChange: isSelected => actions.changeSelection(resource.id, isSelected)})
 	          )
 	        )
 	      )
 	    });
 
-	    var filterChanged = function(isSelected) {
-	      console.log(isSelected)
-	    };
-
-	    var stopFilters = this.props.filters.map(function(filter) {
+	    const stopFilters = this.props.filters.map(function(filter) {
 	      return (
 	        React.DOM.div({key: filter.id, className: "row monstro-resources"}, 
 	          React.DOM.div({className: "large-8 small-9 columns"}, 
 	            React.DOM.a(null, filter.title)
 	          ), 
 	          React.DOM.div({className: "large-4 small-3 columns"}, 
-	            Switch({checked: false, className: "round", onChange: filterChanged})
+	            Switch({checked: filter.selected, className: "round", 
+	                    onChange: isSelected => actions.changeFilter(filter.id, isSelected)})
 	          )
 	        )
 	      )
 	    });
-
-	    var toggleAllSources = function(isSelected) {
-	      actions.toggleAllSources(isSelected);
-	    }
 
 	    return (
 	      React.DOM.form(null, 
@@ -27522,7 +27573,8 @@
 	        React.DOM.div({className: "row monstro-resources"}, 
 
 	          React.DOM.div({className: "large-12 columns"}, 
-	            React.DOM.input({type: "text", placeholder: "Alege cuvântul tău"})
+	            React.DOM.input({type: "text", placeholder: "Alege cuvântul tău", 
+	                   onChange: e => actions.changePersonalFilter(e.target.value)})
 	          ), 
 
 	          React.DOM.div({className: "small-12 columns"}, 
@@ -27533,7 +27585,8 @@
 	            React.DOM.a(null, toggled ? __('Dezactivează Toate') : __('Activează Toate'))
 	          ), 
 	          React.DOM.div({className: "large-4 small-3 columns"}, 
-	            Switch({checked: toggled, className: "round", onChange: toggleAllSources})
+	            Switch({checked: toggled, className: "round", 
+	                    onChange: isSelected => actions.toggleAllSources(isSelected)})
 	          )
 
 	        ), 

@@ -31,7 +31,10 @@ var Aggregator = {
                 )
               ), 
               React.DOM.div({className: "large-3 columns sidebar-right"}, 
-                ResourceSelection({resources: this.state.resources, filters: this.state.filters})
+                ResourceSelection({
+                  resources: this.state.resources, 
+                  filters: this.state.filters}
+                )
               )
             )
           )

@@ -1,18 +1,16 @@
 /** @jsx React.DOM */
-var React = require('react');
-var Fluxxor = require('fluxxor');
-var __ = require('translate');
-var Link = require('link').Component;
-var Switch = require('switch').Component;
-var ResourceSelection = {
+const React = require('react');
+const Fluxxor = require('fluxxor');
+const __ = require('translate');
+const Link = require('link').Component;
+const Switch = require('switch').Component;
+const ResourceSelection = {
   mixins: [Fluxxor.FluxMixin(React)],
   render: function(){
-    var actions = this.getFlux().actions;
-    var toggled = false;
-    var resources = this.props.resources.map(function(resource){
-      var onChange = function(isSelected){
-        actions.changeSelection(resource.id, isSelected);
-      };
+    const actions = this.getFlux().actions;
+    let toggled = false;
+
+    const resources = this.props.resources.map(function(resource){
 
       toggled = toggled || resource.selected;
 
@@ -24,32 +22,26 @@ var ResourceSelection = {
             </Link>
           </div>
           <div className="large-4 small-3 columns">
-            <Switch checked={resource.selected} className="round" onChange={onChange}/>
+            <Switch checked={resource.selected} className="round"
+                    onChange={isSelected => actions.changeSelection(resource.id, isSelected)}/>
           </div>
         </div>
       )
     });
 
-    var filterChanged = function(isSelected) {
-      console.log(isSelected)
-    };
-
-    var stopFilters = this.props.filters.map(function(filter) {
+    const stopFilters = this.props.filters.map(function(filter) {
       return (
         <div key={filter.id} className="row monstro-resources">
           <div className="large-8 small-9 columns">
             <a>{filter.title}</a>
           </div>
           <div className="large-4 small-3 columns">
-            <Switch checked={false} className="round" onChange={filterChanged}/>
+            <Switch checked={filter.selected} className="round"
+                    onChange={isSelected => actions.changeFilter(filter.id, isSelected)}/>
           </div>
         </div>
       )
     });
-
-    var toggleAllSources = function(isSelected) {
-      actions.toggleAllSources(isSelected);
-    }
 
     return (
       <form>
@@ -71,7 +63,8 @@ var ResourceSelection = {
         <div className="row monstro-resources">
 
           <div className="large-12 columns">
-            <input type="text" placeholder="Alege cuvântul tău" />
+            <input type="text" placeholder="Alege cuvântul tău"
+                   onChange={e => actions.changePersonalFilter(e.target.value)} />
           </div>
 
           <div className="small-12 columns">
@@ -82,7 +75,8 @@ var ResourceSelection = {
             <a>{toggled ? __('Dezactivează Toate') : __('Activează Toate')}</a>
           </div>
           <div className="large-4 small-3 columns">
-            <Switch checked={toggled} className="round" onChange={toggleAllSources}/>
+            <Switch checked={toggled} className="round"
+                    onChange={isSelected => actions.toggleAllSources(isSelected)}/>
           </div>
 
         </div>

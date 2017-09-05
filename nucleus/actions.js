@@ -1,6 +1,5 @@
-// var Debouncer = require('debouncer');
-var URIjs = require('URIjs');
-var constants = {
+const URIjs = require('URIjs');
+const constants = {
     BOOTSTRAP: 'boostrap',
     NAVIGATE: 'navigate',
     CUSTOMIZE: 'customize',
@@ -8,22 +7,22 @@ var constants = {
     UPDATE_SEARCH_QUERY: 'update-search-query'
 };
 
-var debounce = require('debouncer');
-var doQuery = debounce(500, function(searchQuery){
-    var config = this.flux.store("Config").getConfig();
-    var uri = new URIjs(config.homeUrl);
+const debounce = require('debouncer');
+const doQuery = debounce(500, function(searchQuery){
+    const config = this.flux.store("Config").getConfig();
+    const uri = new URIjs(config.homeUrl);
     uri.removeSearch('s');//in case we're already on search results page
     uri.addSearch('s', searchQuery);
     this.flux.actions.navigate(uri.toString());
 });
 
-var actions = {
+const actions = {
     bootstrap: function(){
         this.dispatch(constants.BOOTSTRAP);
     },
 
     navigate: function(url, dontPush){
-        var push = !dontPush;
+        const push = !dontPush;
         this.dispatch(constants.NAVIGATE, url);
         if(push){
             history.pushState(null, null, url);
@@ -35,12 +34,12 @@ var actions = {
     },
 
     updateSettings: function(level, deltaOrCb){
-        var payload = {
+        const payload = {
             level: level
         };
-        if('function' == typeof deltaOrCb){
+        if('function' === typeof deltaOrCb){
             payload['cb'] = deltaOrCb
-        } else if('object' == typeof deltaOrCb){
+        } else if('object' === typeof deltaOrCb){
             payload['delta'] = deltaOrCb
         }
         this.dispatch(constants.UPDATE_SETTINGS, payload);

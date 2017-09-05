@@ -1,12 +1,12 @@
 /** @jsx React.DOM */
-var React = require('react');
-var Fluxxor = require('fluxxor');
-var actions = require('../nucleus/actions').actions;
-var Config = require('../mRNA/config');
-var Resource = require('../mRNA/resource');
-var Aggregator = require('aggregator').Component;
+const React = require('react');
+const Fluxxor = require('fluxxor');
+const actions = require('../nucleus/actions').actions;
+const Config = require('../mRNA/config');
+const Resource = require('../mRNA/resource');
+const Aggregator = require('aggregator').Component;
 
-var aggregatorActions = jQuery.extend(true, actions, {
+const aggregatorActions = jQuery.extend(true, actions, {
   updateLang: function(newLang){
     this.dispatch('update-lang', newLang);
   },
@@ -24,9 +24,23 @@ var aggregatorActions = jQuery.extend(true, actions, {
   },
   toggleAllSources: function(isSelected) {
     this.dispatch('toggle-all-sources', isSelected);
+  },
+
+  changeFilter: function (id, isSelected) {
+    this.dispatch('change-filter', {
+      id: id,
+      isSelected: isSelected
+    });
+  },
+
+  changePersonalFilter: function (value) {
+    this.dispatch('change-personal-filter', {
+      value: value
+    });
   }
 });
-var flux = new Fluxxor.Flux({
+
+const flux = new Fluxxor.Flux({
   Config: new Config.Store(),
   Resource: new Resource.Store()
 }, aggregatorActions);
@@ -36,7 +50,7 @@ window.addEventListener('popstate', function() {
   flux.actions.navigate(location.pathname, true);
 });
 
-var TitleCtrl = require('../nucleus/elements/title/controller');
+const TitleCtrl = require('../nucleus/elements/title/controller');
 TitleCtrl(flux.store('Resource'));
 flux.actions.bootstrap();
 React.renderComponent(<Aggregator flux={flux}/>, document.getElementById('react-parent'));

@@ -1,38 +1,43 @@
-var Fluxxor = require('fluxxor');
-var constants = require('../nucleus/actions').constants;
-var parseSiren = require('../nucleus/utils/siren');
-// var traverseObj = require('../nucleus/utils/object-traverser').traverse;
-var resource = null;
-var resources = null;
-var filters = null;
-var lang = null;
-// var __ = require('../nucleus/translate');
-var Courier = require('../nucleus/utils/courier');
-var URIjs = require('URIjs');
-var obj2array = require('../nucleus/utils/obj2array');
-// var cached = {};
+const Fluxxor = require('fluxxor');
+const constants = require('../nucleus/actions').constants;
+const parseSiren = require('../nucleus/utils/siren');
+const debounce = require('utils/debouncer');
+// const traverseObj = require('../nucleus/utils/object-traverser').traverse;
+let resource = null;
+let resources = null;
+let filters = null;
+let lang = null;
+// const __ = require('../nucleus/translate');
+const Courier = require('../nucleus/utils/courier');
+const URIjs = require('URIjs');
+const obj2array = require('../nucleus/utils/obj2array');
+// const cached = {};
 
-var ResourceStore = {
+const ResourceStore = {
+
   initialize: function() {
     this.bindActions(constants.BOOTSTRAP, this.onBootstrap);
     this.bindActions(constants.NAVIGATE, this.onNavigate);
     this.bindActions('update-lang', this.onChangeLang);
     this.bindActions('change-selection', this.changeSelection);
     this.bindActions('toggle-all-sources', this.toggleAllSources);
+    this.bindActions('change-filter', this.changeFilter);
+    this.bindActions('change-personal-filter', this.changePersonalFilter);
   },
 
   getSelectionDelta: function(id, isSelected) {
-    var selectedResources;
-    if(selectedResources = $.cookie(lang)) {
+    let selectedResources = $.cookie(lang);
+    if(selectedResources) {
       selectedResources = selectedResources.split(',');
     } else {
       selectedResources = isSelected ? [] : resources.map(function(resource) {return resource.id});
     }
     if(isSelected) {
-      if(selectedResources.indexOf(id) == -1) {
+      if(selectedResources.indexOf(id) === -1) {
         selectedResources.push(id);
       }
     } else {
+      let index;
       if((index = selectedResources.indexOf(id)) > -1) {
         selectedResources.splice(index, 1);
       }
@@ -42,14 +47,14 @@ var ResourceStore = {
 
   changeSelection: function(payload) {
 
-    var source = resources.find(function(source) {
+    const source = resources.find(function(source) {
       return source.id === payload.id;
     });
 
     source.selected = payload.isSelected;
     this.emit("change");
 
-    var delta = this.getSelectionDelta(payload.id, payload.isSelected);
+    const delta = this.getSelectionDelta(payload.id, source.selected);
     $.cookie(lang, delta);
     this.updateResource().then(function() {
       this.emit("change");
@@ -64,8 +69,8 @@ var ResourceStore = {
       $.cookie(lang, '');
     }
 
-    var resource = this.updateResource();
-    var that = this;
+    const resource = this.updateResource();
+    const that = this;
     this.updateResources().then(function() {
       resource.then(function() {
         that.emit("change");
@@ -73,12 +78,48 @@ var ResourceStore = {
     });
   },
 
+  changeFilter: function (payload) {
+
+    let currentFilter = null;
+
+    filters.forEach(function (filter) {
+      filter.selected = false;
+      if (payload.id === filter.id) {
+        currentFilter = filter;
+      }
+    });
+
+    let that = this;
+
+    currentFilter.selected = payload.isSelected;
+    this.updateResource(payload.isSelected ? currentFilter.title : undefined).then(function () {
+      that.emit("change");
+    });
+
+    this.emit("change");
+  },
+
+  requestPersonalFilter: debounce(500, function (payload) {
+    let that = this;
+    this.updateResource(payload.value).then(function () {
+      that.emit("change");
+    });
+  }),
+
+  changePersonalFilter: function (payload) {
+
+    if (payload.value.length > 0 && payload.value.length < 3) return;
+
+    this.requestPersonalFilter(payload)
+
+  },
+
   onChangeLang: function(newLang) {
     $.cookie('lang', newLang);
     lang = $.cookie('lang');
-    var resource = this.updateResource();
-    var filters = this.updateFilters();
-    var that = this;
+    const resource = this.updateResource();
+    const filters = this.updateFilters();
+    const that = this;
     this.updateResources().then(function() {
       filters.then(function () {
         resource.then(function() {
@@ -88,8 +129,9 @@ var ResourceStore = {
     });
   },
 
-  updateResource: function() {
-    return jQuery.get(AggregatorData.config.homeUrl + '?monstro-api=json&data=resource', null, function(newResource) {
+  updateResource: function(filter) {
+    const path = '?monstro-api=json&data=resource' + (filter ? '&filter=' + encodeURIComponent(filter) : '');
+    return jQuery.get(AggregatorData.config.homeUrl + path, null, function(newResource) {
       resource = parseSiren(newResource);
     }.bind(this), 'json');
   },
@@ -115,7 +157,7 @@ var ResourceStore = {
   },
 
   onNavigate: function(url) {
-    var uri = new URIjs(url);
+    const uri = new URIjs(url);
     if(!uri.hasSearch('monstro-api')) {
       uri.addSearch('monstro-api', 'json');
     }

@@ -33,10 +33,22 @@ class AggregatorModel extends MonstroSirenEntity {
         $POSTS_PER_PAGE = 30;
         $currentPage = isset($_GET['page']) ? (int) $_GET['page'] : 1;
 
-        $totalPagesSQL = 'SELECT COUNT(*) FROM post WHERE source_id IN (:source_ids) AND lang_id = :lang_id';
+        $filter = '';
+
+        if (isset($_GET['filter']) && !empty($_GET['filter'])) {
+            $filter = $_GET['filter'];
+        }
+
+        $totalPagesSQL = '
+          SELECT COUNT(*) FROM post
+          WHERE source_id IN (:source_ids)
+          AND lang_id = :lang_id
+          AND NOT MATCH(title) AGAINST(:filter IN NATURAL LANGUAGE MODE)
+        ';
         $totalPagesQuery = R::getCell($totalPagesSQL, [
             ':lang_id' => $langId,
-            ':source_ids' => implode(',', $resources)
+            ':source_ids' => implode(',', $resources),
+            ':filter' => $filter
         ]);
         $totalPages = ceil($totalPagesQuery / $POSTS_PER_PAGE);
 
@@ -48,10 +60,18 @@ class AggregatorModel extends MonstroSirenEntity {
 
         $mysqlOffset = ($currentPage - 1) * $POSTS_PER_PAGE;
 
-        $postsSQL = 'SELECT * FROM post WHERE source_id IN (:source_ids) AND lang_id = :lang_id ORDER BY date DESC LIMIT :offset, :count';
+        $postsSQL = '
+          SELECT * FROM post
+          WHERE source_id IN (:source_ids)
+          AND lang_id = :lang_id
+          AND NOT MATCH(title) AGAINST(:filter IN NATURAL LANGUAGE MODE)
+          ORDER BY date DESC LIMIT :offset, :count
+        ';
+
         $postsQuery = R::getAll($postsSQL, [
             ':source_ids' => implode(',', $resources),
             ':lang_id' => $langId,
+            ':filter' => $filter,
             ':offset' => $mysqlOffset,
             ':count' => $POSTS_PER_PAGE
         ]);
