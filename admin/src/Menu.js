@@ -12,10 +12,10 @@ const Menu = () => (
       <NavLink to="/filters" className="nav-link" activeClassName="active">Filters</NavLink>
     </li>
     <li className="nav-item">
-      <NavLink to="/top" className="nav-link" activeClassName="active">Top 10</NavLink>
+      <NavLink to="/topics" className="nav-link" activeClassName="active">Topics &times; 3</NavLink>
     </li>
     <li className="nav-item">
-      <NavLink to="/topics" className="nav-link" activeClassName="active">Topics</NavLink>
+      <NavLink to="/top" className="nav-link" activeClassName="active">Top 10</NavLink>
     </li>
     <li className="nav-item">
       <a href="#users" className="nav-link disabled">Users</a>

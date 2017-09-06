@@ -20,6 +20,14 @@ if (isset($_GET['controller']) && isset($_GET['action'])) {
             require_once './framework/FilterService.php';
             $service = new FilterService();
             break;
+        case 'topics':
+            require_once './framework/TopicsService.php';
+            $service = new TopicsService();
+            break;
+        case 'posts':
+            require_once './framework/PostsService.php';
+            $service = new PostsService();
+            break;
         default:
             echo 'Controller not defined.';
             return;

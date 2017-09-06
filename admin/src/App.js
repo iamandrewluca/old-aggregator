@@ -3,6 +3,7 @@ import {
   BrowserRouter as Router,
   Route,
 } from 'react-router-dom';
+import debounce from 'lodash.debounce';
 
 import './App.css';
 
@@ -11,6 +12,7 @@ import Footer from './Footer.js';
 import Menu from './Menu.js';
 import Sources from './Sources.js';
 import Filters from './Filters.js';
+import Topics from './Topics.js';
 
 let fetchUrl = 'https://agregator.md/admin/admin.php';
 let basename = '/admin/';
@@ -37,7 +39,13 @@ class App extends Component {
     newFilter: {
       title: '',
       lang_id: '',
-    }
+    },
+
+    searchedPostsQuery: '',
+    searchedPosts: null,
+    postSlots: null,
+    postSlotsLimit: 3
+
   };
 
   catchError = (res) => {
@@ -186,6 +194,100 @@ class App extends Component {
     }
   };
 
+  fetchSlots = async () => {
+    const slotsPromise = await fetch(route('topics', 'all')).catch(this.catchError);
+    if (slotsPromise) {
+      const postSlots = await slotsPromise.json();
+      this.setState({postSlots})
+    }
+  };
+
+  searchPosts = (e) => {
+    const { value: searchedPostsQuery } = e.target;
+    this.setState({searchedPostsQuery});
+
+    if (searchedPostsQuery.length < 3) {
+      this.debouncedSearch.cancel();
+      this.setState({searchedPosts: null});
+      return;
+    }
+
+    this.debouncedSearch(searchedPostsQuery)
+  };
+
+  debouncedSearch = debounce(async (searchedPostsQuery) => {
+
+    const data = new FormData();
+    data.append('query', searchedPostsQuery);
+
+    const postsPromise = await fetch(route('posts', 'all'), {
+      method: 'POST',
+      body: data,
+    }).catch(this.catchError);
+
+    if (postsPromise) {
+      let posts = await postsPromise.json();
+
+      console.log(posts);
+
+      if (this.state.postSlots.length) {
+        posts = posts.filter(post =>
+          !this.state.postSlots.some(slot =>
+            slot.post_id === post.id));
+      }
+
+      console.log(posts);
+
+      this.setState({searchedPosts: posts.slice(0, 3)})
+    }
+  }, 500);
+
+  deleteSlot = async (id, e) => {
+    e.preventDefault();
+
+    const data = new FormData();
+    data.append('id', id);
+
+    const slotPromise = await fetch(route('topics', 'delete'), {
+      method: 'POST',
+      body: data,
+    }).catch(this.catchError);
+
+    if (slotPromise) {
+      const slotIndex = this.state.postSlots.findIndex(slot => slot.id === id);
+      const postSlots = [
+        ...this.state.postSlots.slice(0, slotIndex),
+        ...this.state.postSlots.slice(slotIndex + 1)
+      ];
+
+      this.setState({postSlots})
+    }
+  };
+
+  addSlot = async (id, e) => {
+    e.preventDefault();
+
+    if (this.state.postSlots.length >= this.state.postSlotsLimit) return;
+
+    const data = new FormData();
+    data.append('post_id', id);
+
+    const slotPromise = await fetch(route('topics', 'create'), {
+      method: 'POST',
+      body: data,
+    }).catch(this.catchError);
+
+    if (slotPromise) {
+      const res = await slotPromise.json();
+      this.setState({
+        searchedPosts: [...this.state.searchedPosts.filter(post => post.id !== res.post_id)],
+        postSlots: [
+          res, ...this.state.postSlots
+        ]
+      });
+    }
+  };
+
   render() {
     return (
       <Router basename={basename}>
@@ -223,8 +325,21 @@ class App extends Component {
                   />
                 )} />
 
+                <Route path="/topics" render={() => (
+                  <Topics
+                    postSlots={this.state.postSlots}
+                    postSlotsLimit={this.state.postSlotsLimit}
+
+                    searchedPosts={this.state.searchedPosts}
+                    searchedPostsQuery={this.state.searchedPostsQuery}
+
+                    searchPosts={this.searchPosts}
+                    fetchSlots={this.fetchSlots}
+                    deleteSlot={this.deleteSlot}
+                    addSlot={this.addSlot}
+                  />
+                )}/>
                 <Route path="/top" component={() => <div>Top 10</div>}/>
-                <Route path="/topics" component={() => <div>Topics of the day</div>}/>
                 <Route path="/users" component={() => <div>Users</div>}/>
 
               </div>
