@@ -27130,6 +27130,7 @@
 	let resource = null;
 	let resources = null;
 	let filters = null;
+	let topics = null;
 	let lang = null;
 	let filter = '';
 	// const __ = require('../nucleus/translate');
@@ -27278,6 +27279,7 @@
 	    resource = parseSiren(AggregatorData.resource);
 	    resources = obj2array(AggregatorData.resources);
 	    filters = AggregatorData.filters;
+	    topics = AggregatorData.topics;
 	    lang = AggregatorData.lang;
 	    this.emit("change");
 	  },
@@ -27317,6 +27319,11 @@
 	  getFilters: function () {
 	    return filters;
 	  },
+
+	  getTopics: function () {
+	    return topics;
+	  },
+
 	};
 
 	module.exports = {
@@ -27473,6 +27480,7 @@
 	      resource: resource.getResource(),
 	      resources: resource.getResources(),
 	      filters: resource.getFilters(),
+	      topics: resource.getTopics(),
 	      lang: resource.getLang()
 	    }
 	  },
@@ -27487,7 +27495,8 @@
 	              React.DOM.div({className: "large-9 columns content-left"}, 
 	                AggregatorListView({
 	                  resource: this.state.resource, 
-	                  resources: this.state.resources}
+	                  resources: this.state.resources, 
+	                  topics: this.state.topics}
 	                )
 	              ), 
 	              React.DOM.div({className: "large-3 columns sidebar-right"}, 
@@ -27702,121 +27711,155 @@
 	const __ = __webpack_require__(257);
 	const Pagination = __webpack_require__(263).Component;
 	const AggregatorListView = jQuery.extend(true, Parent, {
-	    getDefaultProps: function(){
-	        return {
-	            settings: {"no-image": true}
-	        }
-	    },
-
-	    getTitle: function () {
-	        const posts = this.props.resource.getEntitiesByClass('post');
-	        function refreshPage(){
-	            window.parent.location = window.parent.location.href;
-	        }
-	        if(!location.href.startsWith(AggregatorData.config.homeUrl + "?resource=")){
-	            if(AggregatorData.lang === 'ro'){
-	                return (
-	                    React.DOM.div({className: "page-title"}, 
-	                        React.DOM.h1(null, __('Toate știrele')), 
-	                        React.DOM.button({className: "monstro-refresh", type: "button", onClick: refreshPage}, React.DOM.span(null, __('Reîmprospătează')))
-	                    )
-	                )
-	            } if(AggregatorData.lang === 'ru'){
-	                return (
-	                    React.DOM.div({className: "page-title"}, 
-	                        React.DOM.h1(null, __('Все новости')), 
-	                        React.DOM.button({className: "monstro-refresh", type: "button", onClick: refreshPage}, React.DOM.span(null, __('Обновить')))
-	                    )
-	                )
-	            }
-	        }
-	        else {
-	            const category = posts[0].getEntityByClass('category');
-	            if (posts[0] === undefined) return;
-	            return (
-	                React.DOM.div({className: "page-title"}, 
-	                    React.DOM.h1(null, category.prop('name')), 
-	                    React.DOM.p({className: "source-URL"}, 
-	                        React.DOM.a({target: "_blank", rel: "nofollow", href: category.prop('resourceURL'), dangerouslySetInnerHTML: {__html: category.prop('resourceURL')}}), 
-	                        React.DOM.span({className: "agregator-link-extern"})
-	                    )
-	                )
-	            )
-	        }
-	    },
-
-	    getPosts: function(){
-	        const posts = this.props.resource.getEntitiesByClass('post');
-	        if(posts.length){
-	            return posts.map(function(post){
-	                const category = post.getEntityByClass('category');
-	                const date = new Date(post.prop("date"));
-	                const formatedDate = date.getDate() + " " + AggregatorData.months[AggregatorData.lang][date.getMonth()] + " " + date.getFullYear() + ", " + ('0' + date.getHours()).slice(-2) + ":" + ('0' + date.getMinutes()).slice(-2);
-	                return (
-	                    React.DOM.article({key: post.prop('permalink'), className: "type-post " + this.getArticleClasses(post)}, 
-	                        React.DOM.header({className: "entry-header"}, 
-	                            React.DOM.h2({className: "entry-title"}, 
-	                                React.DOM.a({target: "_blank", rel: "nofollow", href: post.prop("permalink"), dangerouslySetInnerHTML: {__html: post.prop("title")}})
-	                            ), 
-	                            Link({className: "resource-permalink", href: category.prop('permalink')}, 
-	                                category.prop('name')
-	                            ), 
-	                            React.DOM.div({className: "entry-meta"}, 
-	                                React.DOM.ul(null, 
-	                                    React.DOM.li(null, React.DOM.span(null, React.DOM.a({target: "_blank", rel: "nofollow", href: post.prop("permalink"), className: "blog-date", dangerouslySetInnerHTML: {__html: formatedDate}})))
-	                                )
-	                            )
-	                        )
-	                    )
-	                )
-	            }.bind(this));
-	        } else {
-	            if(AggregatorData.lang === 'ro'){
-	                return (
-	                    React.DOM.div({className: "row"}, 
-	                        React.DOM.div({className: "columns large-12"}, 
-	                            React.DOM.h4({className: "monstro-no-posts-msg"}, __('Nicio știre. Reveniți.'))
-	                        )
-	                    )
-	                )
-	            } if(AggregatorData.lang === 'ru') {
-	                return (
-	                    React.DOM.div({className: "row"}, 
-	                        React.DOM.div({className: "columns large-12"}, 
-	                            React.DOM.h4({className: "monstro-no-posts-msg"}, __('Нет новостей.'))
-	                        )
-	                    )
-	                )
-	            }
-	        }
-	    },
-
-	    render: function(){
-
-	        const noSources = this.props.resources.every(function(resource) {
-	            return resource.selected === false
-	        });
-
-	        return (
-	            React.DOM.div(null, 
-	                this.getTitle(), 
-	                React.DOM.div({className: "monstro-list-view"}, 
-	                    noSources ? (
-	                        React.DOM.div({className: "row"}, 
-	                            React.DOM.div({className: "columns large-12"}, 
-	                                React.DOM.h4({className: "monstro-no-posts-msg"}, __('Lipsa știrilor e cea mai bună știre - ai deconectat toate sursele.'))
-	                            )
-	                        )
-	                    ) : this.getPosts()
-	                ), 
-	                Pagination({currentPage: this.props.resource.prop('currentPage'), totalPages: this.props.resource.prop('totalPages')})
-	            )
-	        )
+	  getDefaultProps: function(){
+	    return {
+	      settings: {"no-image": true}
 	    }
+	  },
+
+	  getTitle: function () {
+	    const posts = this.props.resource.getEntitiesByClass('post');
+	    function refreshPage(){
+	      window.parent.location = window.parent.location.href;
+	    }
+	    if(!location.href.startsWith(AggregatorData.config.homeUrl + "?resource=")){
+	      if(AggregatorData.lang === 'ro'){
+	        return (
+	          React.DOM.div({className: "page-title"}, 
+	            React.DOM.h1(null, __('Toate știrele')), 
+	            React.DOM.button({className: "monstro-refresh", type: "button", onClick: refreshPage}, React.DOM.span(null, __('Reîmprospătează')))
+	          )
+	        )
+	      } if(AggregatorData.lang === 'ru'){
+	        return (
+	          React.DOM.div({className: "page-title"}, 
+	            React.DOM.h1(null, __('Все новости')), 
+	            React.DOM.button({className: "monstro-refresh", type: "button", onClick: refreshPage}, React.DOM.span(null, __('Обновить')))
+	          )
+	        )
+	      }
+	    }
+	    else {
+	      const category = posts[0].getEntityByClass('category');
+	      if (posts[0] === undefined) return;
+	      return (
+	        React.DOM.div({className: "page-title"}, 
+	          React.DOM.h1(null, category.prop('name')), 
+	          React.DOM.p({className: "source-URL"}, 
+	            React.DOM.a({target: "_blank", rel: "nofollow", href: category.prop('resourceURL'), dangerouslySetInnerHTML: {__html: category.prop('resourceURL')}}), 
+	            React.DOM.span({className: "agregator-link-extern"})
+	          )
+	        )
+	      )
+	    }
+	  },
+
+	  getPosts: function(){
+	    const posts = this.props.resource.getEntitiesByClass('post');
+	    if(posts.length){
+	      return posts.map(function(post){
+	        const category = post.getEntityByClass('category');
+	        const date = new Date(post.prop("date"));
+	        const formatedDate = date.getDate() + " " + AggregatorData.months[AggregatorData.lang][date.getMonth()] + " " + date.getFullYear() + ", " + ('0' + date.getHours()).slice(-2) + ":" + ('0' + date.getMinutes()).slice(-2);
+	        return (
+	          React.DOM.article({key: post.prop('permalink'), className: "type-post " + this.getArticleClasses(post)}, 
+	            React.DOM.header({className: "entry-header"}, 
+	              React.DOM.h2({className: "entry-title"}, 
+	                React.DOM.a({target: "_blank", rel: "nofollow", href: post.prop("permalink"), dangerouslySetInnerHTML: {__html: post.prop("title")}})
+	              ), 
+	              Link({className: "resource-permalink", href: category.prop('permalink')}, 
+	                category.prop('name')
+	              ), 
+	              React.DOM.div({className: "entry-meta"}, 
+	                React.DOM.ul(null, 
+	                  React.DOM.li(null, React.DOM.span(null, React.DOM.a({target: "_blank", rel: "nofollow", href: post.prop("permalink"), className: "blog-date", dangerouslySetInnerHTML: {__html: formatedDate}})))
+	                )
+	              )
+	            )
+	          )
+	        )
+	      }.bind(this));
+	    } else {
+	      if(AggregatorData.lang === 'ro'){
+	        return (
+	          React.DOM.div({className: "row"}, 
+	            React.DOM.div({className: "columns large-12"}, 
+	              React.DOM.h4({className: "monstro-no-posts-msg"}, __('Nicio știre. Reveniți.'))
+	            )
+	          )
+	        )
+	      } if(AggregatorData.lang === 'ru') {
+	        return (
+	          React.DOM.div({className: "row"}, 
+	            React.DOM.div({className: "columns large-12"}, 
+	              React.DOM.h4({className: "monstro-no-posts-msg"}, __('Нет новостей.'))
+	            )
+	          )
+	        )
+	      }
+	    }
+	  },
+
+	  getTopics: function () {
+	    const topics = this.props.topics;
+
+	    return topics.map(function(topic){
+	      const date = new Date(parseInt(topic.post.date));
+	      console.log(date);
+	      const formatedDate = date.getDate() + " " + AggregatorData.months[AggregatorData.lang][date.getMonth()] + " " + date.getFullYear() + ", " + ('0' + date.getHours()).slice(-2) + ":" + ('0' + date.getMinutes()).slice(-2);
+	      return (
+	        React.DOM.article({key: topic.post.id, className: "type-post"}, 
+	          React.DOM.header({className: "entry-header"}, 
+	            React.DOM.h2({className: "entry-title"}, 
+	              React.DOM.a({target: "_blank", rel: "nofollow", href: topic.post.permalink, dangerouslySetInnerHTML: {__html: topic.post.title}})
+	            ), 
+	            Link({className: "resource-permalink", href: topic.post.source.resource_url}, 
+	              topic.post.source.name
+	            ), 
+	            React.DOM.div({className: "entry-meta"}, 
+	              React.DOM.ul(null, 
+	                React.DOM.li(null, React.DOM.span(null, React.DOM.a({target: "_blank", rel: "nofollow", href: topic.post.permalink, className: "blog-date", dangerouslySetInnerHTML: {__html: formatedDate}})))
+	              )
+	            )
+	          )
+	        )
+	      )})
+	  },
+
+	  render: function(){
+
+	    const noSources = this.props.resources.every(function(resource) {
+	      return resource.selected === false
+	    });
+
+	    return (
+	      React.DOM.div(null, 
+	        this.getTitle(), 
+	        React.DOM.div({className: "monstro-list-view"}, 
+
+	          React.DOM.h5(null, __('3 Teme ale zilei')), 
+
+	          this.getTopics(), 
+
+	          noSources ? (
+	            React.DOM.div({className: "row"}, 
+	              React.DOM.div({className: "columns large-12"}, 
+	                React.DOM.h4({className: "monstro-no-posts-msg"}, __('Lipsa știrilor e cea mai bună știre - ai deconectat toate sursele.'))
+	              )
+	            )
+	          ) : React.DOM.div(null, 
+	            React.DOM.h5(null, __('Restul stirilor')), 
+	            this.getPosts()
+	          )
+	        ), 
+	        Pagination({currentPage: this.props.resource.prop('currentPage'), totalPages: this.props.resource.prop('totalPages')})
+	      )
+	    )
+	  }
 	});
 	module.exports = {
-	    Class: AggregatorListView,
-	    Component: React.createClass(AggregatorListView)
+	  Class: AggregatorListView,
+	  Component: React.createClass(AggregatorListView)
 	};
 
 

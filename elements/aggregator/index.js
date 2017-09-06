@@ -13,6 +13,7 @@ const Aggregator = {
       resource: resource.getResource(),
       resources: resource.getResources(),
       filters: resource.getFilters(),
+      topics: resource.getTopics(),
       lang: resource.getLang()
     }
   },
@@ -27,7 +28,8 @@ const Aggregator = {
               React.DOM.div({className: "large-9 columns content-left"}, 
                 AggregatorListView({
                   resource: this.state.resource, 
-                  resources: this.state.resources}
+                  resources: this.state.resources, 
+                  topics: this.state.topics}
                 )
               ), 
               React.DOM.div({className: "large-3 columns sidebar-right"}, 

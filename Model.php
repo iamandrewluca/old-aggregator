@@ -109,4 +109,8 @@ class AggregatorModel extends MonstroSirenEntity {
         $langId = EID("lang:$LANG");
         return R::exportAll(R::findAll('filter', ' lang_id = ? ', [$langId] ));
     }
+
+    function getTopics() {
+        return R::exportAll(R::findAll('topic'), true);
+    }
 }

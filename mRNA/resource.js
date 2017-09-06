@@ -6,6 +6,7 @@ const debounce = require('utils/debouncer');
 let resource = null;
 let resources = null;
 let filters = null;
+let topics = null;
 let lang = null;
 let filter = '';
 // const __ = require('../nucleus/translate');
@@ -154,6 +155,7 @@ const ResourceStore = {
     resource = parseSiren(AggregatorData.resource);
     resources = obj2array(AggregatorData.resources);
     filters = AggregatorData.filters;
+    topics = AggregatorData.topics;
     lang = AggregatorData.lang;
     this.emit("change");
   },
@@ -193,6 +195,11 @@ const ResourceStore = {
   getFilters: function () {
     return filters;
   },
+
+  getTopics: function () {
+    return topics;
+  },
+
 };
 
 module.exports = {

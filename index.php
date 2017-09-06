@@ -55,6 +55,7 @@ if(isset($_GET['monstro-api']) && 'json' === $_GET['monstro-api'] && isset($_GET
         resources: <?php echo json_encode($LANG_RESOURCES);?>,
         resource: <?php echo json_encode($model->getData());?>,
         filters: <?php echo json_encode($model->getFilters());?>,
+        topics: <?php echo json_encode($model->getTopics());?>,
         lang: '<?php echo $LANG;?>',
         config: {
             homeUrl: '<?php echo HOME_URL;?>'
