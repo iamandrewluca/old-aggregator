@@ -1,6 +1,6 @@
 <?php
 
-define('PROD', false);
+define('PROD', true);
 
 if (PROD) {
     define('HOME_URL', 'https://agregator.md/'); //TRAILING SLASH!
