@@ -1,10 +1,10 @@
-var cache = {};
+const cache = {};
 module.exports = {
     fetchJson: function(url, forceUpdate, clearHistory){
-        if(('undefined' == typeof cache[url]) || (('undefined' != typeof forceUpdate) && forceUpdate)){
+        if(('undefined' === typeof cache[url]) || (('undefined' !== typeof forceUpdate) && forceUpdate)){
             cache[url] = jQuery.get(url, null, null, 'json');
         }
-        if(('undefined' != typeof clearHistory) && clearHistory){
+        if(('undefined' !== typeof clearHistory) && clearHistory){
             setTimeout(function(){
                 delete cache[url];
             });

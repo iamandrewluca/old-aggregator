@@ -27432,13 +27432,13 @@
 /* 253 */
 /***/ (function(module, exports) {
 
-	var cache = {};
+	const cache = {};
 	module.exports = {
 	    fetchJson: function(url, forceUpdate, clearHistory){
-	        if(('undefined' == typeof cache[url]) || (('undefined' != typeof forceUpdate) && forceUpdate)){
+	        if(('undefined' === typeof cache[url]) || (('undefined' !== typeof forceUpdate) && forceUpdate)){
 	            cache[url] = jQuery.get(url, null, null, 'json');
 	        }
-	        if(('undefined' != typeof clearHistory) && clearHistory){
+	        if(('undefined' !== typeof clearHistory) && clearHistory){
 	            setTimeout(function(){
 	                delete cache[url];
 	            });
@@ -27450,6 +27450,7 @@
 	        cache[url] = data;
 	    }
 	};
+
 
 /***/ }),
 /* 254 */
@@ -27805,20 +27806,21 @@
 
 	    return topics.map(function(topic){
 	      const date = new Date(parseInt(topic.post.date));
-	      console.log(date);
 	      const formatedDate = date.getDate() + " " + AggregatorData.months[AggregatorData.lang][date.getMonth()] + " " + date.getFullYear() + ", " + ('0' + date.getHours()).slice(-2) + ":" + ('0' + date.getMinutes()).slice(-2);
 	      return (
-	        React.DOM.article({key: topic.post.id, className: "type-post"}, 
-	          React.DOM.header({className: "entry-header"}, 
-	            React.DOM.h2({className: "entry-title"}, 
-	              React.DOM.a({target: "_blank", rel: "nofollow", href: topic.post.permalink, dangerouslySetInnerHTML: {__html: topic.post.title}})
-	            ), 
-	            Link({className: "resource-permalink", href: topic.post.source.resource_url}, 
-	              topic.post.source.name
-	            ), 
-	            React.DOM.div({className: "entry-meta"}, 
-	              React.DOM.ul(null, 
-	                React.DOM.li(null, React.DOM.span(null, React.DOM.a({target: "_blank", rel: "nofollow", href: topic.post.permalink, className: "blog-date", dangerouslySetInnerHTML: {__html: formatedDate}})))
+	        React.DOM.div({className: "columns small-4", key: topic.post.id}, 
+	          React.DOM.article({className: "type-post"}, 
+	            React.DOM.header({className: "entry-header"}, 
+	              React.DOM.h2({className: "entry-title"}, 
+	                React.DOM.a({target: "_blank", rel: "nofollow", href: topic.post.permalink, dangerouslySetInnerHTML: {__html: topic.post.title}})
+	              ), 
+	              Link({className: "resource-permalink", href: topic.post.source.resource_url}, 
+	                topic.post.source.name
+	              ), 
+	              React.DOM.div({className: "entry-meta"}, 
+	                React.DOM.ul(null, 
+	                  React.DOM.li(null, React.DOM.span(null, React.DOM.a({target: "_blank", rel: "nofollow", href: topic.post.permalink, className: "blog-date", dangerouslySetInnerHTML: {__html: formatedDate}})))
+	                )
 	              )
 	            )
 	          )
@@ -27837,9 +27839,14 @@
 	        this.getTitle(), 
 	        React.DOM.div({className: "monstro-list-view"}, 
 
-	          React.DOM.h5(null, __('3 Teme ale zilei')), 
-
-	          this.getTopics(), 
+	          this.props.topics && this.props.topics.length && (
+	            React.DOM.div(null, 
+	              React.DOM.h5(null, __('3 Teme ale zilei')), 
+	              React.DOM.div({className: "row"}, 
+	                this.getTopics()
+	              )
+	            )
+	          ), 
 
 	          noSources ? (
 	            React.DOM.div({className: "row"}, 

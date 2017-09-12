@@ -10,24 +10,31 @@ $RESOURCES = R::findAll('source');
 
 $forceCharsetPlugin = new ForceCharsetPlugin();
 $forceCharsetPlugin->setForcedCharset('utf-8');
+
 $client = new Goutte\Client();
 $client->getClient()->addSubscriber($forceCharsetPlugin);
-foreach($RESOURCES as $resource){
+
+foreach ($RESOURCES as $resource) {
 	echo 'Fetching resources from ' . $resource['name'] . '<br />';
-	if(isset($resource['handler'])){
+
+	if(isset($resource['handler'])) {
 		$handler = $resource['handler'];
 		require_once $DIRNAME . '/resources/' . $handler . '.php';
 		$fetcher = new $handler($client, $resource);
 	} else {
 		$fetcher = new RSSResource($client, $resource);
 	}
+
 	$fetcher -> parse();
 	$fetchedEntities = $fetcher->getAllEntities();
-	foreach($fetchedEntities as $entity){
-		if(R::findOne('post', 'permalink LIKE ?', [$entity->prop('permalink')])){
+
+	foreach ($fetchedEntities as $entity) {
+
+		if(R::findOne('post', 'permalink LIKE ?', [$entity->prop('permalink')])) {
 			echo "\tSkipping " . $entity->prop('permalink') . '<br />';
 			continue;
 		}
+
 		$post = R::dispense('post');
 		$post->title = $entity->prop('title');
 		$post->permalink = $entity->prop('permalink');

@@ -1,11 +1,11 @@
 <?php
 
-define('PROD', true);
+define('PROD', false);
 
 if (PROD) {
     define('HOME_URL', 'https://agregator.md/'); //TRAILING SLASH!
 } else {
-    // define('HOME_URL', 'http://localhost/agregator/');
+    // define('HOME_URL', 'http://localhost/aggregator/');
     define('HOME_URL', 'http://localhost:8001/');
     header("Access-Control-Allow-Origin: *");
 }
@@ -24,7 +24,7 @@ require_once $DIRNAME . '/vendor/redbean/rb.php';
 R::setup('mysql:host=' . MYSQL_HOST . ';dbname=' . MYSQL_DB, MYSQL_USER, MYSQL_PWD);
 
 if (PROD) {
-    R::freeze(TRUE);
+//    R::freeze(TRUE);
 }
 
 //BEGIN resources config

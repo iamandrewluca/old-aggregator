@@ -1,8 +1,7 @@
 <?php
 ini_set('display_errors', 1);
 require_once 'hide/config.php';
-require_once $DIRNAME . '/elements/aggregator/index.php';
-require_once $DIRNAME . '/nucleus/utils/siren/SirenEntity.php';
+//require_once $DIRNAME . '/elements/aggregator/index.php';
 require_once $DIRNAME . '/Model.php';
 global $LANG_RESOURCES, $LANG;
 $model = new AggregatorModel();

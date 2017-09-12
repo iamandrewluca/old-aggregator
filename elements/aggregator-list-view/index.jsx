@@ -100,24 +100,25 @@ const AggregatorListView = jQuery.extend(true, Parent, {
 
     return topics.map(function(topic){
       const date = new Date(parseInt(topic.post.date));
-      console.log(date);
       const formatedDate = date.getDate() + " " + AggregatorData.months[AggregatorData.lang][date.getMonth()] + " " + date.getFullYear() + ", " + ('0' + date.getHours()).slice(-2) + ":" + ('0' + date.getMinutes()).slice(-2);
       return (
-        <article key={topic.post.id} className="type-post">
-          <header className="entry-header">
-            <h2 className="entry-title">
-              <a target="_blank" rel="nofollow" href={topic.post.permalink} dangerouslySetInnerHTML={{__html: topic.post.title}}/>
-            </h2>
-            <Link className="resource-permalink" href={topic.post.source.resource_url}>
-              {topic.post.source.name}
-            </Link>
-            <div className="entry-meta">
-              <ul>
-                <li><span><a target="_blank" rel="nofollow" href={topic.post.permalink} className="blog-date" dangerouslySetInnerHTML={{__html: formatedDate}} /></span></li>
-              </ul>
-            </div>
-          </header>
-        </article>
+        <div className="columns small-4" key={topic.post.id}>
+          <article className="type-post">
+            <header className="entry-header">
+              <h2 className="entry-title">
+                <a target="_blank" rel="nofollow" href={topic.post.permalink} dangerouslySetInnerHTML={{__html: topic.post.title}}/>
+              </h2>
+              <Link className="resource-permalink" href={topic.post.source.resource_url}>
+                {topic.post.source.name}
+              </Link>
+              <div className="entry-meta">
+                <ul>
+                  <li><span><a target="_blank" rel="nofollow" href={topic.post.permalink} className="blog-date" dangerouslySetInnerHTML={{__html: formatedDate}} /></span></li>
+                </ul>
+              </div>
+            </header>
+          </article>
+        </div>
       )})
   },
 
@@ -132,9 +133,14 @@ const AggregatorListView = jQuery.extend(true, Parent, {
         {this.getTitle()}
         <div className="monstro-list-view">
 
-          <h5>{__('3 Teme ale zilei')}</h5>
-
-          {this.getTopics()}
+          {this.props.topics && this.props.topics.length && (
+            <div>
+              <h5>{__('3 Teme ale zilei')}</h5>
+              <div className="row">
+                {this.getTopics()}
+              </div>
+            </div>
+          )}
 
           {noSources ? (
             <div className="row">
