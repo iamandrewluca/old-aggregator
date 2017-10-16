@@ -1,5 +1,4 @@
 <?php
-ini_set('display_errors', 1);
 require_once 'hide/config.php';
 //require_once $DIRNAME . '/elements/aggregator/index.php';
 require_once $DIRNAME . '/Model.php';
@@ -22,6 +21,13 @@ if(isset($_GET['monstro-api']) && 'json' === $_GET['monstro-api'] && isset($_GET
 
     exit(json_encode($data));
 }
+
+if ($LANG === 'ru') {
+    $title =  "Агрегатор новостей";
+} else {
+    $title =  "Agregator de știri";
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,26 +35,18 @@ if(isset($_GET['monstro-api']) && 'json' === $_GET['monstro-api'] && isset($_GET
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <?php if ($LANG == 'ro') {
-        echo "<title>Agregator de știri</title>";
-    }
-    elseif ($LANG == 'ru') {
-        echo "<title>Агрегатор новостей</title>";
-    } ?>
+    <title><?php echo $title; ?></title>
 
     <link rel="stylesheet" href="vendor/foundation/css/foundation.min.css"/>
     <link rel="stylesheet" href="style.css"/>
     <link rel="stylesheet" href="agregator.css"/>
     <link rel="stylesheet" href="nucleus/elements/list-view/styles/style.css"/>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=cyrillic-ext" rel="stylesheet" />
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-    <script src="vendor/foundation/js/foundation.min.js"></script>
-    <script src="vendor/jquery.cookie.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=cyrillic-ext" />
 </head>
 <body>
-<div id="react-parent">
-    <?php // new Aggregator(true, array( 'model' => $model )); ?>
-</div>
+
+<div id="react-parent"></div>
+
 <script>
     AggregatorData = {
         resources: <?php echo json_encode($LANG_RESOURCES);?>,
@@ -69,6 +67,10 @@ if(isset($_GET['monstro-api']) && 'json' === $_GET['monstro-api'] && isset($_GET
         }
     }
 </script>
-<script src="concat/frontend.js"></script>
+<script async defer src="vendor/jquery-3.2.1.min.js"></script>
+<script async defer src="vendor/foundation/js/foundation.min.js"></script>
+<script async defer src="vendor/jquery.cookie.js"></script>
+<script async defer src="concat/frontend.js"></script>
+
 </body>
 </html>

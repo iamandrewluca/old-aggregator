@@ -2,8 +2,10 @@
   "name": "admin",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/admin/build/",
+  "homepage": "/admin",
   "dependencies": {
+    "bootstrap": "^4.0.0-beta",
+    "jquery": "^3.2.1",
     "lodash.debounce": "^4.0.8",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
@@ -14,6 +16,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "postbuild": "cp -r ../admin/api . && rm -rf ../admin && mv build ../admin && cp -r api ../admin"
   }
 }

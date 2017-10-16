@@ -14,11 +14,11 @@ import Sources from './Sources.js';
 import Filters from './Filters.js';
 import Topics from './Topics.js';
 
-let fetchUrl = 'https://agregator.md/admin/admin.php';
+let fetchUrl = '/admin/api';
 let basename = '/admin/';
 
 if (process.env.NODE_ENV === 'development') {
-  fetchUrl = 'http://localhost:8001/admin/admin.php'
+  fetchUrl = 'http://localhost:8080/admin/api'
 }
 
 const route = (controller, action) => `${fetchUrl}?controller=${controller}&action=${action}`;

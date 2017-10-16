@@ -1,11 +1,6 @@
 <?php
 
-require_once '../hide/config.php';
-require_once '../hide/require_auth.php';
-
-if (PROD) {
-  require_auth();
-}
+require_once '../../hide/config.php';
 
 if (isset($_GET['controller']) && isset($_GET['action'])) {
 

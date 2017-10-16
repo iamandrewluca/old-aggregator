@@ -1,14 +1,23 @@
 <?php
 
+global $DIRNAME;
+$DIRNAME = dirname(__FILE__) . '/..';
+
+
+require_once $DIRNAME . '/vendor/redbean/rb.php';
+
 define('PROD', false);
+
 
 if (PROD) {
     define('HOME_URL', 'https://agregator.md/'); //TRAILING SLASH!
 } else {
     // define('HOME_URL', 'http://localhost/aggregator/');
-    define('HOME_URL', 'http://localhost:8001/');
+    define('HOME_URL', 'http://localhost:8080/');
     header("Access-Control-Allow-Origin: *");
+    ini_set('display_errors', 1);
 }
+
 
 //BEGIN mysql config
 define("MYSQL_HOST", "localhost");
@@ -17,15 +26,8 @@ define("MYSQL_USER", "agregator_user");
 define("MYSQL_PWD", "Efs6V6bWf2Qytjfr584Q");
 //END mysql config
 
-global $DIRNAME;
-$DIRNAME = dirname(__FILE__) . '/..';
-
-require_once $DIRNAME . '/vendor/redbean/rb.php';
 R::setup('mysql:host=' . MYSQL_HOST . ';dbname=' . MYSQL_DB, MYSQL_USER, MYSQL_PWD);
 
-if (PROD) {
-//    R::freeze(TRUE);
-}
 
 //BEGIN resources config
 global $RESOURCES;
@@ -229,7 +231,7 @@ $LANG_RESOURCES = R::exportAll($LANG_RESOURCES_BEANS);
 
 global $SELECTED_RESOURCES;
 
-if (isset( $_COOKIE[$LANG])) {
+if (isset($_COOKIE[$LANG])) {
     $SELECTED_RESOURCES = explode(',', $_COOKIE[$LANG]);
 } else {
     $SELECTED_RESOURCES = array_map(function($resource){
@@ -241,6 +243,10 @@ array_walk($LANG_RESOURCES, function(&$resource) use($SELECTED_RESOURCES) {
     $resource['selected'] = in_array($resource['id'], $SELECTED_RESOURCES);
 });
 
+/**
+ * Dump and die
+ * @param $data
+ */
 function dd($data) {
     var_dump($data);
     die();
