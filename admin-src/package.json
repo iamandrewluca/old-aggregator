@@ -18,7 +18,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "postbuild": "cp -r ../admin/api . && rm -rf ../admin && mv build ../admin && cp -r api ../admin"
+    "postbuild": "mv ../admin/api . && rm -rf ../admin && mv build ../admin && mv api ../admin"
   },
   "devDependencies": {
     "exports-loader": "^0.6.4"

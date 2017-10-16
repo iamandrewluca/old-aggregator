@@ -1,6 +1,5 @@
 <?php
 require_once 'hide/config.php';
-//require_once $DIRNAME . '/elements/aggregator/index.php';
 require_once $DIRNAME . '/Model.php';
 global $LANG_RESOURCES, $LANG;
 $model = new AggregatorModel();
@@ -41,12 +40,10 @@ if ($LANG === 'ru') {
     <link rel="stylesheet" href="style.css"/>
     <link rel="stylesheet" href="agregator.css"/>
     <link rel="stylesheet" href="nucleus/elements/list-view/styles/style.css"/>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=cyrillic-ext" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=cyrillic-ext" rel="stylesheet" />
 </head>
 <body>
-
 <div id="react-parent"></div>
-
 <script>
     AggregatorData = {
         resources: <?php echo json_encode($LANG_RESOURCES);?>,
@@ -67,10 +64,9 @@ if ($LANG === 'ru') {
         }
     }
 </script>
-<script async defer src="vendor/jquery-3.2.1.min.js"></script>
-<script async defer src="vendor/foundation/js/foundation.min.js"></script>
-<script async defer src="vendor/jquery.cookie.js"></script>
-<script async defer src="concat/frontend.js"></script>
-
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script src="vendor/foundation/js/foundation.min.js"></script>
+<script src="vendor/jquery.cookie.js"></script>
+<script src="concat/frontend.js"></script>
 </body>
 </html>
