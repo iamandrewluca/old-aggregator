@@ -5,6 +5,7 @@ import {
 } from 'react-router-dom';
 import debounce from 'lodash.debounce';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 import Header from './Header.js';
